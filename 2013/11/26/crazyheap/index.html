@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        若干丧心病狂的平衡树 - 
+      
+      CJLD
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    若干丧心病狂的平衡树 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <div id="content">
+      <p>&#26368;&#36817;&#32763; paper&#65292;&#20598;&#28982;&#30475;&#21040;&#20102; O(log log N) &#30340;&#22534;&#65292;&#26377;&#20123;&#20852;&#36259;&#20110;&#26159;&#20046;&#30740;&#31350;&#36215;&#26469;&#65292;&#20381;&#31232;&#35760;&#24471; fhq &#22312;&#20908;&#20196;&#33829;&#26377;&#35762;&#36807;&#65292; &#20294;&#26159;&#30001;&#20110;&#24403;&#26102;&#24320;&#23567;&#24046;&#25152;&#20197;&#27809;&#21548;&#25026;&#65292;&#19981;&#36807;&#20107;&#21518;&#32763;&#20102;&#32763;&#24403;&#26102;&#30340; ppt &#20063;&#27809;&#22826;&#30475;&#25026;&#12290;</p>
+<p>&#22522;&#20110;&#27604;&#36739;&#30340;&#25490;&#24207;&#24050;&#32463;&#26159;&#34987;&#35777;&#26126;&#22797;&#26434;&#24230;&#19981;&#20302;&#20110; O(NlogN) &#65292;&#22240;&#27492;&#65292;&#22522;&#20110;&#27604;&#36739;&#30340;&#22534;&#20063;&#19981;&#21487;&#33021;&#20570;&#21040;&#22343;&#25674; logN &#65292;&#25152;&#20197;&#36825;&#20123;&#22534;&#37117;&#26377;&#23427;&#30340;&#29305;&#27530;&#24615;&#65292; &#23601;&#26159;&#26435;&#20540;&#33539;&#22260;&#22266;&#23450;&#65292;&#27604;&#22914;&#26435;&#20540;&#33539;&#22260;&#20026; D&#65292;&#21017;&#22797;&#26434;&#24230;&#20026; O(log log D)&#65292;&#24403;&#28982;&#65292;&#21518;&#38754;&#25552;&#21040;&#30340;&#36825;&#20004;&#31181;&#25968;&#25454;&#32467;&#26500;&#37117;&#19981;&#20165;&#20165;&#26159;&#19968;&#20010;&#22534;&#65292;&#20182;&#20204;&#36824;&#21487;&#20197;&#25214; lower_bound&#65292;&#22797;&#26434;&#24230;&#21516;&#26679;&#26159; O(loglogN)&#12290;</p>
+<p>Google &#20102;&#19968;&#30058;&#65292;&#39318;&#20808;&#25214;&#21040;&#20102;&#36825;&#20040;&#19968;&#31687;&#35770;&#25991; <code>A Priority Queue in Which Initialization and Queue Operations Take O(loglogD) Time</code>&#65292; &#22823;&#27010;&#30340;&#24605;&#36335;&#26159;&#22312;&#22312;&#20108;&#21449;&#26641;&#19978;&#20108;&#20998;&#65292;&#24403;&#28982;&#65292;&#36825;&#26869;&#20108;&#21449;&#26641;&#26159;&#38745;&#24577;&#30340;&#65292;&#24213;&#37096;&#26377; 2^n &#20010;&#33410;&#28857;&#65292;&#19968;&#20849; n+1 &#23618;&#65292;&#30475;&#20102;&#35768;&#20037;&#36824;&#25289;&#19978; lyp &#30475;&#25165;&#24046;&#19981;&#22810;&#30693;&#36947;&#26159;&#20010;&#24590;&#20040;&#22238;&#20107;&#65292; &#20294;&#26159;&#23545;&#20110;&#23454;&#29616;&#36824;&#26159;&#19968;&#26080;&#25152;&#30693;&#8230;&#8230;&#36930;&#25918;&#24323;&#36825;&#31181;&#26041;&#27861;&#8230;&#8230;</p>
+<p>&#20043;&#21518;&#36890;&#36807;&#21508;&#31181; Google&#65292;&#21448;&#25214;&#21040;&#36825;&#20040;&#19968;&#31181;&#25968;&#25454;&#32467;&#26500;&#65292;&#21517;&#26352; <code>Van Emde Boas trees</code>&#65292;&#26377;&#19968;&#31687;&#20013;&#25991; Blog &#35762;&#30340;&#24456;&#22909;&#65292;<a href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">&#20256;&#36865;&#38376;</a>&#65292;&#25991;&#20013;&#35828;&#31639;&#23548;&#37324;&#26377;&#20171;&#32461;&#36825;&#20010;&#25968;&#25454;&#32467;&#26500;&#65292; &#20026;&#21861;&#25105;&#30340;&#31639;&#23548;&#19978;&#27809;&#26377;&#8230;</p>
+<p>&#31616;&#21333;&#30340;&#26469;&#35828;&#23601;&#26159;&#36825;&#26679;&#19968;&#20010;&#25968;&#25454;&#32467;&#26500;&#65292;&#20551;&#35774;&#19968;&#20010;&#22823;&#23567;&#20026; N &#30340; veb&#26641;&#65292;&#37027;&#20040;&#20182;&#20250;&#26377; sqrt(N) &#20010;&#20998;&#25903;&#65292;&#27599;&#20010;&#20998;&#25903;&#37117;&#26159;&#19968;&#39063; veb&#26641;&#65292; &#32780;&#20026;&#20102;&#32500;&#25252;&#36825; sqrt(N) &#20010;&#20998;&#25903;&#65292;&#19987;&#38376;&#22312;&#39069;&#22806;&#29992;&#19968;&#39063; veb&#26641;&#65288;&#20551;&#35774;&#21629;&#21517;&#20026; summary &#65289;&#26469;&#31649;&#29702;&#36825; sqrt(N) &#20010;&#20998;&#25903;&#12290;</p>
+<p>&#24403;&#28982;&#36825;&#20040;&#20570;&#36824;&#19981;&#22815;&#65292;&#19968;&#27425;&#25554;&#20837;&#23682;&#19981;&#26159;&#26082;&#35201;&#22312; summary &#20013;&#25554;&#20837;&#21448;&#35201;&#22312;&#23376;&#26641;&#20013;&#25554;&#20837;&#65292;&#36825;&#26679;&#20004;&#27425;&#25554;&#20837;&#36896;&#25104;&#22797;&#26434;&#24230;&#36864;&#21270;&#20026; O(logN)&#65292;&#20110;&#26159;&#20046;&#36890;&#36807;&#32500;&#25252;&#19968;&#20010;&#31867;&#20284;&#20110; lazy &#26631;&#35760;&#30340;&#26368;&#23567;&#20540;&#23601;&#21487;&#20197;&#20570;&#21040;&#27599;&#27425;&#21482;&#20250;&#20135;&#29983;&#19968;&#27425;&#26032;&#30340;&#36882;&#24402;&#35843;&#29992;&#65292;&#22240;&#20026;&#27599;&#27425;&#26641;&#30340;&#35268;&#27169;&#37117;&#26159;&#30452;&#25509;&#24320;&#26681;&#21495;&#65292;&#25152;&#20197;&#22797;&#26434;&#24230;&#20026; O(loglogN)&#12290;</p>
+<p>&#36824;&#31639;&#26159;&#20010;&#27604;&#36739;&#20248;&#32654;&#30340;&#31639;&#27861;&#65292;&#32780;&#19988;&#24120;&#25968;&#20284;&#20046;&#19981;&#22823;&#65292;<a href="https://github.com/cjld/DLIB/blob/master/c%2B%2B/include/_vebtree/vebtree.cpp">&#24594;&#23454;&#29616;&#20102;&#19968;&#21457;</a>&#12290;</p>
+<p>&#20294;&#26159;&#19981;&#24184;&#30340;&#26159;&#65292;&#20570;&#20102;&#19979;&#27979;&#35797;&#65292;&#36825;&#36135;&#21644; treap &#24046;&#19981;&#22810;&#8230;</p>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2013/10/25/qtopenglhighversion" title="QtOpenGL高版本api使用">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2013/12/25/cghwreport" title="图形学大作业文档">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">26 November 2013</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#DataStructure-ref">DataStructure <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2013 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+

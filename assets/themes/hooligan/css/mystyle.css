@@ -1,0 +1,175 @@
+﻿#content_box a {
+  color: #B8B8B8;
+}
+
+#content_box a:hover {
+  color: #d4edf9;
+}
+
+.span4 section {
+  margin-bottom: 35px;
+}
+
+#contents {
+}
+
+table {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 14px;
+  border-collapse:collapse;
+  text-align:left;
+  margin:20px;
+}
+
+table th {
+  font-size:14px;
+  font-weight:bold;
+  color: #A3C2FF;
+  border-bottom:2px solid #6678b1;
+  padding:10px 8px;
+}
+
+table tr:nth-last-child(1) td {
+  border-bottom:0px;
+}
+
+table td {
+  border-bottom: 1px solid #414141;
+  padding:6px 8px;
+}
+
+table tbody tr:hover td {
+  color: #A3C2FF;
+  border-bottom: 1px solid #999999;
+}
+
+table tr:nth-last-child(1):hover td {
+  border-bottom:0px;
+}
+
+table caption {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.posts {
+  min-width : 200px;
+  width : 65%;
+  float : left;
+}
+
+.ToDoDiv {
+  padding-left : 5%;
+  width : 30%;
+  min-width : 200px;
+  float : left;
+}
+
+.posts>ul>li>a {
+  font-size : 16px;
+  font-family: 'Oxygen', 黑体;
+}
+
+.readMore {
+  font-size : 14px;
+  color : rgb(92,92,92);
+}
+
+.readMore:hover {
+  color : rgb(255,255,255);
+}
+
+.breadcrumb li {
+  display : list-item;
+}
+
+.tag_box {
+  font-family : 'Oxygen', 黑体;
+}
+
+li {
+  line-height : 20px;
+}
+
+ul, ol :not(.breadcrumb > ul) {
+  padding: 0;
+  margin: 0 0 12px 40px;
+}
+
+
+.sandpost>pre {
+  border-radius: 3px;
+  border: 0px dashed;
+  border-color: rgb(214, 183, 159);
+  background-color: rgb(27, 27, 27);
+  min-width : 200px;
+  width : 40%;
+}
+
+.sandpost>hr {
+  display : none;
+}
+
+.sandpost>pre:nth-child(4n+2) {
+  margin-right : 6%;
+  margin-bottom : 50px;
+  float : left;
+}
+
+.sandpost>pre:nth-child(4n) {
+  margin-left : 6%;
+  margin-top : 50px;
+  float : right;
+}
+
+.sandpost>pre:nth-child(6n+0) {}
+.sandpost>pre:nth-child(6n+2) {
+  border-color: rgb(35, 143, 65);
+  background-color: rgb(0, 0, 0);
+}
+.sandpost>pre:nth-child(6n+4) {
+  border-color: rgb(89, 250, 243);
+  background-color: rgb(48, 48, 48);
+}
+
+.sandpost>pre:hover {
+  background-color: rgb(60, 60, 60);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(255,255,255);
+}
+
+code {
+  color: rgb(255, 255, 255);
+  margin: 0 4px 0 4px;
+  box-shadow: none;
+}
+
+.content p {
+  padding-bottom: 12px;
+  line-height: 20px;
+  margin: 0;
+}
+
+pre {
+  box-shadow: rgba(0, 0, 0, 0.65) 0px 0px 13px 2px, transparent 0 1px 7px 0px inset;
+}
+
+blockquote p {
+  font-size: 14px;
+}
+
+blockquote {
+  padding: 0 0 0 24px;
+  margin: 0 0 18px 2px;
+  border-left: 5px solid rgba(0, 0, 0, 0.13);
+}
+
+.tag_box.inline a, .tag_box a {
+  margin: 5px;
+}
+
+.span4 i {
+  margin-right: 5px;
+}

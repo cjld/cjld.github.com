@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        超简易openCL api - 
+      
+      CJLD
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    超简易openCL api 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <div id="content">
+      <p>&#34429;&#35828;openCL&#26377;&#20010;&#31616;&#21333;&#30340;c++&#23553;&#35013;&#22120;&#65292;&#19981;&#36807;&#36824;&#26159;&#24456;&#40635;&#28902;&#21602;&#65292;&#19968;&#22823;&#22376;&#20195;&#30721;&#65292;&#33021;&#21521;CUDA&#19968;&#26679;&#19968;&#21477;&#35805;&#25630;&#23450;&#22810;&#22909;&#65292;&#36930;&#21322;&#22812;&#30561;&#19981;&#30528;&#24320;&#22987;&#20889;&#36229;&#31616;&#26131;openCL api&#12290;</p>
+<p>&#25104;&#26524;&#22270;&#65306;</p>
+<pre><code>#include &quot;ldCLtemplate.h&quot;
+#include &lt;ctime&gt;
+
+#define N 2048
+#define FOR(i,l,r) for (int i=(l);i&lt;=(r);i++)
+
+int a[N],b[N],c[N];
+
+int main() {
+  FOR(i,0,N-1) a[i]=b[i]=i;
+
+  LDCL ldcl(&quot;kernal.cl&quot;,&quot;adder&quot;,cl::NDRange(N));
+  ldcl.setArg(a, N*sizeof(a[0]), CL_MEM_READ_ONLY);
+  ldcl.setArg(b, N*sizeof(b[0]), CL_MEM_READ_ONLY);
+  ldcl.setArg(c, N*sizeof(b[0]), CL_MEM_WRITE_ONLY, LDCL_NEED_READ);
+  ldcl.run();
+}</code></pre>
+<p>&#36824;&#26159;&#35201;5&#34892;&#21602;&#8230;&#65292;&#26412;&#26469;setArg&#37027;&#20010;&#22320;&#26041;&#24819;&#29992;&#20010;template&#26469;&#30528;&#65292;&#25630;&#21322;&#22825;&#37117;&#27809;&#32534;&#35793;&#25104;&#21151;&#65292;&#36930;&#25918;&#24323;&#12290;</p>
+<p>&#25991;&#26723;&#20160;&#20040;&#20063;&#25042;&#24471;&#20889;&#20102;&#8230;&#8230;&#65292;&#21453;&#27491;&#25105;&#33258;&#24049;&#29992;&#30340;&#35828;&#65292;<a href="https://github.com/cjld/opencl1/tree/master/ld_opencl_template">github repo</a></p>
+<p>&#20170;&#22825;&#36824;&#23398;&#20102;&#19979;&#21407;&#23376;&#20989;&#25968;&#30340;&#29992;&#27861;&#65292;&#21407;&#23376;&#20989;&#25968;&#30456;&#24403;&#20110;&#19968;&#20010;&#20840;&#23616;&#38459;&#22622;&#30340;&#20989;&#25968;&#65292;&#19981;&#36807;&#36895;&#24230;&#19981;&#21643;&#28404;&#12290;</p>
+<p>&#23545;&#36825;&#26679;&#19968;&#20010;kernal&#20570;&#20102;&#27979;&#35797;&#65306;</p>
+<pre><code>#define FOR(i,l,r) for (int i=(l);i&lt;=(r);i++)
+
+kernel void adder(constant int* a, constant int* b, global int* result)
+{
+  int idx = get_global_id(0);
+  int x=1,y=2;
+  FOR(i,1,100000) {
+    atomic_add(result,result[1]);
+    atomic_add(result+1,result[0]);
+    atomic_add(result,result[1]);
+    atomic_add(result+1,result[0]);
+    atomic_add(result,result[1]);
+    atomic_add(result+1,result[0]);
+    atomic_add(result,result[1]);
+    atomic_add(result+1,result[0]);
+    atomic_add(result,result[1]);
+    atomic_add(result+1,result[0]);
+  }
+}</code></pre>
+<p>&#22797;&#21046;&#36825;&#20040;&#22810;&#20221;&#30446;&#30340;&#26159;&#20026;&#20102;&#19981;&#35753;for&#24490;&#29615;&#26412;&#36523;&#25104;&#20026;&#20027;&#35201;&#30340;&#22797;&#26434;&#24230;&#12290;</p>
+<p>&#27979;&#35797;&#21457;&#29616;&#65292;&#21644;&#24037;&#20316;&#32452;&#22823;&#23567;&#26377;&#38750;&#24120;&#22823;&#30340;&#20851;&#31995;&#65306;</p>
+<ul>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;1024&#65292;&#32791;&#26102;&#65306;3067ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;512&#65292;&#32791;&#26102;&#65306;3037ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;256&#65292;&#32791;&#26102;&#65306;2968ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;128&#65292;&#32791;&#26102;&#65306;2943ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;64&#65292;&#32791;&#26102;&#65306;2886ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;32&#65292;&#32791;&#26102;&#65306;5120ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;16&#65292;&#32791;&#26102;&#65306;7737ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;8&#65292;&#32791;&#26102;&#65306;9095ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;4&#65292;&#32791;&#26102;&#65306;11587ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;2&#65292;&#32791;&#26102;&#65306;12355ms</li>
+<li>&#24037;&#20316;&#32452;&#22823;&#23567;&#65306;1&#65292;&#32791;&#26102;&#65306;18766ms</li>
+</ul>
+<p>&#24037;&#20316;&#32452;&#22823;&#23567;&#20026;64&#26159;&#26368;&#20248;&#20540;&#65292;&#36825;&#26159;&#20026;&#20160;&#20040;&#65311;&#35980;&#20284;&#25105;&#30340; CL_DEVICE_MAX_WORK_ITEM_SIZES &#30340;&#26368;&#21518;&#19968;&#32500;&#26159;64&#65292;&#32780;&#19988;&#20302;&#20110;64&#32791;&#26102;&#24555;&#36895;&#25856;&#21319;&#65292;&#19981;&#35299;&#65292;&#26377;&#31354;&#19978;stackoverflow&#21435;&#38382;&#38382;&#65292;&#24635;&#20043;&#20197;&#21518;&#23613;&#37327;&#21543;&#24037;&#20316;&#32452;&#24320;&#22823;&#21644;&#36991;&#20813;&#20351;&#29992;&#36807;&#22810;&#30340;&#21407;&#23376;&#20989;&#25968;&#23601;&#22909;&#20102;&#21543;&#12290;</p>
+<p><em>&#26356;&#26032;&#26085;&#24535;</em></p>
+<ul>
+<li>2013/10/11
+<ul>
+<li>&#20195;&#30721;&#37325;&#20889;&#20026;<code>DOpenCL</code>&#65292;&#22686;&#21152;&#23545;buffer&#65292;function&#65292;context&#30340;&#31649;&#29702;&#65292;&#20869;&#23384;&#21487;&#30001; DOpenCL &#31867;&#32479;&#19968;&#31649;&#29702;</li>
+<li><code>DCLGL.h</code> &#22686;&#21152;<code>DCLBufferGL</code>,<code>DCLImageGL</code>,<code>DCLRenderBufferGL</code></li>
+<li>&#26032;&#20179;&#24211;&#22320;&#22336;<a href="https://github.com/cjld/DLIB">https://github.com/cjld/DLIB</a></li>
+</ul></li>
+<li>2013/8/11 <em>&#22686;&#21152;bufferGL</em></li>
+<li>2013/8/5 <em>local&#19981;&#33021;&#35774;&#32622;&#30340;bug</em></li>
+</ul>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2013/07/31/openclasync" title="openCL同步函数">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2013/08/05/globalsync" title="在openCL中实现全局同步">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">03 August 2013</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#OpenCL-ref">OpenCL <span>10</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2013 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+

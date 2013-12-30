@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        OpenCL与OpenGL共享折腾二三事 - 
+      
+      CJLD
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    OpenCL与OpenGL共享折腾二三事 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <div id="content">
+      <p>&#20026;&#20102;&#35753;&#22270;&#24418;&#35838;&#30340;&#20316;&#19994;&#21487;&#20197;&#29992; OpenCL &#20570;&#23454;&#26102;&#32472;&#21046;&#65292;&#20110;&#26159;&#20046;&#24320;&#22987;&#25240;&#33150;&#22914;&#20309;&#35753; OpenCL &#20013;&#30340;&#22270;&#29255;&#21487;&#20197;&#39640;&#25928;&#30340;&#28210;&#26579;&#21040;&#23631;&#24149;&#19978;&#65292;&#39286;&#20102;&#19968;&#22823;&#22280;&#23398;&#20102;&#19981;&#23569; OpenGL &#30340;&#29992;&#27861;&#65292;&#26368;&#21518;&#26368;&#22909;&#30340;&#35299;&#20915;&#26041;&#26696;&#20063;&#21482;&#33021;&#26159;&#20849;&#20139;<code>texture/image</code>&#65292;&#28982;&#21518;&#22312; OpenGL&#20013;&#22312;&#32472;&#21046;&#19968;&#36941;&#12290;</p>
+<hr />
+<h3 id="pbo">PBO</h3>
+<p>&#39318;&#20808;&#26159;&#23581;&#35797;&#20351;&#29992; PBO(Pixel Buffer Object) &#26469;&#21644;OpenCL&#20132;&#20114;&#65292;&#20351;&#29992;&#36215;&#26469;&#38750;&#24120;&#26041;&#20415;&#65292;&#21644;&#20043;&#21069;&#25991;&#31456;&#25552;&#21040;&#30340; VBO &#29992;&#27861;&#26159;&#19968;&#26679;&#30340;&#12290;</p>
+<p>&#21019;&#24314;&#20102; PBO &#20197;&#21518;&#65292;&#30452;&#25509;&#29992;&#20197;&#19979;&#20195;&#30721;&#23601;&#21487;&#20197;&#32472;&#21046;&#21040;</p>
+<pre><code>//&#32465;&#23450;pbo
+glBindBufferARB(GL_PIXEL_UNPACK_BUFFER_ARB, pboIds[index]);
+//&#32472;&#21046;&#65292;&#22240;&#20026;&#25105;&#20204;&#24050;&#32463; bind pbo &#20102;&#65292;&#25152;&#20197; data &#21442;&#25968;&#35774;&#32622;&#20026; 0&#65292; opengl&#23601;&#20250;&#20174;pbo&#20013;&#35835;&#25968;&#25454;
+void glDrawPixels(width, height, format, type, 0);</code></pre>
+<p>&#30475; OpenGL &#30340;&#20171;&#32461;&#65306;&#8220;glDrawPixels &#8212; write a block of pixels to the frame buffer&#8221;&#65292;&#24212;&#35813;&#24456;&#24555;&#21543;&#65292;&#37117;&#30452;&#25509;&#20889;&#21040;&#24103;&#32531;&#23384;&#37324;&#20102;&#12290;</p>
+<p>&#20294;&#26159;&#23454;&#38469;&#32467;&#26524;&#26159;&#27604;&#36739;&#24930;&#30340;&#65292;800*600 &#38656;&#35201;&#33457;&#23558;&#36817;4ms&#65292;fps300&#22810;&#65292;1920*1080&#23601;&#35201;&#25509;&#36817;10ms&#65292;&#33258;&#24049;&#30452;&#25509;&#25226;&#25968;&#25454;&#20174; OpenCL &#25335;&#21040; CPU &#20877;&#25335;&#21040; OpenGL&#65292;&#21457;&#29616;&#36895;&#24230;&#26159;&#19968;&#26679;&#30340;&#12290;</p>
+<p>&#20107;&#21518;&#35748;&#30495;&#30475;&#20102;&#19979; PBO &#30340;<a href="http://www.songho.ca/opengl/gl_pbo.html">&#20171;&#32461;</a>&#65292;&#21457;&#29616; PBO &#20998;&#20004;&#31181;&#65306;</p>
+<ul>
+<li><code>GL_PIXEL_UNPACK_BUFFER_ARB</code> &#29992;&#20110;&#20174;CPU&#20256;&#36865;&#25968;&#25454;&#32473;GPU</li>
+<li><code>GL_PIXEL_PACK_BUFFER_ARB</code> &#29992;&#20110;&#20174;GPU&#20256;&#36865;&#25968;&#25454;&#32473;CPU</li>
+</ul>
+<p>&#25105;&#19968;&#24320;&#22987;&#23601;&#29702;&#35299;&#38169;&#20102;&#65292;&#36825;&#29609;&#24847;&#26412;&#26469;&#23601;&#21482;&#26159;&#29992;&#26469;&#21644; CPU &#20256;&#36865;&#25968;&#25454;&#30340;&#65292;&#20110;&#26159;&#36825;&#20010;&#26041;&#27861;&#22833;&#36133;</p>
+<hr />
+<h3 id="fbo">FBO</h3>
+<p>&#20110;&#26159;&#20046;&#24320;&#22987;&#25240;&#33150; FBO, &#32593;&#19978;&#25214;&#21040;&#36825;&#20040;&#20010; <a href="http://sa09.idav.ucdavis.edu/docs/SA09_GL_interop.pdf">PPT</a> &#35762;&#30340;&#27604;&#36739;&#28165;&#26970;&#65292;&#36825;&#20010; PPT &#20013;&#23454;&#29616;&#30340;&#20869;&#23481;&#22823;&#27010;&#26159;&#29992; OpenGL &#28210;&#26579;&#20986;&#19968;&#20010;&#22270;&#29255;&#20197;&#21518;&#65292;&#20256;&#32473; OpenCL &#20570;&#19968;&#27425;&#39640;&#26031;&#27169;&#31946;&#20877;&#26174;&#31034;&#20986;&#26469;&#65292;&#29992;&#27861;&#22914;&#19979;&#65306;</p>
+<pre><code>// &#21019;&#24314;&#24182;&#32465;&#23450;FBO
+glGenFramebuffersEXT(1, &amp;fbo);
+glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
+// &#21019;&#24314;&#19968;&#20010;RenderBuffer
+glGenRenderbuffersEXT(1, &amp;rb_color);
+glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rb_color);
+glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGBA8, width, height);
+// &#21543;rbo&#25346;&#36733;&#21040;FBO&#30340;&#39068;&#33394;&#32531;&#20914;&#21306;
+glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, rb_color);
+
+// &#20174;gl&#21019;&#24314;cl buffer
+cl_mem cl_scene; 
+cl_scene = clCreateFromGLRenderbuffer(cxGPUContext, CL_MEM_READ_ONLY, rb_color, 0);</code></pre>
+<p>&#29992;&#27861;&#20063;&#27604;&#36739;&#31616;&#21333;&#65292;&#22312; OpenCL &#21487;&#20197;&#30452;&#25509;&#20351;&#29992; <code>image2d_t</code> &#23545;&#35937;&#25509;&#35302;&#65292;&#20294;&#26159;&#38382;&#39064;&#21448;&#26469;&#20102;&#65292;bind frame buffer&#20197;&#21518;&#23631;&#24149;&#23601;&#20160;&#20040;&#20063;&#26174;&#31034;&#19981;&#20986;&#26469;&#20102;&#65292;&#20174;<a href="http://blog.csdn.net/xiajun07061225/article/details/7283929">&#25991;&#31456;</a>&#20013;&#20180;&#32454;&#38405;&#35835;FBO&#20197;&#21518;&#22823;&#27010;&#29702;&#35299;&#20102;FBO&#30340;&#24037;&#20316;&#21407;&#29702;&#12290;</p>
+<p>FBO&#65288;FrameBufferObject&#65289;&#65292;&#34987;&#29992;&#26469;&#35753;&#29992;&#25143;&#21019;&#24314;FrameBuffer&#65292;&#19968;&#24320;&#22987;&#25105;&#20204;&#30340;&#22270;&#20687;&#31995;&#32479;&#20026;&#25105;&#20204;&#24050;&#32463;&#21019;&#24314;&#22909;&#20102;&#19968;&#20010;FrameBuffer&#65292;&#34987;&#31216;&#20043;&#20026;<a href="http://www.opengl.org/wiki/Default_Framebuffer">Default Framebuffer</a>&#65292;&#23427;&#30001;&#33509;&#24178;&#20010;<code>ColorBuffer</code>&#65292;&#19968;&#20010;<code>DepthBuffer</code>&#65292;&#19968;&#20010;<code>StencilBuffer</code>&#26500;&#25104;&#65292;&#32780; FBO &#20801;&#35768;&#29992;&#25143;&#33258;&#24049;&#36890;&#36807;&#21019;&#24314; <code>RenderBuffer</code> &#21644; <code>Texture</code> &#26469;&#25346;&#36733;&#31649;&#29702;&#36825;&#20123;&#19981;&#21516;&#30340; buffer&#65292;&#20182;&#30340;&#29992;&#36884;&#22810;&#21322;&#29992;&#22312;&#28210;&#26579;&#21040; texture&#12290;</p>
+<p>&#38382;&#39064;&#23601;&#20986;&#22312;&#65292;&#22914;&#26524;&#20320;bind&#20102;&#33258;&#24049;&#21019;&#24314;&#30340;frameBuffer&#65292;&#37027;&#20040; OpenGL &#23601;&#20250;&#21543;&#22270;&#20687;&#28210;&#26579;&#21040;&#20320;&#30340; frameBuffer &#37324;&#21435;&#65292;&#32780; Default FrameBuffer &#37324;&#36824;&#26159;&#31354;&#30340;&#65292;&#20110;&#26159;&#23631;&#24149;&#23601;&#40657;&#20102;&#12290;</p>
+<p>&#30001;&#20110;&#23545; OpenGL &#20102;&#35299;&#19981;&#28145;&#21051;&#65292;&#20063;&#19981;&#28165;&#26970;&#24590;&#20040;&#30452;&#25509;&#31649;&#29702; Default FrameBuffer &#65292;&#23581;&#35797;&#20102;&#19979;&#30452;&#25509; bind renderbuffer &#21040; Default FrameBuffer &#19978;&#21435;&#36820;&#22238;<code>&#26080;&#25928;&#25805;&#20316;</code>&#65292;&#20110;&#26159;&#20046;&#36825;&#20010;&#26041;&#27861;&#20063;&#20316;&#24223;&#20102;&#8230;</p>
+<p>&#19981;&#36807;&#24635;&#30340;&#26469;&#35828; FBO &#36824;&#26159;&#24456;&#26377;&#29992;&#30340;&#12290;</p>
+<h3 id="update">update</h3>
+<p>&#22312; <a href="http://www.opengpu.org/">OpenGPU</a> &#35770;&#22363;&#19978;<a href="http://www.opengpu.org/forum.php?mod=viewthread&amp;tid=15965">&#25552;&#38382;</a>&#20197;&#21518;&#24471;&#21040;&#20102;&#22823;&#31070;&#30340;&#22238;&#22797;&#65292;&#20351;&#29992; <code>glBlitFramebuffer</code>&#65292;&#36825;&#20010;&#20989;&#25968;&#26159; OpenGL3.0&#30340;&#26631;&#20934;&#12290;</p>
+<p>&#23581;&#35797;&#20102;&#19968;&#30058;&#20197;&#21518;&#21457;&#29616;&#36895;&#24230;&#21644;&#31532;&#19977;&#20010;&#26041;&#27861;&#24046;&#19981;&#22810;&#12290;</p>
+<hr />
+<h3 id="textureimage">Texture/image</h3>
+<p>&#26368;&#21518;&#30340;&#26041;&#27861;&#36824;&#26159;&#22238;&#24402;&#21040;&#30452;&#25509;&#35753; OpenGL &#21644; OpenCL &#20849;&#20139; Texture&#65292;&#28982;&#21518;&#29992; OpenGL &#32472;&#21046;&#12290;</p>
+<p>&#32472;&#21046;&#30340;&#35805;&#30452;&#25509;&#29992;&#20102;&#20197;&#19979;&#20195;&#30721;&#65306;</p>
+<pre><code>glEnable(GL_TEXTURE_RECTANGLE);
+
+bind();
+glBegin ( GL_QUADS );
+    glTexCoord2f (     0,      0 ); glVertex2f ( -1.0F, -1.0F );
+    glTexCoord2f (     0, height ); glVertex2f ( -1.0F,  1.0F );
+    glTexCoord2f ( width, height ); glVertex2f (  1.0F,  1.0F );
+    glTexCoord2f ( width,      0 ); glVertex2f (  1.0F, -1.0F );
+glEnd ( );
+unBind();
+
+glDisable(GL_TEXTURE_RECTANGLE);</code></pre>
+<p>&#20284;&#20046;&#26377;&#26356;&#24555;&#30340;&#26041;&#27861;&#65292;&#20351;&#29992; <code>glDrawPixels</code>&#65292;&#20294;&#26159;&#19978;&#38754;&#36825;&#26041;&#27861;&#32472;&#21046;1080P&#27599;&#19968;&#24103;&#20063;&#21482;&#29992;&#20102; 0.1ms &#65292;&#20110;&#26159;&#20046;&#25042;&#24471;&#20877;&#32487;&#32493;&#25240;&#33150;&#20102;</p>
+<p>&#21478;&#22806;&#26377;&#20010;&#34507;&#30140;&#30340;&#20107;&#24773;&#26159;&#65292; OpenCL &#20013;&#30340; float3 &#23454;&#38469;&#19978;&#23601;&#26159; float4&#65292;&#22914;&#26524;&#20320;&#29992;&#19968;&#20010; float3 &#25351;&#38024;&#25351;&#21521;&#19968;&#20010;&#22320;&#22336;&#20462;&#25913;&#65292;&#20182;&#20250;&#25226;&#26368;&#21518;&#31532;&#22235;&#20301;&#36171;&#20540;&#20026; 0&#65292;&#36825;&#28857;&#25402;&#22353;&#29241;&#30340;&#12290;</p>
+<hr />
+<h3 id="&#21442;&#32771;&#25991;&#31456;">&#21442;&#32771;&#25991;&#31456;</h3>
+<ol style="list-style-type: decimal">
+<li><a href="http://www.songho.ca/opengl/gl_pbo.html">FBO,PBO,VBO&#37117;&#20171;&#32461;&#30340;&#36229;&#35814;&#32454;&#32780;&#19988;&#24102;demo</a></li>
+<li><a href="https://code.google.com/p/rtrt-on-gpu/">OpenCL,OpenGL&#65292;GLSL&#23454;&#29616;&#30340;&#20809;&#32447;&#36319;&#36394;</a></li>
+<li><a href="http://blog.csdn.net/xiajun07061225/article/details/7283929">[1]&#30340;&#32763;&#35793;</a></li>
+<li><a href="http://sa09.idav.ucdavis.edu/docs/SA09_GL_interop.pdf">OpenCL&#25805;&#20316;FBO</a></li>
+</ol>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2013/10/02/dtdaccount" title="流水账">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2013/10/11/qtlinkerror" title="Qt重定义链接错误">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">11 October 2013</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#OpenCL-ref">OpenCL <span>10</span></a></li>
+     
+    	<li><a href="/tags.html#OpenGL-ref">OpenGL <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#Qt-ref">Qt <span>4</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2013 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+

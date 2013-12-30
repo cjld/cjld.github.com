@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        在Qt下共享openGL与openCL缓存 - 
+      
+      CJLD
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    在Qt下共享openGL与openCL缓存 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <div id="content">
+      <p>openCL&#30340;&#20351;&#29992;&#24120;&#24120;&#38656;&#35201;&#21644;openGL&#25645;&#37197;&#36215;&#26469;&#65292;glut&#19981;&#38169;&#30340;&#36873;&#25321;&#65292;&#19981;&#36807;&#30001;&#20110;&#26412;&#20154;&#27604;&#36739;&#21916;&#27426;Qt&#65292;&#20110;&#26159;&#30452;&#25509;&#20351;&#29992;&#20102;QGLWidget&#36827;&#34892;&#32472;&#22270;&#12290;</p>
+<p>&#26412;&#25991;&#37325;&#28857;&#26159;&#20171;&#32461;&#22914;&#20309;&#20849;&#20139;openCL&#21644;openGL&#30340;&#32531;&#23384;(VBO)&#65292;&#21644;VBO&#30340;&#31616;&#21333;&#24212;&#29992;&#12290;</p>
+<blockquote>
+<p><img src="../../../../img/qgl_clbuffer.png" /> &gt;&#22312;QGLWidget&#19979;&#23454;&#29616;&#30340;openGL&#24212;&#29992;&#65292;&#20854;&#20013;&#27491;&#24358;&#20989;&#25968;&#37096;&#20998;&#30001;openCL&#35745;&#31639;&#65292;<a href="https://github.com/cjld/QGL-BufferCLshare">Fork me on Github</a></p>
+</blockquote>
+<p>&#31616;&#21333;&#30340;QGLWidget&#26694;&#26550;&#21487;&#20197;&#21442;&#32771;&#36825;&#31687;&#8594;<a href="http://qiliang.net/old/nehe_qt/">Qt OpenGL&#25945;&#31243;</a></p>
+<h2 id="&#20174;opengl&#20013;&#21019;&#24314;&#20351;&#29992;vbo"><strong>&#20174;openGL&#20013;&#21019;&#24314;&#20351;&#29992;VBO</strong></h2>
+<p>&#20174;openGL&#30340;&#35282;&#24230;&#26469;&#30475;&#65292;&#20351;&#29992;VBO&#65288;&#39030;&#28857;&#32531;&#23384;&#22120;&#65289;&#30340;&#20960;&#20010;&#27493;&#39588;&#65306;</p>
+<ul>
+<li>&#21019;&#24314;&#39030;&#28857;&#32531;&#23384;&#22120;</li>
+<li>&#32465;&#23450;&#65288;bind&#65289;&#39030;&#28857;&#32531;&#23384;&#22120;</li>
+<li>&#20351;&#29992;&#39030;&#28857;&#32531;&#23384;&#22120;&#32472;&#21046;</li>
+</ul>
+<p>&#22240;&#20026;&#22312;qt&#37324;&#22909;&#20687;&#27809;&#26377;&#25214;&#21040;glBindBuffer&#36825;&#20040;&#20123;&#20989;&#25968;&#65292;&#20110;&#26159;&#20046;&#21482;&#22909;&#29992;Qt&#33258;&#24049;&#23553;&#35013;&#22909;&#30340;QGLBuffer&#65292;&#20351;&#29992;&#36215;&#26469;&#36824;&#27604;&#36739;&#26041;&#20415;</p>
+<pre><code>buffer=new QGLBuffer(QGLBuffer::VertexBuffer);
+buffer-&gt;create();
+//&#30456;&#24403;&#20110;glGenBuffer
+
+buffer-&gt;bind();
+//&#30456;&#24403;&#20110;glBindBuffer
+
+buffer-&gt;allocate(sizeof(GLfloat)*2048*2);
+//&#30456;&#24403;&#20110;glBufferData
+
+buffer-&gt;bind();
+//&#32465;&#23450;&#65292;&#32472;&#21046;&#20934;&#22791;
+
+glEnableClientState(GL_VERTEX_ARRAY);
+glVertexPointer(2,GL_FLOAT,0,0);
+glColor3f(1,1,0);
+glDrawArrays(GL_LINE_STRIP,0,2048);
+//&#32472;&#21046;</code></pre>
+<p>&#26377;&#19968;&#20010;&#22353;&#29241;&#30340;&#22320;&#26041;&#65292;&#19968;&#23450;&#35201;&#20808;create&#20877;bind&#20877;alloccate&#65292;&#20081;&#20102;&#23601;&#20160;&#20040;&#20063;&#30011;&#19981;&#20986;&#26469;&#12290;</p>
+<h2 id="openclopengl&#20849;&#29992;vbo"><strong>openCL&amp;openGL&#20849;&#29992;VBO</strong></h2>
+<p>openCL&#22914;&#26524;&#38656;&#35201;&#21644;openGL&#20849;&#20139;buffer&#65292;&#22823;&#33268;&#27493;&#39588;&#22914;&#19979;&#65306;</p>
+<ul>
+<li>&#21019;&#24314;&#19968;&#20010;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;</li>
+<li>&#20174;openGL&#24050;&#32463;&#21019;&#24314;&#22909;&#30340;VBO&#21019;&#24314;&#19968;&#20010;openCL buffer</li>
+<li>&#36830;&#25509;buffer&#65292;&#37322;&#25918;buffer</li>
+</ul>
+<p>&#25105;&#23558;&#36825;&#20123;&#19996;&#35199;&#23553;&#35013;&#21040;&#20102; <code>ldCLtempl.h</code>&#65292;&#20351;&#29992;&#26041;&#27861;&#22914;&#19979;&#65306;</p>
+<pre><code>ldcl.init(wglGetCurrentContext(),wglGetCurrentDC());
+//&#21019;&#24314;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;
+
+ldcl.setArg(buffer-&gt;bufferId(),CL_MEM_READ_WRITE);
+//&#20849;&#20139;buffer</code></pre>
+<p><code>ldCLtempl.h</code>&#30340;&#23454;&#29616;&#26041;&#27861;&#22914;&#19979;&#65306;</p>
+<pre><code>void init(HGLRC glContext, HDC glDisplay) {
+  cl::Platform::get(&amp;platformList);
+  printPlatformInfo();
+
+  platformList[pid].getDevices(CL_DEVICE_TYPE_ALL,&amp;deviceList);
+  printDeviceInfo();
+
+  cl_context_properties props[]={
+    CL_GL_CONTEXT_KHR, (cl_context_properties)glContext,
+    CL_WGL_HDC_KHR, (cl_context_properties)glDisplay,
+    CL_CONTEXT_PLATFORM, (cl_context_properties)platformList[pid](), 0
+  };
+  context=new cl::Context(deviceList, props);
+  //&#21019;&#24314;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;
+
+  cmdQueue=new cl::CommandQueue(*context,deviceList[did]);
+}
+
+struct myBufferGL : public myBuffer {
+  vector&lt;cl::Memory&gt; mv;
+  myBufferGL(LDCL *fa, cl_mem_flags flags, GLuint bufobj) : myBuffer(fa,flags,0,0,0) {
+    buffer=new cl::BufferGL(*(fa-&gt;context),flags,bufobj);
+    //&#36890;&#36807;&#20174;openGL&#24050;&#32463;&#21019;&#24314;&#30340;buffer&#21019;&#24314;
+    mv.push_back(*buffer);
+  }
+  virtual void beforeRun() {father-&gt;cmdQueue-&gt;enqueueAcquireGLObjects(&amp;mv);}
+  //&#20174;openGL&#33719;&#21462;buffer&#30340;&#25511;&#21046;&#26435;
+  virtual void afterRun() {father-&gt;cmdQueue-&gt;enqueueReleaseGLObjects(&amp;mv);}
+  //&#37322;&#25918;&#25511;&#21046;&#26435;
+  ~myBufferGL() {}
+};</code></pre>
+<p>&#32441;&#29702;&#32531;&#23384;&#30340;&#20351;&#29992;&#26041;&#27861;&#31867;&#20284;&#12290;</p>
+<p>&#21478;&#22806;&#20070;&#19978;&#20889;&#30340;&#22312;&#25191;&#34892;openCL&#20043;&#21069;&#24471;&#20808;&#25191;&#34892;<code>glFinish()</code>&#65292;&#19981;&#36807;&#25105;&#27809;&#26377;&#25191;&#34892;&#20063;&#21487;&#20197;&#29992;&#65292;&#32780;&#19988;&#21457;&#29616;openCL&#26159;&#21516;&#27493;&#25191;&#34892;&#32780;&#19981;&#26159;&#24322;&#27493;&#25191;&#34892;&#30340;&#65292;&#20284;&#20046;&#26174;&#21345;&#26159;&#21542;&#25903;&#25345;&#21516;&#27493;&#26377;&#20851;&#12290;</p>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2013/08/05/globalsync" title="在openCL中实现全局同步">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2013/08/12/mksection" title="Markdown段落缩进">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">11 August 2013</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#OpenCL-ref">OpenCL <span>10</span></a></li>
+     
+    	<li><a href="/tags.html#OpenGL-ref">OpenGL <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#Qt-ref">Qt <span>4</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2013 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+

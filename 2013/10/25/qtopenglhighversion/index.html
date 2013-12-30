@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        QtOpenGL高版本api使用 - 
+      
+      CJLD
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    QtOpenGL高版本api使用 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <div id="content">
+      <p>&#35201;&#22312; Qt &#20013;&#20351;&#29992; OpenGL&#65292;QGLWidget&#26159;&#19968;&#20010;&#24456;&#19981;&#38169;&#30340;&#36873;&#25321;&#65292;&#21482;&#38656;&#37325;&#36733;&#20960;&#20010;&#20989;&#25968;&#23601;&#22909;&#20102;&#12290;</p>
+<p>&#20294;&#26159;&#22312; QGLWidget &#20013;&#65292;&#21482;&#26377;&#38750;&#24120;&#23569;&#25968;&#30340; OpenGL &#20989;&#25968;&#65292;&#26597;&#38405;&#25991;&#26723;&#65292;&#22312; <code>QGLFunctions</code> &#31867;&#37324;&#26377; OpenGL2.0/ES &#30340;&#22522;&#26412;&#20989;&#25968;&#65292;&#27809;&#26377;&#26356;&#39640;&#29256;&#26412;&#30340;&#20989;&#25968;&#12290;</p>
+<p>QGLFunctions &#30340;&#20351;&#29992;&#26041;&#27861;&#27604;&#36739;&#31616;&#21333;&#65292;&#22312;&#26500;&#36896;&#20989;&#25968;&#20013;&#20256;&#20837; QGLContext &#23601;&#22909;&#20102;&#12290;</p>
+<p>&#33510;&#33510; Google &#20102;&#19968;&#30058;&#65292;Qt&#25226;&#20989;&#25968;&#23553;&#35013;&#21040;&#19968;&#20123;&#22855;&#24618;&#30340;&#31867;&#37324;&#65292;&#22914; QOpenGLFunctions_1_0, QOpenGLFunctions_1_1, QOpenGLFunctions_1_2, QOpenGLFunctions_1_3, QOpenGLFunctions_1_4, QOpenGLFunctions_1_5, QOpenGLFunctions_2_0, QOpenGLFunctions_2_1, QOpenGLFunctions_3_0 &#8230;</p>
+<p>&#38750;&#24120;&#22855;&#24618;&#20026;&#20160;&#20040; Qt &#38656;&#35201;&#20570;&#36825;&#20123;&#22855;&#24618;&#30340;&#23553;&#35013;&#65292;&#20284;&#20046;&#26159;&#20026;&#20102;&#36328;&#24179;&#21488;&#30340;&#38656;&#27714;&#65292;&#37027;&#26082;&#28982;&#26159;&#22312; pc &#19978;&#65292;&#22914;&#20309;&#20351;&#29992;&#39640;&#29256;&#26412;&#30340; API &#65311;</p>
+<p><code>QOpenGLFunctions_X_X</code>&#30340;&#20351;&#29992;&#26041;&#27861;&#21644;<code>QGLFunctions</code>&#30340;&#20351;&#29992;&#26041;&#27861;&#19981;&#22826;&#19968;&#26679;&#65292;&#20173;&#28982;&#38656;&#35201;&#32487;&#25215;&#33258;<code>QOpenGLFunctions_X_X</code>&#65292;&#24403;&#28982;&#65292;&#30452;&#25509;&#22768;&#26126;&#20063;&#21487;&#20197;&#65292;&#22914;&#25105;&#23454;&#29616;&#30340; QGLCL&#30340;renderbuffer&#65306;</p>
+<pre><code>struct DCLRenderBufferGL : public DCLBuffer, public QOpenGLFunctions_3_0 {
+    DCLRenderBufferGL() {
+        initializeOpenGLFunctions();
+    }
+}&#65307;</code></pre>
+<p>&#38656;&#35201;&#39069;&#22806;&#35843;&#29992; <code>initializeOpenGLFunctions()</code> &#26469;&#21021;&#22987;&#21270;&#20989;&#25968;&#65292;&#20294;&#26159;&#20351;&#29992;&#30340;&#26102;&#20505;&#25105;&#21364;&#20986;&#29616;&#20102; bug&#65292;<code>initializeOpenGLFunctions()</code>&#36820;&#22238; false&#65292;&#28982;&#21518;&#20989;&#25968;&#20351;&#29992;&#36820;&#22238;&#27573;&#38169;&#35823;&#12290;</p>
+<p>&#20960;&#30058;&#25240;&#33150;&#20197;&#21518;&#25214;&#21040;&#20102;&#38382;&#39064;&#25152;&#22312; &#8212;&#8212;&#8212;&#8212; OpenGL&#19978;&#19979;&#25991;&#29256;&#26412;&#35774;&#32622;&#26377;&#38382;&#39064;&#65292;&#38656;&#35201;&#21152;&#20837;&#20197;&#19979;&#20195;&#30721;&#65306;</p>
+<pre><code>QGLFormat glf = QGLFormat::defaultFormat();
+glf.setVersion(3,0);
+QGLFormat::setDefaultFormat(glf); </code></pre>
+<p>&#27880;&#24847;&#65292;&#36825;&#20010;&#22320;&#26041;&#30340; setVersion &#24517;&#39035;&#19981;&#22823;&#19981;&#23567;&#21018;&#21018;&#22909;&#8230;&#8230;</p>
+<p>&#25240;&#33150;&#36825;&#20010;&#30340;&#30446;&#30340;&#26159;&#65292;&#20043;&#21069; OpenCL/OpenGL&#20849;&#20139; &#20013;&#25552;&#21040;&#30340; FBO&#65292;&#22312; <a href="http://www.opengpu.org/">OpenGPU</a> &#35770;&#22363;&#19978;<a href="http://www.opengpu.org/forum.php?mod=viewthread&amp;tid=15965">&#25552;&#38382;</a>&#20197;&#21518;&#24471;&#21040;&#20102;&#22823;&#31070;&#30340;&#22238;&#22797;&#65292;&#20351;&#29992; <code>glBlitFramebuffer</code>&#65292;&#36825;&#20010;&#20989;&#25968;&#26159; OpenGL3.0&#30340;&#26631;&#20934;&#12290;</p>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2013/10/11/qtlinkerror" title="Qt重定义链接错误">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2013/11/26/crazyheap" title="若干丧心病狂的平衡树">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">25 October 2013</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#Qt-ref">Qt <span>4</span></a></li>
+     
+    	<li><a href="/tags.html#OpenGL-ref">OpenGL <span>3</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2013 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+
