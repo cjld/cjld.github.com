@@ -4,13 +4,135 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-01-01T17:11:06+08:00</updated>
+ <updated>2014-02-04T20:17:46+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>jasonzhu8@126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Unity3D 初探</title>
+   <link href="http://cjld.github.io/2014/02/04/unitynewbie"/>
+   <updated>2014-02-04T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/02/04/unitynewbie</id>
+   <content type="html">&lt;p&gt;&amp;#21448;&amp;#22909;&amp;#20037;&amp;#27809;&amp;#26377;&amp;#26356;&amp;#26032; BLOG &amp;#20102;, &amp;#19968;&amp;#23450;&amp;#35201;&amp;#22362;&amp;#25345;&amp;#19968;&amp;#20010;&amp;#26376;&amp;#33267;&amp;#23569;&amp;#19968;&amp;#31687;, &amp;#20110;&amp;#26159;&amp;#20046;&amp;#25105;&amp;#21448;&amp;#26469;&amp;#35760;&amp;#27969;&amp;#27700;&amp;#36134;&amp;#20102;, &amp;#36825;&amp;#19968;&amp;#27425;&amp;#23601;&amp;#35762;&amp;#35762;&amp;#36825;&amp;#19968;&amp;#21608;&amp;#25240;&amp;#33150; Unity3D &amp;#30340;&amp;#24773;&amp;#20917;&amp;#21543;.&lt;/p&gt;
+&lt;p&gt;&amp;#23398;&amp;#20064;&amp;#36164;&amp;#26009;&amp;#32593;&amp;#19978;&amp;#25628;&amp;#19968;&amp;#22823;&amp;#25226;, &amp;#20027;&amp;#35201;&amp;#23398;&amp;#20064;&amp;#36164;&amp;#26009;&amp;#26469;&amp;#33258;&amp;#20110;&amp;#19979;&amp;#38754;&amp;#20960;&amp;#20010;&amp;#32593;&amp;#31449;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.unitymanual.com/topic/download/index.html&quot;&gt;http://www.unitymanual.com/topic/download/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.xuanyusong.com/&quot;&gt;http://www.xuanyusong.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.unity3d.com/Documentation/ScriptReference/&quot;&gt;https://docs.unity3d.com/Documentation/ScriptReference/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#22914;&amp;#26524;&amp;#33021;&amp;#31995;&amp;#32479;&amp;#30340;&amp;#23398;&amp;#20064;&amp;#23436;&amp;#36824;&amp;#25171;&amp;#31639;&amp;#21435;&amp;#23448;&amp;#26041;&amp;#19979;&amp;#20960;&amp;#20010; demo &amp;#35748;&amp;#30495;&amp;#30740;&amp;#31350;&amp;#19979;.&lt;/p&gt;
+&lt;h3 id=&quot;&amp;#23545;&amp;#20110;-unity3d-&amp;#30340;&amp;#21520;&amp;#27133;&quot;&gt;&amp;#23545;&amp;#20110; Unity3D &amp;#30340;&amp;#21520;&amp;#27133;&lt;/h3&gt;
+&lt;p&gt;Unity3D &amp;#36825;&amp;#20010;&amp;#24341;&amp;#25806;, &amp;#19978;&amp;#25163;&amp;#36824;&amp;#26159;&amp;#27604;&amp;#36739;&amp;#31616;&amp;#21333;&amp;#30340;, &amp;#36825;&amp;#24471;&amp;#30410;&amp;#20110;&amp;#20854;&amp;#32534;&amp;#36753;&amp;#22120;, &amp;#29992;&amp;#36215;&amp;#26469;&amp;#38750;&amp;#24120;&amp;#33298;&amp;#26381;, &amp;#20960;&amp;#20046;&amp;#19981;&amp;#29992;&amp;#20889;&amp;#20195;&amp;#30721;&amp;#23601;&amp;#33021;&amp;#22815;&amp;#20570;&amp;#20986;&amp;#28843;&amp;#37239;&amp;#30340;&amp;#25928;&amp;#26524;, &amp;#20195;&amp;#30721;&amp;#19978;&amp;#20250;&amp;#28857; javascript &amp;#23601;&amp;#33021;&amp;#23436;&amp;#25104;&amp;#24456;&amp;#22810;&amp;#20107;&amp;#24773;, &amp;#21487;&amp;#20197;&amp;#35828;&amp;#26159;&amp;#38750;&amp;#24120;&amp;#30340;&amp;#29031;&amp;#39038;&amp;#35774;&amp;#35745;&amp;#24072;&amp;#20102;. &amp;#22240;&amp;#27492;&amp;#32593;&amp;#19978;&amp;#30340;&amp;#24456;&amp;#22810;&amp;#25945;&amp;#31243;&amp;#20063;&amp;#27604;&amp;#36739;&amp;#20559;&amp;#21521;&amp;#20110;&amp;#35774;&amp;#35745;&amp;#24072;, &amp;#36825;&amp;#35753;&amp;#25105;&amp;#26377;&amp;#20123;&amp;#35768;&amp;#22256;&amp;#24785;, &amp;#20316;&amp;#20026;&amp;#31243;&amp;#24207;&amp;#21592;, &amp;#36824;&amp;#26159;&amp;#24076;&amp;#26395;&amp;#19968;&amp;#20999;&amp;#37117;&amp;#33021;&amp;#22815;&amp;#29992;&amp;#20195;&amp;#30721;&amp;#26469;&amp;#25511;&amp;#21046;, &amp;#22909;&amp;#22312;&amp;#32534;&amp;#36753;&amp;#22120;&amp;#33021;&amp;#20570;&amp;#21040;&amp;#30340;&amp;#32477;&amp;#22823;&amp;#22810;&amp;#25968;&amp;#20107;&amp;#24773;&amp;#30452;&amp;#25509;&amp;#29992;&amp;#20195;&amp;#30721;&amp;#20063;&amp;#33021;&amp;#20570;&amp;#21040;, &amp;#20294;&amp;#22909;&amp;#20687;&amp;#36824;&amp;#26159;&amp;#26377;&amp;#20123;&amp;#20570;&amp;#19981;&amp;#21040;&amp;#38656;&amp;#35201;&amp;#29992;&amp;#19968;&amp;#20123;&amp;#26356;&amp;#22797;&amp;#26434;&amp;#30340;&amp;#20195;&amp;#30721;&amp;#29978;&amp;#33267;&amp;#25554;&amp;#20214;&amp;#26469;&amp;#23454;&amp;#29616;.&lt;/p&gt;
+&lt;p&gt;&amp;#19981;&amp;#36807; Unity &amp;#30495;&amp;#24515;&amp;#26159;&amp;#19968;&amp;#20010;&amp;#38750;&amp;#24120;&amp;#36190;&amp;#30340;&amp;#24341;&amp;#25806;, &amp;#35748;&amp;#30495;&amp;#26597;&amp;#38405;&amp;#25991;&amp;#26723;&amp;#30340;&amp;#35805;&amp;#24819;&amp;#20570;&amp;#36824;&amp;#26159;&amp;#33021;&amp;#20570;&amp;#21040;&amp;#30340;, &amp;#29616;&amp;#22312;&amp;#30340; Unity3D &amp;#31038;&amp;#21306;&amp;#20063;&amp;#38750;&amp;#24120;&amp;#27963;&amp;#36291;, &amp;#19981;&amp;#36807;&amp;#36825;&amp;#29609;&amp;#24847;&amp;#36824;&amp;#30495;&amp;#26159;&amp;#36149;, &amp;#35980;&amp;#20284;&amp;#19987;&amp;#19994;&amp;#29256;&amp;#35201;&amp;#29992; 1500 &amp;#20992;.&lt;/p&gt;
+&lt;p&gt;&amp;#20197;&amp;#19978;&amp;#26159;&amp;#19968;&amp;#20010;&amp;#26032;&amp;#25163;&amp;#19981;&amp;#36127;&amp;#36131;&amp;#20219;&amp;#30340;&amp;#21520;&amp;#27133;&lt;/p&gt;
+&lt;h3 id=&quot;&amp;#23545;&amp;#20110;-csharp-&amp;#30340;&amp;#21520;&amp;#27133;&quot;&gt;&amp;#23545;&amp;#20110; CSharp &amp;#30340;&amp;#21520;&amp;#27133;&lt;/h3&gt;
+&lt;p&gt;CSharp &amp;#21407;&amp;#26469;&amp;#23601;&amp;#26159; C#, &amp;#25105;&amp;#30495;&amp;#26159;&amp;#23396;&amp;#38475;&amp;#23521;&amp;#38395;&amp;#20102;, C# &amp;#30340;&amp;#26469;&amp;#28304;&amp;#26159; C++ &amp;#20013;&amp;#30340;&amp;#20004;&amp;#20010;&amp;#21152;&amp;#21495;&amp;#21472;&amp;#22312;&amp;#19968;&amp;#36215;, &amp;#24040;&amp;#30828;&amp;#30340;&amp;#33041;&amp;#27934;&amp;#36824;&amp;#30495;&amp;#26159;&amp;#22823;.&lt;/p&gt;
+&lt;p&gt;&amp;#25351;&amp;#38024;&amp;#36825;&amp;#20010;&amp;#27010;&amp;#24565;&amp;#34987;&amp;#21462;&amp;#28040;&amp;#25481;&amp;#36824;&amp;#30495;&amp;#26159;&amp;#35753;&amp;#20154;&amp;#38590;&amp;#21463;&amp;#8230; struct &amp;#30340;&amp;#31561;&amp;#20110;&amp;#21495;&amp;#26159;&amp;#25335;&amp;#36125;&amp;#32780; class &amp;#30340;&amp;#31561;&amp;#21495;&amp;#26159;&amp;#20256;&amp;#24341;&amp;#29992;&amp;#36825;&amp;#36824;&amp;#30495;&amp;#26159;&amp;#35753;&amp;#20154;&amp;#32416;&amp;#32467;, &amp;#19975;&amp;#19968;&amp;#25105;&amp;#19981;&amp;#30693;&amp;#36947;&amp;#25105;&amp;#24403;&amp;#21069;&amp;#29992;&amp;#30340;&amp;#21040;&amp;#24213;&amp;#26159; struct &amp;#36824;&amp;#26159; class &amp;#24590;&amp;#20040;&amp;#30772;.&lt;/p&gt;
+&lt;p&gt;&amp;#36824;&amp;#26377; &amp;#25176;&amp;#31649;(delegate) &amp;#21644; &amp;#20107;&amp;#20214;(event), &amp;#20026;&amp;#20160;&amp;#20040;&amp;#24863;&amp;#35273;&amp;#23601;&amp;#26159;&amp;#20989;&amp;#25968;&amp;#25351;&amp;#38024;&amp;#21644;&amp;#20989;&amp;#25968;&amp;#25351;&amp;#38024;&amp;#25968;&amp;#32452;&amp;#8230;&amp;#8230;&lt;/p&gt;
+&lt;p&gt;&amp;#24050;&amp;#32463;&amp;#19981;&amp;#22826;&amp;#24819;&amp;#21435;&amp;#32416;&amp;#32467;&amp;#35821;&amp;#35328;&amp;#29305;&amp;#24615;&amp;#20102;, &amp;#21453;&amp;#27491;&amp;#25105;&amp;#23601;&amp;#26159;&amp;#21543;&amp;#23427;&amp;#24403; C++ &amp;#26469;&amp;#29992;&amp;#30340;, &amp;#20197;&amp;#21518;&amp;#19978; java &amp;#23567;&amp;#23398;&amp;#26399;&amp;#30340;&amp;#26102;&amp;#20505;&amp;#20877;&amp;#35748;&amp;#30495;&amp;#30740;&amp;#31350;&amp;#30740;&amp;#31350;.&lt;/p&gt;
+&lt;h3 id=&quot;&amp;#23398;&amp;#20064;&amp;#31508;&amp;#35760;&quot;&gt;&amp;#23398;&amp;#20064;&amp;#31508;&amp;#35760;&lt;/h3&gt;
+&lt;p&gt;&amp;#28034;&amp;#40486;&amp;#24335;&amp;#30340;&amp;#31508;&amp;#35760;, &amp;#29992;&amp;#36825;&amp;#31181;&amp;#22823;&amp;#22411;&amp;#36719;&amp;#20214;&amp;#38656;&amp;#35201;&amp;#31215;&amp;#32047;&amp;#30340;&amp;#35910;&amp;#30693;&amp;#35782;&amp;#22826;&amp;#22810;&amp;#20102;, &amp;#38543;&amp;#25163;&amp;#35760;&amp;#19968;&amp;#19979;&amp;#21040;&amp;#26102;&amp;#20505;&amp;#20063;&amp;#22909;&amp;#26597;&lt;/p&gt;
+&lt;h4 id=&quot;day1&quot;&gt;day1&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;#23548;&amp;#20837;&amp;#27169;&amp;#22411;&amp;#19982;&amp;#21160;&amp;#30011;&lt;/li&gt;
+&lt;li&gt;&amp;#33258;&amp;#24102;&amp;#30340;&amp;#26448;&amp;#36136;&amp;#19982;&amp;#30528;&amp;#33394;&amp;#22120;&amp;#30340;&amp;#20351;&amp;#29992;&amp;#65292;&amp;#39640;&amp;#20809;&amp;#65292;mip&amp;#31561;&amp;#31561;&lt;/li&gt;
+&lt;li&gt;GUI&amp;#25353;&amp;#38062;&amp;#65292;&amp;#32441;&amp;#29702;&lt;/li&gt;
+&lt;li&gt;&amp;#31435;&amp;#20307;&amp;#22768;&amp;#38899;&amp;#19982;&amp;#33050;&amp;#26412;&amp;#25511;&amp;#21046;&lt;/li&gt;
+&lt;li&gt;&amp;#33050;&amp;#26412;&amp;#21019;&amp;#24314;&amp;#29289;&amp;#20307;&amp;#65292;&amp;#39044;&amp;#35774;instantiate&amp;#21019;&amp;#24314;&amp;#29289;&amp;#20307;&lt;/li&gt;
+&lt;li&gt;favorite&amp;#20445;&amp;#23384;&amp;#25628;&amp;#32034;&amp;#32467;&amp;#26524;&amp;#20070;&amp;#31614; &amp;#22810;&amp;#20851;&amp;#38190;&amp;#23383;&amp;#25628;&amp;#32034;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;day2&quot;&gt;day2&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;#38452;&amp;#24433;&amp;#35201;&amp;#21516;&amp;#26102;&amp;#22312;&amp;#25237;&amp;#23556;&amp;#32773;&amp;#65292;&amp;#25509;&amp;#21463;&amp;#32773;&amp;#65292;&amp;#28783;&amp;#20809;&amp;#22788;&amp;#35774;&amp;#32622;&lt;/li&gt;
+&lt;li&gt;&amp;#36873;&amp;#25321;&amp;#22810;&amp;#20010;&amp;#21516;&amp;#26102;&amp;#35843;&amp;#25972;&lt;/li&gt;
+&lt;li&gt;lock Inspector &amp;#35753;&amp;#20854;&amp;#22266;&amp;#23450;&amp;#26174;&amp;#31034;&amp;#19968;&amp;#29289;&amp;#20307;&lt;/li&gt;
+&lt;li&gt;Debug &amp;#21487;&amp;#20197;&amp;#26597;&amp;#30475;&amp;#33050;&amp;#26412;&amp;#20013;&amp;#30340;&amp;#31169;&amp;#26377;&amp;#21464;&amp;#37327;&lt;/li&gt;
+&lt;li&gt;&amp;#21491;&amp;#19978;&amp;#35282;&amp;#21019;&amp;#24314; tab, shift + tab &amp;#26368;&amp;#22823;&amp;#21270;&amp;#24403;&amp;#21069; tab&lt;/li&gt;
+&lt;li&gt;&amp;#22330;&amp;#26223;&amp;#27983;&amp;#35272;
+&lt;ul&gt;
+&lt;li&gt;&amp;#26041;&amp;#21521;&amp;#38190;&amp;#31227;&amp;#21160;&lt;/li&gt;
+&lt;li&gt;&amp;#20013;&amp;#38190;&lt;/li&gt;
+&lt;li&gt;&amp;#21491;&amp;#38190;&amp;#20999;&amp;#25442;&amp;#35270;&amp;#35282; + WASD&lt;/li&gt;
+&lt;li&gt;shift &amp;#21152;&amp;#36895;&lt;/li&gt;
+&lt;li&gt;&amp;#36873;&amp;#25321;&amp;#29289;&amp;#20307; F &amp;#21040;&amp;#26174;&amp;#31034;&amp;#20013;&amp;#24515;&lt;/li&gt;
+&lt;li&gt;alt+&amp;#24038;&amp;#38190;&amp;#65292;&amp;#32469;&amp;#29289;&amp;#20307;&amp;#26059;&amp;#36716;&lt;/li&gt;
+&lt;li&gt;shift + ctrl &amp;#21560;&amp;#38468;&amp;#31227;&amp;#21160;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;getComponent(type)&lt;/li&gt;
+&lt;li&gt;GameObject.Find(name)&lt;/li&gt;
+&lt;li&gt;GameObject.FindGameObject(s)WithTag(tagname)&lt;/li&gt;
+&lt;li&gt;Time
+&lt;ul&gt;
+&lt;li&gt;Time.time&lt;/li&gt;
+&lt;li&gt;Time.deltaTime&lt;/li&gt;
+&lt;li&gt;Time.fixedTime&lt;/li&gt;
+&lt;li&gt;fixedDeltaTime&lt;/li&gt;
+&lt;li&gt;smoothDeltaTime&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;yield WaitForSeconds&lt;/li&gt;
+&lt;li&gt;gameObject.sendMessage&lt;/li&gt;
+&lt;li&gt;CSharp &amp;#20013;&amp;#30340; delegate/event&lt;/li&gt;
+&lt;li&gt;OnMouseOver &amp;#37325;&amp;#36733;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;day3&quot;&gt;day3&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OnGUI &amp;#35843;&amp;#29992;&amp;#39057;&amp;#29575;&amp;#20026;&amp;#27599;&amp;#31186;120&amp;#27425;&amp;#65292;&amp;#39640;&amp;#20110;&amp;#21047;&amp;#26032;&amp;#39057;&amp;#29575;&lt;/li&gt;
+&lt;li&gt;&amp;#21508;&amp;#31181;&amp;#21487;&amp;#37325;&amp;#36733;&amp;#20989;&amp;#25968;&lt;/li&gt;
+&lt;li&gt;Screen &amp;#31867;&lt;/li&gt;
+&lt;li&gt;Group Box&lt;/li&gt;
+&lt;li&gt;GUILayout
+&lt;ul&gt;
+&lt;li&gt;BeginHorizontal&lt;/li&gt;
+&lt;li&gt;Space&lt;/li&gt;
+&lt;li&gt;GUILayoutOption&lt;/li&gt;
+&lt;li&gt;GUILayout.Width GUILayout.MinWidth GUILayout.ExpandHeight.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;C# &amp;#29305;&amp;#24615;
+&lt;ul&gt;
+&lt;li&gt;params &amp;#21487;&amp;#21464;&amp;#21442;&amp;#25968;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;GUILayout.BeginArea(Rect)&lt;/li&gt;
+&lt;li&gt;GUI.Window
+&lt;ul&gt;
+&lt;li&gt;GUI.DragWindow&lt;/li&gt;
+&lt;li&gt;&amp;#26080;&amp;#27861;&amp;#25302;&amp;#21160;&amp;#31383;&amp;#21475;&amp;#20027;&amp;#35201;&amp;#22240;&amp;#20026;&amp;#20301;&amp;#32622;&amp;#35774;&amp;#32622;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;day4&quot;&gt;day4&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;TerrainData.Alphamaps &amp;#35774;&amp;#32622;&amp;#36148;&amp;#22270;&amp;#28151;&amp;#21512;&lt;/li&gt;
+&lt;li&gt;setHeights&lt;/li&gt;
+&lt;li&gt;heightMapScale&lt;/li&gt;
+&lt;li&gt;GetSteepness &amp;#33719;&amp;#24471;&amp;#26012;&amp;#29575;&lt;/li&gt;
+&lt;li&gt;GetInterpolatedHeight &amp;#39640;&amp;#24230;&amp;#25554;&amp;#20540;&lt;/li&gt;
+&lt;li&gt;C# &amp;#25193;&amp;#23637;&amp;#26041;&amp;#27861; &amp;#35201;static&amp;#65292;this&amp;#31532;&amp;#19968;&amp;#20010;&amp;#21442;&amp;#25968;&lt;/li&gt;
+&lt;li&gt;Resource.Load&lt;/li&gt;
+&lt;li&gt;TerrainData.splatPrototypes &amp;#28155;&amp;#21152;&amp;#32441;&amp;#29702;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;day5&quot;&gt;day5&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Input.GetAxis &amp;#34394;&amp;#25311;&amp;#36724; &amp;#24179;&amp;#28369;&lt;/li&gt;
+&lt;li&gt;GameObject.CreatePrimitive(PrimitiveType.Cube)&lt;/li&gt;
+&lt;li&gt;Input.GetMouseButton 0 l 1 r 2 m&lt;/li&gt;
+&lt;li&gt;Input.GetKey KeyCode.UpArrow&lt;/li&gt;
+&lt;li&gt;Rigidbody
+&lt;ul&gt;
+&lt;li&gt;MovePosition&lt;/li&gt;
+&lt;li&gt;AddForce&lt;/li&gt;
+&lt;li&gt;velocity&lt;/li&gt;
+&lt;li&gt;angularVelocity&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Destroy&lt;/li&gt;
+&lt;li&gt;Event.clickCount&lt;/li&gt;
+&lt;li&gt;Event &amp;#21508;&amp;#31181;&amp;#21151;&amp;#33021;&amp;#38190;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#26368;&amp;#36817;&amp;#34917;&amp;#30058;&amp;#34917;&amp;#24471;&amp;#22825;&amp;#26127;&amp;#22320;&amp;#26263;&amp;#20102;&amp;#8230;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>跨年折腾路由器</title>

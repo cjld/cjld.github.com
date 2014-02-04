@@ -10,6 +10,7 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/02/04/unitynewbie
 http://cjld.github.io/2014/01/01/routerfck
 http://cjld.github.io/2013/12/30/pandoctest
 http://cjld.github.io/2013/12/25/cghwreport
