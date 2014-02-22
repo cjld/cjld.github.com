@@ -5,10 +5,30 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-02-12T08:40:20+08:00</lastBuildDate>
-        <pubDate>2014-02-12T08:40:20+08:00</pubDate>
+        <lastBuildDate>2014-02-22T18:53:39+08:00</lastBuildDate>
+        <pubDate>2014-02-22T18:53:39+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>mipMap 导致的诡异 Bug</title>
+                <description>&lt;p&gt;&amp;#20170;&amp;#22825;&amp;#22312;&amp;#29992; RenderTexture &amp;#23454;&amp;#29616;&amp;#25112;&amp;#20105;&amp;#36855;&amp;#38654;&amp;#30340;&amp;#26102;&amp;#20505;&amp;#20986;&amp;#29616;&amp;#20102;&amp;#35809;&amp;#24322;&amp;#30340; Bug&amp;#65292; &amp;#26368;&amp;#21518;&amp;#32993;&amp;#20081;&amp;#30340;&amp;#25226;&amp;#36825;&amp;#20010; Bug &amp;#20462;&amp;#22797;&amp;#20102;&amp;#65292; Bug &amp;#22914;&amp;#19979;&amp;#65306;&lt;/p&gt;
+&lt;div class=&quot;figure&quot;&gt;
+&lt;img src=&quot;../../../../img/mipmapbug/1.png&quot; /&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;#21491;&amp;#19979;&amp;#26159;&amp;#25112;&amp;#20105;&amp;#36855;&amp;#38654;&amp;#36148;&amp;#22270;&amp;#65292;&amp;#21487;&amp;#20197;&amp;#30475;&amp;#21040;&amp;#22270;&amp;#20013;&amp;#36793;&amp;#32536;&amp;#22788;&amp;#20986;&amp;#29616;&amp;#20102;&amp;#33707;&amp;#21517;&amp;#20854;&amp;#22937;&amp;#30340;&amp;#40657;&amp;#36793;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#19968;&amp;#24320;&amp;#22987;&amp;#26159;&amp;#20197;&amp;#20026; depth buffer &amp;#30340;&amp;#31934;&amp;#24230;&amp;#20986;&amp;#20102;&amp;#38382;&amp;#39064;&amp;#65292; &amp;#21508;&amp;#31181;&amp;#36755;&amp;#20986;&amp;#35843;&amp;#35797;&amp;#26080;&amp;#26524;&amp;#20197;&amp;#21518;&amp;#65292;&amp;#20598;&amp;#28982;&amp;#30340;&amp;#20598;&amp;#28982;&amp;#30340;&amp;#20462;&amp;#25913;&amp;#20102;&amp;#36855;&amp;#38654;&amp;#36148;&amp;#22270;&amp;#30340; FilterMode &amp;#20197;&amp;#21518;&amp;#40657;&amp;#36793;&amp;#30340;&amp;#20998;&amp;#24067;&amp;#20986;&amp;#29616;&amp;#21464;&amp;#21270;&amp;#65292; &amp;#22312; Texture &amp;#39640;&amp;#32423;&amp;#36873;&amp;#39033;&amp;#20013;&amp;#31105;&amp;#29992; mipmap &amp;#20197;&amp;#21518; bug &amp;#20462;&amp;#22797;&amp;#65292; &amp;#21407;&amp;#22240;&amp;#26159;&amp;#22240;&amp;#20026;&amp;#22312;&amp;#26576;&amp;#20123;&amp;#36793;&amp;#36828;&amp;#22320;&amp;#26041;&amp;#30452;&amp;#25509;&amp;#20351;&amp;#29992;&amp;#20102;&amp;#26368;&amp;#23567;&amp;#32423;&amp;#21035;&amp;#30340; mipmap&amp;#65292;&amp;#32780;&amp;#26368;&amp;#23567;&amp;#32423;&amp;#21035;&amp;#30340; mipmap &amp;#39068;&amp;#33394;&amp;#24182;&amp;#19981;&amp;#26159;&amp;#36879;&amp;#26126;&amp;#30340;&amp;#65292;&amp;#23548;&amp;#33268;&amp;#20986;&amp;#29616; bug&amp;#12290;&lt;/p&gt;
+&lt;div class=&quot;figure&quot;&gt;
+&lt;img src=&quot;../../../../img/mipmapbug/2.png&quot; /&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;#26377;&amp;#19968;&amp;#28857;&amp;#26080;&amp;#27861;&amp;#29702;&amp;#35299;&amp;#30340;&amp;#26159;&amp;#65292; &amp;#20351;&amp;#29992; RenderTexture &amp;#24212;&amp;#35813;&amp;#20250;&amp;#20002;&amp;#22833;&amp;#23618;&amp;#27425;&amp;#32454;&amp;#33410;&amp;#30340;&amp;#65292; Unity3D &amp;#26159;&amp;#24590;&amp;#20040;&amp;#26679;&amp;#25214;&amp;#21040;&amp;#38656;&amp;#35201;&amp;#20351;&amp;#29992; mipmap &amp;#30340;&amp;#22320;&amp;#26041;&amp;#30340;&amp;#65311; &amp;#38590;&amp;#36947;&amp;#20648;&amp;#23384;&amp;#20102;&amp;#27599;&amp;#20010;&amp;#20687;&amp;#32032;&amp;#30340; LOD &amp;#20040; = =&lt;/p&gt;
+</description>
+                <link>http://cjld.github.io/2014/02/22/mipmapbug</link>
+                <guid>http://cjld.github.io/2014/02/22/mipmapbug</guid>
+                <pubDate>2014-02-22T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Unity3D 初探</title>
@@ -212,6 +232,24 @@
 &lt;li&gt;vertex shader &amp;#38656;&amp;#35201;&amp;#23545;uv&amp;#36171;&amp;#20540;&lt;/li&gt;
 &lt;li&gt;TextureName_ST TRANSFORM_TEX&lt;/li&gt;
 &lt;li&gt;_SinTime&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;day11&quot;&gt;day11&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;RenderTexture.active&lt;/li&gt;
+&lt;li&gt;source.SetGlobalShaderProperty (&amp;#8220;_RenderTex&amp;#8220;);&lt;/li&gt;
+&lt;li&gt;Graphics.Blit(source, dest, mat);&lt;/li&gt;
+&lt;li&gt;DepthTextureMode _CameraDepthTexture&lt;/li&gt;
+&lt;li&gt;ZTest Always Cull Off ZWrite Off&lt;/li&gt;
+&lt;li&gt;&lt;span class=&quot;citation&quot;&gt;@script&lt;/span&gt; RequireComponent (Camera)&lt;/li&gt;
+&lt;li&gt;island height map&lt;/li&gt;
+&lt;li&gt;setrslt&lt;/li&gt;
+&lt;li&gt;SkyBoxGenerator&lt;/li&gt;
+&lt;li&gt;matcaps&lt;/li&gt;
+&lt;li&gt;fake sss&lt;/li&gt;
+&lt;li&gt;Renderer.sharedMaterial&lt;/li&gt;
+&lt;li&gt;StaticBatchingUtility.Combine&lt;/li&gt;
+&lt;li&gt;b.transform.parent = a.transform&lt;/li&gt;
+&lt;li&gt;MeshCombineUtility&lt;/li&gt;
 &lt;/ul&gt;
 </description>
                 <link>http://cjld.github.io/2014/02/04/unitynewbie</link>
