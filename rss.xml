@@ -5,10 +5,103 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-02-22T18:53:39+08:00</lastBuildDate>
-        <pubDate>2014-02-22T18:53:39+08:00</pubDate>
+        <lastBuildDate>2014-03-27T16:57:09+08:00</lastBuildDate>
+        <pubDate>2014-03-27T16:57:09+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Eigen 试用</title>
+                <description>&lt;p&gt;&amp;#26368;&amp;#36817;&amp;#35201;&amp;#20570;&amp;#19968;&amp;#20123;&amp;#21644;&amp;#30697;&amp;#38453;&amp;#26377;&amp;#20851;&amp;#30340;&amp;#36816;&amp;#31639;&amp;#65292; &amp;#22240;&amp;#20026; matlab &amp;#23454;&amp;#22312;&amp;#29992;&amp;#19981;&amp;#20064;&amp;#24815;&amp;#65292;&amp;#25214;&amp;#20102;&amp;#20010;&amp;#27604;&amp;#36739;&amp;#36731;&amp;#37327;&amp;#30340; Eigen&amp;#65292;&amp;#36731;&amp;#37327;&amp;#21040;&amp;#37117;&amp;#19981;&amp;#38656;&amp;#35201;&amp;#38142;&amp;#25509;&amp;#65292;&amp;#36190;&amp;#21543;~&lt;/p&gt;
+&lt;p&gt;&amp;#29305;&amp;#24449;&amp;#20540;&amp;#65292;SVD&amp;#20998;&amp;#35299;&amp;#37117;&amp;#26377;&amp;#65292;&amp;#35299;&amp;#32447;&amp;#24615;&amp;#26041;&amp;#31243;&amp;#65292;&amp;#26368;&amp;#23567;&amp;#20108;&amp;#20056;&amp;#37117;&amp;#27809;&amp;#38382;&amp;#39064;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#20284;&amp;#20046;&amp;#36824;&amp;#26377;&amp;#20123;&amp;#38024;&amp;#23545;&amp;#31232;&amp;#30095;&amp;#30697;&amp;#38453;&amp;#30340;&amp;#20248;&amp;#21270;&amp;#65292;&amp;#19981;&amp;#36807;&amp;#29992;&amp;#19981;&amp;#30528;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#19968;&amp;#27573;&amp;#31616;&amp;#21333;&amp;#30340; code :&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;Eigen/Core&amp;gt;
+#include &amp;lt;Eigen/Dense&amp;gt;
+#include &amp;lt;Eigen/Eigen&amp;gt;
+#include &amp;lt;Eigen/SVD&amp;gt;
+
+using namespace std;
+using namespace Eigen;
+
+#define FOR(i,l,r) for (int i=(l); i&amp;lt;=(r); i++)
+
+int main() {
+    Vector4d v1;
+    v1 &amp;lt;&amp;lt; 1, 2, 3, 4;
+    cout &amp;lt;&amp;lt; &amp;quot;v1 = \n&amp;quot; &amp;lt;&amp;lt; v1 &amp;lt;&amp;lt; endl;
+    cout &amp;lt;&amp;lt; &amp;quot;v1.cols() &amp;quot; &amp;lt;&amp;lt; v1.cols() &amp;lt;&amp;lt; &amp;quot; v1.rows() &amp;quot; &amp;lt;&amp;lt; v1.rows() &amp;lt;&amp;lt; endl;
+    cout &amp;lt;&amp;lt; v1(1) &amp;lt;&amp;lt; v1(1,0) &amp;lt;&amp;lt; endl;
+
+    VectorXd v2(2);
+    v2 &amp;lt;&amp;lt; 8, 9;
+    cout &amp;lt;&amp;lt; &amp;quot;v2 = \n&amp;quot; &amp;lt;&amp;lt; v2 &amp;lt;&amp;lt; endl;
+
+    cout &amp;lt;&amp;lt; &amp;quot;test matrix&amp;quot; &amp;lt;&amp;lt; endl;
+
+    MatrixXf m1(2,5);
+    FOR(i,0,m1.rows()-1) FOR(j,0,m1.cols()-1) m1(i,j) = i*10+j;
+    cout &amp;lt;&amp;lt; &amp;quot;m1 =\n&amp;quot; &amp;lt;&amp;lt; m1 &amp;lt;&amp;lt; endl;
+
+    int rows=5;
+    int cols=5;
+    MatrixXf m2(rows,cols);
+    m2&amp;lt;&amp;lt;( Matrix3f()&amp;lt;&amp;lt;1,2,3,4,5,6,7,8,10 ).finished(),
+        MatrixXf::Zero(3,cols-3),
+        MatrixXf::Zero(rows-3,3),
+        MatrixXf::Identity(rows-3,cols-3);
+    cout&amp;lt;&amp;lt;&amp;quot;m2=\n&amp;quot;&amp;lt;&amp;lt;m2&amp;lt;&amp;lt;endl;
+
+    cout&amp;lt;&amp;lt; m1*m2 &amp;lt;&amp;lt;endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#36716;&amp;#32622;&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; m2.transpose() * m1.transpose() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#23545;&amp;#27599;&amp;#20010;&amp;#20803;&amp;#32032;&amp;#25191;&amp;#34892; cos&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; m2.array().cos() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#34892;&amp;#21015;&amp;#24335;&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; m2.determinant() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#29305;&amp;#24449;&amp;#21521;&amp;#37327;&amp;quot;&amp;lt;&amp;lt;endl;
+    EigenSolver&amp;lt;decltype(m2)&amp;gt; es(m2);
+    cout &amp;lt;&amp;lt; es.eigenvectors() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#29305;&amp;#24449;&amp;#20540;&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; es.eigenvalues() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#29305;&amp;#24449;&amp;#20540;&amp;#20998;&amp;#35299; V*D*V^(-1)&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; es.eigenvectors() * es.eigenvalues().asDiagonal() * es.eigenvectors().inverse() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;SVD &amp;#20998;&amp;#35299;&amp;quot;&amp;lt;&amp;lt;endl;
+    JacobiSVD&amp;lt;decltype(m2)&amp;gt; svd(m2, ComputeThinU | ComputeThinV);
+    cout &amp;lt;&amp;lt; svd.matrixU().determinant() &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; svd.singularValues() &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; svd.matrixV().determinant() &amp;lt;&amp;lt; endl;
+    cout &amp;lt;&amp;lt; svd.matrixU() * svd.singularValues().asDiagonal() * svd.matrixV().transpose() &amp;lt;&amp;lt; endl;
+    cout&amp;lt;&amp;lt;&amp;quot;SVD &amp;#35299;&amp;#26368;&amp;#23567;&amp;#20108;&amp;#20056;&amp;quot;&amp;lt;&amp;lt;endl;
+    cout &amp;lt;&amp;lt; svd.solve(VectorXf::Ones(5));
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#26497;&amp;#20998;&amp;#35299;&amp;quot;&amp;lt;&amp;lt;endl;
+    auto rot = svd.matrixU() * svd.matrixV().transpose();
+    auto scl = svd.matrixV() * svd.singularValues().asDiagonal() * svd.matrixV().transpose();
+    cout&amp;lt;&amp;lt;rot&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;scl&amp;lt;&amp;lt;endl;
+    cout&amp;lt;&amp;lt;rot.determinant()&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;rot*scl&amp;lt;&amp;lt;endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#40784;&amp;#27425;&amp;#22352;&amp;#26631;&amp;quot;&amp;lt;&amp;lt;endl;
+    Transform&amp;lt;float, 5, Affine&amp;gt; trans;
+    //trans.computeRotationScaling();
+    cout &amp;lt;&amp;lt; trans.matrix() &amp;lt;&amp;lt; endl;
+
+    cout&amp;lt;&amp;lt;&amp;quot;&amp;#35299;&amp;#32447;&amp;#24615;&amp;#26041;&amp;#31243;&amp;quot;&amp;lt;&amp;lt;endl;
+    VectorXf v(5);
+    v &amp;lt;&amp;lt; 1,2,4,3,5;
+    cout&amp;lt;&amp;lt;MatrixXf(v.asDiagonal()).colPivHouseholderQr().solve(VectorXf::Ones(5))&amp;lt;&amp;lt;endl;
+}&lt;/code&gt;&lt;/pre&gt;
+</description>
+                <link>http://cjld.github.io/2014/03/27/tryeigen</link>
+                <guid>http://cjld.github.io/2014/03/27/tryeigen</guid>
+                <pubDate>2014-03-27T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>mipMap 导致的诡异 Bug</title>

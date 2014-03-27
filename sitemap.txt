@@ -10,6 +10,7 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/03/27/tryeigen
 http://cjld.github.io/2014/02/22/mipmapbug
 http://cjld.github.io/2014/02/04/unitynewbie
 http://cjld.github.io/2014/01/01/routerfck
