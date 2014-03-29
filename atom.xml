@@ -4,13 +4,24 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-03-27T16:57:09+08:00</updated>
+ <updated>2014-03-30T00:09:43+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>jasonzhu8@126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Unity 在导入模型时点数发生改变</title>
+   <link href="http://cjld.github.io/2014/03/30/unitychangevertex"/>
+   <updated>2014-03-30T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/03/30/unitychangevertex</id>
+   <content type="html">&lt;p&gt;&amp;#26368;&amp;#36817;&amp;#35201;&amp;#21033;&amp;#29992; Unity &amp;#20570;&amp;#19968;&amp;#20123;&amp;#20851;&amp;#20110; mesh &amp;#30340;&amp;#21464;&amp;#24418;&amp;#65292;&amp;#20294;&amp;#26159;&amp;#21364;&amp;#20986;&amp;#29616;&amp;#20102;&amp;#19968;&amp;#20123;&amp;#38382;&amp;#39064;&amp;#65292;&amp;#21457;&amp;#29616;&amp;#21407;&amp;#26469;&amp;#30340; obj &amp;#25991;&amp;#20214;&amp;#26377; n &amp;#20010;&amp;#28857;&amp;#65292;&amp;#23548;&amp;#20837;&amp;#21040; Unity &amp;#20013;&amp;#21364;&amp;#21464;&amp;#22810;&amp;#20102;&amp;#8230;&lt;/p&gt;
+&lt;p&gt;&amp;#20107;&amp;#21518;&amp;#25214;&amp;#21040;&amp;#21407;&amp;#22240;&amp;#65292;&amp;#21407;&amp;#26469;&amp;#26159; Unity &amp;#22312;&amp;#23548;&amp;#20837;&amp;#27169;&amp;#22411;&amp;#26102;&amp;#65292;&amp;#20250;&amp;#25226;&amp;#20855;&amp;#26377;&amp;#19981;&amp;#21516;&amp;#27861;&amp;#21521;&amp;#37327;&amp;#30340;&amp;#28857;&amp;#25286;&amp;#20998;&amp;#25104;&amp;#20960;&amp;#20010;&amp;#28857;&amp;#65292;&amp;#22240;&amp;#27492;&amp;#28857;&amp;#25968;&amp;#23601;&amp;#21464;&amp;#22810;&amp;#20102;&amp;#65292;&amp;#35299;&amp;#20915;&amp;#26041;&amp;#27861;&amp;#26159;&amp;#22312;&amp;#23548;&amp;#20837;&amp;#27169;&amp;#22411;&amp;#35774;&amp;#32622;&amp;#37324;&amp;#25226; Normals &amp;#25913;&amp;#20026; None&lt;/p&gt;
+&lt;p&gt;&amp;#36825;&amp;#31687;&amp;#25991;&amp;#31456;&amp;#22909;&amp;#27700;&amp;#8230; &amp;#25105;&amp;#32431;&amp;#31929;&amp;#26159;&amp;#26469;&amp;#20945;&amp;#25991;&amp;#31456;&amp;#25968;&amp;#30340; = =&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Eigen 试用</title>
