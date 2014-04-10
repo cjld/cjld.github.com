@@ -173,3 +173,16 @@ blockquote {
 .span4 i {
   margin-right: 5px;
 }
+
+#mainTitle {
+  text-align: center;
+}
+
+.span4 h3 {
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.span4 i {
+  vertical-align: baseline;
+}

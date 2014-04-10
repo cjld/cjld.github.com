@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+
     <meta charset="utf-8">
     <title>
       
         mipMap 导致的诡异 Bug - 
       
-      CJLD
+      
+        CJLD
+      
     </title>
     
     <meta name="author" content="cjld">
@@ -155,55 +159,6 @@
 </div>
 
 <div class="row">
-  <div class="span8">
-    <div id="content">
-      <p>&#20170;&#22825;&#22312;&#29992; RenderTexture &#23454;&#29616;&#25112;&#20105;&#36855;&#38654;&#30340;&#26102;&#20505;&#20986;&#29616;&#20102;&#35809;&#24322;&#30340; Bug&#65292; &#26368;&#21518;&#32993;&#20081;&#30340;&#25226;&#36825;&#20010; Bug &#20462;&#22797;&#20102;&#65292; Bug &#22914;&#19979;&#65306;</p>
-<div class="figure">
-<img src="../../../../img/mipmapbug/1.png" />
-</div>
-<hr />
-<p>&#21491;&#19979;&#26159;&#25112;&#20105;&#36855;&#38654;&#36148;&#22270;&#65292;&#21487;&#20197;&#30475;&#21040;&#22270;&#20013;&#36793;&#32536;&#22788;&#20986;&#29616;&#20102;&#33707;&#21517;&#20854;&#22937;&#30340;&#40657;&#36793;&#12290;</p>
-<p>&#19968;&#24320;&#22987;&#26159;&#20197;&#20026; depth buffer &#30340;&#31934;&#24230;&#20986;&#20102;&#38382;&#39064;&#65292; &#21508;&#31181;&#36755;&#20986;&#35843;&#35797;&#26080;&#26524;&#20197;&#21518;&#65292;&#20598;&#28982;&#30340;&#20598;&#28982;&#30340;&#20462;&#25913;&#20102;&#36855;&#38654;&#36148;&#22270;&#30340; FilterMode &#20197;&#21518;&#40657;&#36793;&#30340;&#20998;&#24067;&#20986;&#29616;&#21464;&#21270;&#65292; &#22312; Texture &#39640;&#32423;&#36873;&#39033;&#20013;&#31105;&#29992; mipmap &#20197;&#21518; bug &#20462;&#22797;&#65292; &#21407;&#22240;&#26159;&#22240;&#20026;&#22312;&#26576;&#20123;&#36793;&#36828;&#22320;&#26041;&#30452;&#25509;&#20351;&#29992;&#20102;&#26368;&#23567;&#32423;&#21035;&#30340; mipmap&#65292;&#32780;&#26368;&#23567;&#32423;&#21035;&#30340; mipmap &#39068;&#33394;&#24182;&#19981;&#26159;&#36879;&#26126;&#30340;&#65292;&#23548;&#33268;&#20986;&#29616; bug&#12290;</p>
-<div class="figure">
-<img src="../../../../img/mipmapbug/2.png" />
-</div>
-<hr />
-<p>&#26377;&#19968;&#28857;&#26080;&#27861;&#29702;&#35299;&#30340;&#26159;&#65292; &#20351;&#29992; RenderTexture &#24212;&#35813;&#20250;&#20002;&#22833;&#23618;&#27425;&#32454;&#33410;&#30340;&#65292; Unity3D &#26159;&#24590;&#20040;&#26679;&#25214;&#21040;&#38656;&#35201;&#20351;&#29992; mipmap &#30340;&#22320;&#26041;&#30340;&#65311; &#38590;&#36947;&#20648;&#23384;&#20102;&#27599;&#20010;&#20687;&#32032;&#30340; LOD &#20040; = =</p>
-
-    </div>
-    <hr>
-    <div class="pagination btn-group">
-      
-        <a class="btn prev" href="/2014/02/04/unitynewbie" title="Unity3D 初探">&larr; Previous</a>
-      
-        <a class="btn" href="/archive.html">Archive</a>
-      
-        <a class="btn next" href="/2014/03/27/tryeigen" title="Eigen 试用">Next &rarr;</a>
-      
-    </div>
-    <hr>
-    
-
-
-  <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_developer = 1;
-    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
-    
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-
-
-  </div>
   
   <div class="span4">
     <section>
@@ -236,6 +191,62 @@
         </div>
       </section>
   </div>
+
+
+  <div class="span8">
+    <div id="content">
+      <p>&#20170;&#22825;&#22312;&#29992; RenderTexture &#23454;&#29616;&#25112;&#20105;&#36855;&#38654;&#30340;&#26102;&#20505;&#20986;&#29616;&#20102;&#35809;&#24322;&#30340; Bug&#65292; &#26368;&#21518;&#32993;&#20081;&#30340;&#25226;&#36825;&#20010; Bug &#20462;&#22797;&#20102;&#65292; Bug &#22914;&#19979;&#65306;</p>
+<div class="figure">
+<img src="../../../../img/mipmapbug/1.png" />
+</div>
+<hr />
+<p>&#21491;&#19979;&#26159;&#25112;&#20105;&#36855;&#38654;&#36148;&#22270;&#65292;&#21487;&#20197;&#30475;&#21040;&#22270;&#20013;&#36793;&#32536;&#22788;&#20986;&#29616;&#20102;&#33707;&#21517;&#20854;&#22937;&#30340;&#40657;&#36793;&#12290;</p>
+<p>&#19968;&#24320;&#22987;&#26159;&#20197;&#20026; depth buffer &#30340;&#31934;&#24230;&#20986;&#20102;&#38382;&#39064;&#65292; &#21508;&#31181;&#36755;&#20986;&#35843;&#35797;&#26080;&#26524;&#20197;&#21518;&#65292;&#20598;&#28982;&#30340;&#20598;&#28982;&#30340;&#20462;&#25913;&#20102;&#36855;&#38654;&#36148;&#22270;&#30340; FilterMode &#20197;&#21518;&#40657;&#36793;&#30340;&#20998;&#24067;&#20986;&#29616;&#21464;&#21270;&#65292; &#22312; Texture &#39640;&#32423;&#36873;&#39033;&#20013;&#31105;&#29992; mipmap &#20197;&#21518; bug &#20462;&#22797;&#65292; &#21407;&#22240;&#26159;&#22240;&#20026;&#22312;&#26576;&#20123;&#36793;&#36828;&#22320;&#26041;&#30452;&#25509;&#20351;&#29992;&#20102;&#26368;&#23567;&#32423;&#21035;&#30340; mipmap&#65292;&#32780;&#26368;&#23567;&#32423;&#21035;&#30340; mipmap &#39068;&#33394;&#24182;&#19981;&#26159;&#36879;&#26126;&#30340;&#65292;&#23548;&#33268;&#20986;&#29616; bug&#12290;</p>
+<div class="figure">
+<img src="../../../../img/mipmapbug/2.png" />
+</div>
+<hr />
+<p>&#26377;&#19968;&#28857;&#26080;&#27861;&#29702;&#35299;&#30340;&#26159;&#65292; &#20351;&#29992; RenderTexture &#24212;&#35813;&#20250;&#20002;&#22833;&#23618;&#27425;&#32454;&#33410;&#30340;&#65292; Unity3D &#26159;&#24590;&#20040;&#26679;&#25214;&#21040;&#38656;&#35201;&#20351;&#29992; mipmap &#30340;&#22320;&#26041;&#30340;&#65311; &#38590;&#36947;&#20648;&#23384;&#20102;&#27599;&#20010;&#20687;&#32032;&#30340; LOD &#20040; = =</p>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2014/02/04/unitynewbie" title="Unity3D 初探">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/2014/03/27/tryeigen" title="Eigen 试用">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+
+  </div>
+  
 </div>
 
 
