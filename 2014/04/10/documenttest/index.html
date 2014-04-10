@@ -17,14 +17,16 @@
         display : none;
     }
 
-    body {
+    html, body {
       color: black !important;
       background: white !important;
+      background-image: none !important;
       text-shadow: 0px 1px 1px #D8D8D8 !important;
     }
 
     h1, h2, h3, h4, h5, h6 {
       color: rgb(0, 0, 0) !important;
+      page-break-after: avoid;
     }
 
     div.page-header {
@@ -54,12 +56,21 @@
     }
 
     .span4 {
-      min-height: 837px;
+      page-break-after: always;
     }
 
     span.pln {
       color: white !important;
     }
+
+    .page_break {
+      page-break-after: always;
+    }
+
+    ul, img, table {
+      page-break-inside: avoid;
+    }
+
     </style>
 
     
@@ -266,7 +277,16 @@
 <p>&#20844;&#24335; <span class="math">\(e^{i\pi} + 1 = 0\)</span> &#20844;&#24335;</p>
 <p>Relation <span class="math">\(R\)</span> is <span class="math">\(xy\ge1\)</span>, and <span class="math">\(x\in \mathbb{Z}\)</span> and <span class="math">\(y\in\mathbb{Z}\)</span>, is <span class="math">\(R\)</span> reflexive?</p>
 <h2 id="&#25216;&#24039;">&#25216;&#24039;</h2>
-<p>&#23601;&#36825;&#26679;&#28982;&#21518;&#29992; chrome &#20445;&#23384;&#25104; PDF&#65292;&#38750;&#24120;&#36190;</p>
+<p>&#36825;&#20960;&#20010;&#32593;&#39029;&#26377;&#35762;&#20851;&#20110;&#25171;&#21360;&#30340; CSS &#23646;&#24615;&#65306;</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@page">https://developer.mozilla.org/en-US/docs/Web/CSS/@page</a></li>
+<li><a href="http://www.cocss.com/1564.html">http://www.cocss.com/1564.html</a></li>
+<li><a href="http://dev.w3.org/csswg/css-page/#at-page-rule">http://dev.w3.org/csswg/css-page/#at-page-rule</a></li>
+</ul>
+<p>&#20998;&#20010;&#39029;&#35797;&#35797;</p>
+<div class="page_break">
+
+</div>
 <table>
 <caption>&#26399;&#26411;&#32771;&#35797;&#26102;&#38388;</caption>
 <thead>

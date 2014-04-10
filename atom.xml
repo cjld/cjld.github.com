@@ -4,7 +4,7 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-04-10T08:22:51+08:00</updated>
+ <updated>2014-04-10T10:43:49+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
@@ -26,7 +26,16 @@
 &lt;p&gt;&amp;#20844;&amp;#24335; &lt;span class=&quot;math&quot;&gt;\(e^{i\pi} + 1 = 0\)&lt;/span&gt; &amp;#20844;&amp;#24335;&lt;/p&gt;
 &lt;p&gt;Relation &lt;span class=&quot;math&quot;&gt;\(R\)&lt;/span&gt; is &lt;span class=&quot;math&quot;&gt;\(xy\ge1\)&lt;/span&gt;, and &lt;span class=&quot;math&quot;&gt;\(x\in \mathbb{Z}\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(y\in\mathbb{Z}\)&lt;/span&gt;, is &lt;span class=&quot;math&quot;&gt;\(R\)&lt;/span&gt; reflexive?&lt;/p&gt;
 &lt;h2 id=&quot;&amp;#25216;&amp;#24039;&quot;&gt;&amp;#25216;&amp;#24039;&lt;/h2&gt;
-&lt;p&gt;&amp;#23601;&amp;#36825;&amp;#26679;&amp;#28982;&amp;#21518;&amp;#29992; chrome &amp;#20445;&amp;#23384;&amp;#25104; PDF&amp;#65292;&amp;#38750;&amp;#24120;&amp;#36190;&lt;/p&gt;
+&lt;p&gt;&amp;#36825;&amp;#20960;&amp;#20010;&amp;#32593;&amp;#39029;&amp;#26377;&amp;#35762;&amp;#20851;&amp;#20110;&amp;#25171;&amp;#21360;&amp;#30340; CSS &amp;#23646;&amp;#24615;&amp;#65306;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/@page&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/CSS/@page&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cocss.com/1564.html&quot;&gt;http://www.cocss.com/1564.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://dev.w3.org/csswg/css-page/#at-page-rule&quot;&gt;http://dev.w3.org/csswg/css-page/#at-page-rule&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#20998;&amp;#20010;&amp;#39029;&amp;#35797;&amp;#35797;&lt;/p&gt;
+&lt;div class=&quot;page_break&quot;&gt;
+
+&lt;/div&gt;
 &lt;table&gt;
 &lt;caption&gt;&amp;#26399;&amp;#26411;&amp;#32771;&amp;#35797;&amp;#26102;&amp;#38388;&lt;/caption&gt;
 &lt;thead&gt;
