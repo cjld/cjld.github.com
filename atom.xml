@@ -4,13 +4,75 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-04-10T10:43:49+08:00</updated>
+ <updated>2014-05-02T09:41:48+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>jasonzhu8@126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>std::vector's magic</title>
+   <link href="http://cjld.github.io/2014/05/02/vectormagic"/>
+   <updated>2014-05-02T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/05/02/vectormagic</id>
+   <content type="html">&lt;p&gt;&amp;#19968;&amp;#30452;&amp;#23545; stl &amp;#37324;&amp;#30340;&amp;#20869;&amp;#23384;&amp;#30003;&amp;#35831;&amp;#26426;&amp;#21046;&amp;#24863;&amp;#21040;&amp;#19981;&amp;#35299;&amp;#65292;&amp;#20889;&amp;#20102;&amp;#36825;&amp;#20040;&amp;#19968;&amp;#27573;&amp;#20195;&amp;#30721;&amp;#20570;&amp;#27979;&amp;#35797; &amp;#65306;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;vector&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;ctime&amp;gt;
+
+using namespace std;
+
+struct fly {
+    static int hh;
+    int x;
+    
+    fly() {
+        x = hh++;
+    }
+    
+};
+
+int fly::hh = 0;
+
+int main() {
+    vector&amp;lt;fly&amp;gt; a;
+    int n = 1000000;
+    a.resize(n);
+    long long tt;
+    int s=0;
+
+    tt = clock();
+    for (int i=0; i&amp;lt;1000; i++) {
+        a.clear();
+        a.resize(n);
+        s += a[0].x;
+    }
+    cout &amp;lt;&amp;lt; clock() - tt &amp;lt;&amp;lt; endl;
+
+    tt = clock();
+    for (int i=0; i&amp;lt;1000; i++) {
+        vector&amp;lt;fly&amp;gt; a;
+        a.clear();
+        a.resize(n);
+        s += a[0].x;
+    }
+    cout &amp;lt;&amp;lt; clock() - tt &amp;lt;&amp;lt; endl;
+
+    tt = clock();
+    for (int i=0; i&amp;lt;1000; i++) {
+        fly* a = new fly[n];
+        s += a[0].x;
+        delete[] a;
+    }
+    cout &amp;lt;&amp;lt; clock() - tt &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;#36816;&amp;#34892;&amp;#32467;&amp;#26524;&amp;#19977;&amp;#20010;&amp;#32791;&amp;#26102;&amp;#20381;&amp;#27425;&amp;#26159; 662&amp;#65292; 1534&amp;#65292; 2856&amp;#65292; &amp;#32467;&amp;#26524;&amp;#20196;&amp;#25105;&amp;#24456;&amp;#24847;&amp;#22806;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#20180;&amp;#32454;&amp;#30340;&amp;#30475;&amp;#20102;&amp;#19979; c++ reference&amp;#65292; &amp;#21457;&amp;#29616;&amp;#25152;&amp;#26377; stl &amp;#23481;&amp;#22120;&amp;#37324;&amp;#26377;&amp;#19968;&amp;#20010;&amp;#19981;&amp;#20026;&amp;#20154;&amp;#30693;&amp;#30340;&amp;#19996;&amp;#35199;&amp;#65292; &lt;a href=&quot;http://www.cplusplus.com/reference/memory/allocator/?kw=allocator&quot;&gt;allocator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#20284;&amp;#20046;&amp;#21644;&amp;#25105;&amp;#20204;&amp;#24179;&amp;#26102;&amp;#29702;&amp;#35299;&amp;#30340; new &amp;#19981;&amp;#22826;&amp;#19968;&amp;#26679;&amp;#65292;&amp;#24179;&amp;#26102; new &amp;#19968;&amp;#20010;&amp;#20803;&amp;#32032;&amp;#65292;&amp;#20250;&amp;#39318;&amp;#20808;&amp;#20026;&amp;#36825;&amp;#20010;&amp;#20803;&amp;#32032;&amp;#20998;&amp;#37197;&amp;#31354;&amp;#38388;&amp;#20877;&amp;#35843;&amp;#29992;&amp;#26500;&amp;#36896;&amp;#20989;&amp;#25968;&amp;#65292; &amp;#32780; allocator &amp;#21017;&amp;#23558;&amp;#36825;&amp;#20004;&amp;#37096;&amp;#20998;&amp;#24320;&amp;#20102;&amp;#65292; &amp;#26377;&amp;#21487;&amp;#33021;&amp;#20998;&amp;#37197;&amp;#20102;&amp;#31354;&amp;#38388;&amp;#21364;&amp;#27809;&amp;#26377;&amp;#26500;&amp;#36896;&amp;#36825;&amp;#20010;&amp;#20803;&amp;#32032;&amp;#65292; &amp;#20063;&amp;#26377;&amp;#21487;&amp;#33021;&amp;#26512;&amp;#26500;&amp;#25481;&amp;#36825;&amp;#20010;&amp;#20803;&amp;#32032;&amp;#20197;&amp;#21518;&amp;#27809;&amp;#26377;&amp;#37322;&amp;#25918;&amp;#31354;&amp;#38388;&amp;#65292; &amp;#20110;&amp;#26159;&amp;#20046;&amp;#23601;&amp;#20986;&amp;#29616;&amp;#20102;&amp;#20197;&amp;#19978;&amp;#22855;&amp;#24618;&amp;#30340;&amp;#36816;&amp;#34892;&amp;#32467;&amp;#26524;&amp;#12290;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>写作业专用文档</title>

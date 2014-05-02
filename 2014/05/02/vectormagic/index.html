@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    <meta charset="utf-8">
+    <title>
+      
+        std::vector's magic - 
+      
+      
+        CJLD
+      
+    </title>
+    
+    <meta name="author" content="cjld">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/mystyle.css" rel="stylesheet" type="text/css" media="all">    
+    <link href="/assets/themes/hooligan/google-code-prettify/doxy.css" rel="stylesheet" type="text/css" media="all">
+
+    
+    <!-- fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>      
+
+
+          <a class="brand" href="/">CJLD</a>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              
+              
+              
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">关于</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">文章</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/rss.xml">订阅</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/sand.html">零散</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+            </ul>
+            <ul class="nav pull-right social visible-desktop">
+              <li class="divider-vertical"></li>
+              
+                <li>
+                  <a href="https://github.com/cjld" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+              
+                  
+                                        
+                         
+                                  
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="page-header">
+  <h1 id="mainTitle">
+    std::vector's magic 
+    
+  </h1>
+</div>
+
+<div class="row">
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">02 May 2014</span></div>
+    </section>
+         
+    
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#C++-ref">C++ <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+       
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+
+
+  <div class="span8">
+    <div id="content">
+      <p>&#19968;&#30452;&#23545; stl &#37324;&#30340;&#20869;&#23384;&#30003;&#35831;&#26426;&#21046;&#24863;&#21040;&#19981;&#35299;&#65292;&#20889;&#20102;&#36825;&#20040;&#19968;&#27573;&#20195;&#30721;&#20570;&#27979;&#35797; &#65306;</p>
+<pre><code>#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+
+struct fly {
+    static int hh;
+    int x;
+    
+    fly() {
+        x = hh++;
+    }
+    
+};
+
+int fly::hh = 0;
+
+int main() {
+    vector&lt;fly&gt; a;
+    int n = 1000000;
+    a.resize(n);
+    long long tt;
+    int s=0;
+
+    tt = clock();
+    for (int i=0; i&lt;1000; i++) {
+        a.clear();
+        a.resize(n);
+        s += a[0].x;
+    }
+    cout &lt;&lt; clock() - tt &lt;&lt; endl;
+
+    tt = clock();
+    for (int i=0; i&lt;1000; i++) {
+        vector&lt;fly&gt; a;
+        a.clear();
+        a.resize(n);
+        s += a[0].x;
+    }
+    cout &lt;&lt; clock() - tt &lt;&lt; endl;
+
+    tt = clock();
+    for (int i=0; i&lt;1000; i++) {
+        fly* a = new fly[n];
+        s += a[0].x;
+        delete[] a;
+    }
+    cout &lt;&lt; clock() - tt &lt;&lt; &quot; &quot; &lt;&lt; s &lt;&lt; endl;
+}</code></pre>
+<p>&#36816;&#34892;&#32467;&#26524;&#19977;&#20010;&#32791;&#26102;&#20381;&#27425;&#26159; 662&#65292; 1534&#65292; 2856&#65292; &#32467;&#26524;&#20196;&#25105;&#24456;&#24847;&#22806;&#12290;</p>
+<p>&#20180;&#32454;&#30340;&#30475;&#20102;&#19979; c++ reference&#65292; &#21457;&#29616;&#25152;&#26377; stl &#23481;&#22120;&#37324;&#26377;&#19968;&#20010;&#19981;&#20026;&#20154;&#30693;&#30340;&#19996;&#35199;&#65292; <a href="http://www.cplusplus.com/reference/memory/allocator/?kw=allocator">allocator</a></p>
+<p>&#20284;&#20046;&#21644;&#25105;&#20204;&#24179;&#26102;&#29702;&#35299;&#30340; new &#19981;&#22826;&#19968;&#26679;&#65292;&#24179;&#26102; new &#19968;&#20010;&#20803;&#32032;&#65292;&#20250;&#39318;&#20808;&#20026;&#36825;&#20010;&#20803;&#32032;&#20998;&#37197;&#31354;&#38388;&#20877;&#35843;&#29992;&#26500;&#36896;&#20989;&#25968;&#65292; &#32780; allocator &#21017;&#23558;&#36825;&#20004;&#37096;&#20998;&#24320;&#20102;&#65292; &#26377;&#21487;&#33021;&#20998;&#37197;&#20102;&#31354;&#38388;&#21364;&#27809;&#26377;&#26500;&#36896;&#36825;&#20010;&#20803;&#32032;&#65292; &#20063;&#26377;&#21487;&#33021;&#26512;&#26500;&#25481;&#36825;&#20010;&#20803;&#32032;&#20197;&#21518;&#27809;&#26377;&#37322;&#25918;&#31354;&#38388;&#65292; &#20110;&#26159;&#20046;&#23601;&#20986;&#29616;&#20102;&#20197;&#19978;&#22855;&#24618;&#30340;&#36816;&#34892;&#32467;&#26524;&#12290;</p>
+
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2014/04/10/documenttest" title="写作业专用文档">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next disabled">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'cjldblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+
+  </div>
+  
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; 2014 cjld
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/assets/themes/hooligan/js/gen_content.js"></script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/hooligan/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+           $("pre").addClass("prettyprint");
+           prettyPrint();
+      })
+    </script>
+    
+
+    
+  </body>
+</html>
+
