@@ -4,13 +4,25 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-05-02T09:41:48+08:00</updated>
+ <updated>2014-06-05T10:13:25+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>jasonzhu8@126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>路漫漫</title>
+   <link href="http://cjld.github.io/2014/06/05/lotlearn"/>
+   <updated>2014-06-05T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/06/05/lotlearn</id>
+   <content type="html">&lt;p&gt;&amp;#26368;&amp;#36817;&amp;#24635;&amp;#31639;&amp;#24537;&amp;#23436; siga &amp;#20102;&amp;#65292;&amp;#28145;&amp;#28145;&amp;#30340;&amp;#24863;&amp;#35273;&amp;#21040;&amp;#33258;&amp;#24049;&amp;#30340;&amp;#19981;&amp;#36275;&amp;#20043;&amp;#22788;&amp;#65292;&amp;#19968;&amp;#20010;&amp;#26159;&amp;#33521;&amp;#35821;&amp;#65292;&amp;#20108;&amp;#26159;&amp;#19968;&amp;#20123;&amp;#25216;&amp;#33021;&amp;#8230;&lt;/p&gt;
+&lt;p&gt;&amp;#26377;&amp;#24456;&amp;#22810;&amp;#24819;&amp;#20570;&amp;#30340;&amp;#65292;&amp;#26377;&amp;#24456;&amp;#22810;&amp;#24819;&amp;#23398;&amp;#30340;&amp;#65292;&amp;#26080;&amp;#22856;&amp;#22826;&amp;#25042;&amp;#35745;&amp;#21010;&amp;#24635;&amp;#26159;&amp;#33853;&amp;#31354;&amp;#65292;&amp;#19968;&amp;#22823;&amp;#27874;&amp;#26399;&amp;#26411;&amp;#32771;&amp;#35797;&amp;#35201;&amp;#26469;&amp;#20102;&amp;#65292;&amp;#20877;&amp;#25042;&amp;#23601;&amp;#35201;&amp;#27515;&amp;#20102;&amp;#8230;&lt;/p&gt;
+&lt;p&gt;&amp;#36824;&amp;#24819;&amp;#31215;&amp;#32047;&amp;#19968;&amp;#22871;&amp;#20570;&amp;#28216;&amp;#25103;&amp;#30340;&amp;#25216;&amp;#33021;&amp;#21602;&amp;#65292;&amp;#20174;&amp;#20570;&amp;#38899;&amp;#20048;&amp;#65292;&amp;#32654;&amp;#26415;&amp;#65292;&amp;#21160;&amp;#30011;&amp;#21040;&amp;#21508;&amp;#31181;nb&amp;#24341;&amp;#25806;&amp;#30340;&amp;#20351;&amp;#29992;&amp;#65292; &amp;#20160;&amp;#20040;&amp;#26102;&amp;#20505;&amp;#25165;&amp;#33021;&amp;#23454;&amp;#29616;&amp;#21602;&amp;#65311;&lt;/p&gt;
+&lt;p&gt;&amp;#26368;&amp;#36817;&amp;#22681;&amp;#30340;&amp;#22909;&amp;#27515;&amp;#21834;&amp;#65292;Google&amp;#37117;&amp;#25277;&amp;#20102;&amp;#65292;&amp;#20160;&amp;#20040;&amp;#26102;&amp;#20505;&amp;#25165;&amp;#33021;&amp;#26080;&amp;#38556;&amp;#30861;&amp;#30340;&amp;#19978;&amp;#27833;&amp;#31649;&amp;#21602;&amp;#65292;&amp;#19978;&amp;#38754;&amp;#30830;&amp;#23454;&amp;#26377;&amp;#24456;&amp;#22810;&amp;#31934;&amp;#21326;&amp;#21568;&amp;#12290;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>std::vector's magic</title>
