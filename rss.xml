@@ -5,10 +5,48 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-06-05T10:13:25+08:00</lastBuildDate>
-        <pubDate>2014-06-05T10:13:25+08:00</pubDate>
+        <lastBuildDate>2014-06-11T05:31:39+08:00</lastBuildDate>
+        <pubDate>2014-06-11T05:31:39+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Blender 大法好</title>
+                <description>&lt;p&gt;&amp;#32654;&amp;#21452;&amp;#19978;&amp;#35838;&amp;#26102;&amp;#20132;&amp;#36807; 3dsMax&amp;#65292; &amp;#26080;&amp;#22856;&amp;#19981;&amp;#22826;&amp;#20064;&amp;#24815;&amp;#65292;&amp;#36234;&amp;#29992;&amp;#36234;&amp;#36457;&amp;#33050;&amp;#65292;&amp;#26368;&amp;#36817;&amp;#20960;&amp;#22825;&amp;#24320;&amp;#22987;&amp;#23581;&amp;#35797; Blender&amp;#65292;&amp;#19981;&amp;#31105;&amp;#36234;&amp;#29992;&amp;#36234;&amp;#21916;&amp;#27426;~&amp;#65292;&amp;#24863;&amp;#35273;&amp;#27604;&amp;#24403;&amp;#26102; Unity3D &amp;#30340;&amp;#19978;&amp;#25163;&amp;#36895;&amp;#24230;&amp;#26356;&amp;#24555;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#23567;&amp;#30333; 3dsMax &amp;#20063;&amp;#26159;&amp;#27973;&amp;#23581;&amp;#36740;&amp;#27490;&amp;#65292;&amp;#19981;&amp;#22826;&amp;#28165;&amp;#26970;&amp;#65292;&amp;#20294;&amp;#26159;&amp;#29992;&amp;#36807; Blender &amp;#20197;&amp;#21518;&amp;#24863;&amp;#35273; Blender &amp;#26356;&amp;#26377;&amp;#29983;&amp;#21629;&amp;#21147;&amp;#65306;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;#36895;&amp;#24230;&amp;#24555;&amp;#65292;&amp;#22312;&amp;#25105;&amp;#23567;&amp;#26412;&amp;#19978;&amp;#30452;&amp;#25509;&amp;#31186;&amp;#24320;&amp;#65292;&amp;#21738;&amp;#20687;&amp;#22823; AutoDesk&amp;#65292; &amp;#21551;&amp;#21160;Logo&amp;#37117;&amp;#35201;&amp;#35753;&amp;#25105;&amp;#30475;&amp;#21322;&amp;#20998;&amp;#38047;&amp;#65292;&amp;#32780;&amp;#19988;&amp;#30028;&amp;#38754;&amp;#21709;&amp;#24212;&amp;#36895;&amp;#24230;&amp;#20063;&amp;#19981;&amp;#21643;&amp;#22320;&amp;#12290;&lt;/li&gt;
+&lt;li&gt;&amp;#25152;&amp;#26377;&amp;#25805;&amp;#20316;&amp;#37117;&amp;#21487;&amp;#20197;&amp;#29992; python &amp;#23454;&amp;#29616;&amp;#65292;&amp;#27599;&amp;#22312; UI &amp;#30028;&amp;#38754;&amp;#20316;&amp;#19968;&amp;#27425;&amp;#25805;&amp;#20316;&amp;#65292; console &amp;#23601;&amp;#20250;&amp;#36755;&amp;#20986; python &amp;#21629;&amp;#20196;&amp;#65292;&amp;#37117;&amp;#20813;&amp;#21435;&amp;#26597; &amp;#21521; Unity &amp;#37027;&amp;#26679;&amp;#26597; API &amp;#20102;&amp;#12290;&lt;/li&gt;
+&lt;li&gt;&amp;#30028;&amp;#38754;&amp;#24178;&amp;#20928;&amp;#65292;&amp;#21151;&amp;#33021;&amp;#27491;&amp;#20132;&lt;/li&gt;
+&lt;li&gt;&amp;#24320;&amp;#28304;&amp;#30340; ~&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#36825;&amp;#20004;&amp;#22825;&amp;#30475;&amp;#20102;&amp;#19968;&amp;#19979;&amp;#27833;&amp;#31649;&amp;#19978;&amp;#30340; &lt;a href=&quot;https://www.youtube.com/watch?v=GTq9sLQOiVs&amp;amp;list=PLzmyR17f55-LVbgnzhS4Xl9zJ3dSCdYW3&quot;&gt;blender beginning tutorial&lt;/a&gt;&amp;#65292; &amp;#23398;&amp;#20064;&amp;#20102;&amp;#31616;&amp;#21333;&amp;#30340;&amp;#24314;&amp;#27169;&amp;#21644;&amp;#28210;&amp;#26579;&amp;#65292;&amp;#27969;&amp;#20307;&amp;#24341;&amp;#25806;&amp;#36229;&amp;#22909;&amp;#29609;&amp;#26377;&amp;#26408;&amp;#26377;~&lt;/p&gt;
+&lt;p&gt;&amp;#26469;&amp;#20010; hot key &lt;img src=&quot;http://wiki.blender.org/uploads/7/7c/BlenderHotkeysEditMode.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#19968;&amp;#20123;&amp;#31616;&amp;#21333;&amp;#30340;&amp;#31508;&amp;#35760;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Shift + S or Object/Mesh &amp;#187; Snap&lt;/li&gt;
+&lt;li&gt;Ctrl J join 2 obj&lt;/li&gt;
+&lt;li&gt;Alt C convert to mesh&lt;/li&gt;
+&lt;li&gt;Ctrl P set parent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#25509;&amp;#19979;&amp;#26469;&amp;#25171;&amp;#31639;&amp;#20877;&amp;#25226; motion track &amp;#23398;&amp;#23398;&amp;#65292;&amp;#25214;&amp;#21040;&amp;#20010;&amp;#19981;&amp;#38169;&amp;#30340;&lt;a href=&quot;https://www.youtube.com/user/4ap21/playlists&quot;&gt;&amp;#25945;&amp;#31243;&lt;/a&gt;&amp;#65292;&amp;#33021;&amp;#23398;&amp;#36825;&amp;#20040;&amp;#22810;&amp;#19996;&amp;#35199;&amp;#38750;&amp;#24120;&amp;#24863;&amp;#35874;&amp;#36825;&amp;#20040;&amp;#22810;&amp;#20154;&amp;#30340;&amp;#26080;&amp;#31169;&amp;#22857;&amp;#29486;&amp;#12290;&lt;/p&gt;
+&lt;p&gt;&amp;#20960;&amp;#20010;&amp;#28210;&amp;#26579;&amp;#20986;&amp;#26469;&amp;#30340;&amp;#23567;&amp;#22270;&amp;#29255;&amp;#65306;&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;&lt;img src=&quot;../../../../img/blender/noob/1.png&quot; /&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;&lt;img src=&quot;../../../../img/blender/noob/2.png&quot; /&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;&lt;img src=&quot;../../../../img/blender/noob/3.png&quot; /&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;&lt;img src=&quot;../../../../img/blender/noob/4.jpg&quot; /&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;&lt;img src=&quot;../../../../img/blender/noob/5.png&quot; /&gt;&lt;/h2&gt;
+&lt;div class=&quot;figure&quot;&gt;
+&lt;img src=&quot;../../../../img/blender/noob/6.png&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;&amp;#20197;&amp;#21450;&amp;#20570;&amp;#20102;&amp;#20004;&amp;#20010;&amp;#23567;&amp;#21160;&amp;#30011;&amp;#65306;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../../../../img/blender/noob/g1.gif&quot; /&gt; &lt;img src=&quot;../../../../img/blender/noob/g2.gif&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#29992; Cycles Render &amp;#28210;&amp;#26579;&amp;#30340;&amp;#36229;&amp;#32423;&amp;#24930;&amp;#21834;&amp;#8230; &amp;#25913;&amp;#22825;&amp;#24324;&amp;#20010;&amp;#28210;&amp;#26579;&amp;#26381;&amp;#21153;&amp;#22120;&amp;#35797;&amp;#35797;&lt;/p&gt;
+</description>
+                <link>http://cjld.github.io/2014/06/11/blendercool</link>
+                <guid>http://cjld.github.io/2014/06/11/blendercool</guid>
+                <pubDate>2014-06-11T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>路漫漫</title>

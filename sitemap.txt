@@ -10,6 +10,7 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/06/11/blendercool
 http://cjld.github.io/2014/06/05/lotlearn
 http://cjld.github.io/2014/05/02/vectormagic
 http://cjld.github.io/2014/04/10/documenttest
