@@ -1,6 +1,8 @@
 function regExpMatch(url, pattern) {    try { return new RegExp(pattern).test(url); } catch(ex) { return false; }    }
     function FindProxyForURL(url, host) {
 	if (shExpMatch(url, "*://autoproxy-gfwlist.googlecode.com/*")) return 'PROXY 192.168.1.1:8086';
+	if (shExpMatch(url, "*://*.google.*")) return 'PROXY 192.168.1.1:8086';
+	if (shExpMatch(url, "*://google.*")) return 'PROXY 192.168.1.1:8086';
 	if (shExpMatch(url, "https://autoproxy.org*")) return 'DIRECT';
 	if (shExpMatch(url, "http://ime.baidu.jp*")) return 'DIRECT';
 	if (regExpMatch(url, "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?www\\.exblog\\.jp")) return 'DIRECT';
