@@ -4,13 +4,98 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-06-13T00:43:32+08:00</updated>
+ <updated>2014-06-25T00:10:27+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>jasonzhu8@126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Blender Inside Out</title>
+   <link href="http://cjld.github.io/2014/06/20/blenderio"/>
+   <updated>2014-06-20T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/06/20/blenderio</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=YibZKnVc0Zk&amp;amp;list=PLtuvwW4VAp5sn3kYEM8f2WQwPVXIbHXMq&quot;&gt;Blender Inside Out&lt;/a&gt; &amp;#23545; blender &amp;#20570;&amp;#20102;&amp;#38750;&amp;#24120;&amp;#31995;&amp;#32479;&amp;#30340;&amp;#20171;&amp;#32461;&amp;#65292;&amp;#20449;&amp;#24687;&amp;#37327;&amp;#27604;&amp;#36739;&amp;#22823;&amp;#65292;&amp;#20570;&amp;#20123;&amp;#31508;&amp;#35760;&amp;#65306;&lt;/p&gt;
+&lt;h2 id=&quot;interface&quot;&gt;Interface&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;N&lt;/code&gt; : Property panel&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;T&lt;/code&gt; : Tools panel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;selection-tools&quot;&gt;Selection Tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;RMB&lt;/code&gt; : select one&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;A&lt;/code&gt; : (De)select All / Invert&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;B&lt;/code&gt; : Border Select&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C&lt;/code&gt; : Circle Select , &lt;code&gt;SW&lt;/code&gt; to change the size&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;LMB&lt;/code&gt; : Polygon Select&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;...&lt;/code&gt; : Deselect&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MMB&lt;/code&gt; : Deselect&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;transform-tools&quot;&gt;Transform Tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt; : Translate&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;R&lt;/code&gt; : Rotate&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;S&lt;/code&gt; : Scale&lt;/li&gt;
+&lt;li&gt;Pivot center for rotate and scale&lt;/li&gt;
+&lt;li&gt;Transform orientation : Global , Local , Normal , Gimbal? , Custom&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;X&lt;/code&gt; &lt;code&gt;Y&lt;/code&gt; &lt;code&gt;Z&lt;/code&gt; &lt;code&gt;Shift&lt;/code&gt; Constraint Axis&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Alt&lt;/code&gt; + &lt;code&gt;Space&lt;/code&gt; : Select Orientation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shift&lt;/code&gt; + D : Duplicate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;using-the-search-box-to-find-amost-anything&quot;&gt;Using The Search Box To Find Amost Anything&lt;/h2&gt;
+&lt;h2 id=&quot;customizing-the-interface-layout&quot;&gt;Customizing The Interface Layout&lt;/h2&gt;
+&lt;p&gt;Right click in split line to split or merge&lt;/p&gt;
+&lt;h2 id=&quot;using-the-3d-cursor&quot;&gt;Using The 3D Cursor&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;D&lt;/code&gt; + &lt;code&gt;LMB&lt;/code&gt; | &lt;code&gt;RMB&lt;/code&gt; | &lt;code&gt;Ctrl&lt;/code&gt;: draw | erase | line&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;S&lt;/code&gt; : snap menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;object-mode-versus-edit-mode&quot;&gt;Object Mode Versus Edit Mode&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Tab&lt;/code&gt; : switch between two mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Tab&lt;/code&gt; : (in Edit Mode) switch select mode {v,e,f}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;mesh-selection-tools&quot;&gt;Mesh Selection Tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;L&lt;/code&gt; : select link&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;R&lt;/code&gt; : Repeat last command&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;N+&lt;/code&gt; | &lt;code&gt;N-&lt;/code&gt; : select more | less around cur select&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; : separated to another obj&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Y&lt;/code&gt; : split&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Alt&lt;/code&gt; + &lt;code&gt;RMB&lt;/code&gt; : select edge loop like &amp;#8212; &amp;#8212; &amp;#8212;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Alt&lt;/code&gt; + &lt;code&gt;RMB&lt;/code&gt; : select edge ring like | | |&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;RMB&lt;/code&gt; : select path&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;object-mesh-snapping&quot;&gt;Object / Mesh Snapping&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;snap to : volume , face, edge, vertex&lt;/li&gt;
+&lt;li&gt;snap element : center, active, median, closest&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;LMB&lt;/code&gt; : duplicate and extrude at 3d cursor&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; when transform, enable snap&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;edit-model&quot;&gt;Edit model&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;E&lt;/code&gt; : Extrude and Extrude individual&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;V&lt;/code&gt;|&lt;code&gt;F&lt;/code&gt;|&lt;code&gt;E&lt;/code&gt; : vertex/face/edge menu&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;I&lt;/code&gt; : face inset&lt;/li&gt;
+&lt;li&gt;face edge bevel&lt;/li&gt;
+&lt;li&gt;bridge and spin&lt;/li&gt;
+&lt;li&gt;loop cuts&lt;/li&gt;
+&lt;li&gt;knife&lt;/li&gt;
+&lt;li&gt;merge and collapse&lt;/li&gt;
+&lt;li&gt;Mesh Creases for subsdiv&lt;/li&gt;
+&lt;li&gt;mesh display in property to display normal, length, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;modifiers&quot;&gt;Modifiers&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;H&lt;/code&gt; : hook menu&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ljMePAmmxx4&quot;&gt;all modifiers Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;to-be-continue&quot;&gt;to be continue&lt;/h2&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Blender 大法好</title>

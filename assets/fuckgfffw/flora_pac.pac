@@ -1850,7 +1850,6 @@ function FindProxyForURL(url, host) {
         'dianping.com',
         'discuz.com',
         'discuz.net',
-        'dl.google.com',
         'docin.com',
         'donews.com',
         'dospy.com',
