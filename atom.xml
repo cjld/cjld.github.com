@@ -4,7 +4,7 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-06-25T00:10:27+08:00</updated>
+ <updated>2014-06-26T02:26:45+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
@@ -93,7 +93,32 @@
 &lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;H&lt;/code&gt; : hook menu&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ljMePAmmxx4&quot;&gt;all modifiers Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;to-be-continue&quot;&gt;to be continue&lt;/h2&gt;
+&lt;h2 id=&quot;smoothing-groups&quot;&gt;Smoothing Groups&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mark sharp used by Edge Split modifier&lt;/li&gt;
+&lt;li&gt;Crease used by subsurf modifier&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;setting-seams-and-unwrapping&quot;&gt;Setting Seams And Unwrapping&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mark Seams in Edge menu&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt; : Pack island&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;W&lt;/code&gt; : Weld / Align Menu&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; : Pin, need to enable live unwarp&lt;/li&gt;
+&lt;li&gt;Sculpting UV&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#36824;&amp;#26377;&amp;#22909;&amp;#22810;&amp;#19996;&amp;#35199;&amp;#21834;&amp;#8230; &amp;#19981;&amp;#24819;&amp;#30475;&amp;#20102;&amp;#65292; &amp;#20808;&amp;#29609; motion track &amp;#21435; &amp;#8230;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt; move to layer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;motion-track&quot;&gt;Motion Track&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;LMB&lt;/code&gt; : add marker and slide&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;two point track&lt;/p&gt;
+&lt;p&gt;&amp;#26376;&amp;#20142;&amp;#26159;&amp;#21518;&amp;#26399;&amp;#21152;&amp;#19978;&amp;#30340;&lt;/p&gt;
+&lt;div class=&quot;figure&quot;&gt;
+&lt;img src=&quot;../../../../img/blender/noob/m1.gif&quot; /&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
