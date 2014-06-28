@@ -10,6 +10,7 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/06/28/blendmt
 http://cjld.github.io/2014/06/20/blenderio
 http://cjld.github.io/2014/06/11/blendercool
 http://cjld.github.io/2014/06/05/lotlearn
