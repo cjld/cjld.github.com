@@ -5,8 +5,8 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-06-29T00:14:41+08:00</lastBuildDate>
-        <pubDate>2014-06-29T00:14:41+08:00</pubDate>
+        <lastBuildDate>2014-07-01T17:53:10+08:00</lastBuildDate>
+        <pubDate>2014-07-01T17:53:10+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -29,6 +29,19 @@
 &lt;h2 id=&quot;four-point-track&quot;&gt;four point track&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;img src=&quot;../../../../img/blender/noob/m2.gif&quot; title=&quot;fig:&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;solve-camera&quot;&gt;solve camera&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Shift&lt;/code&gt; : link node&lt;/li&gt;
+&lt;li&gt;Nikon D90 lens distortion k1 about -0.15, k2 about 0.1&lt;/li&gt;
+&lt;li&gt;&lt;img src=&quot;../../../../img/blender/noob/m3.gif&quot; title=&quot;fig:&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;&amp;#33394;&amp;#24425;&amp;#30340;&amp;#30693;&amp;#35782;&quot;&gt;&amp;#33394;&amp;#24425;&amp;#30340;&amp;#30693;&amp;#35782;&lt;/h2&gt;
+&lt;p&gt;&amp;#24120;&amp;#24120;&amp;#21644; motion track &amp;#20998;&amp;#19981;&amp;#24320;&amp;#30340;&amp;#23601;&amp;#26159;&amp;#21518;&amp;#26399;&amp;#21512;&amp;#25104;&amp;#65292; &amp;#32780;&amp;#39068;&amp;#33394;&amp;#21512;&amp;#25104;&amp;#26159;&amp;#21518;&amp;#26399;&amp;#21512;&amp;#25104;&amp;#30340;&amp;#37325;&amp;#35201;&amp;#32452;&amp;#25104;&amp;#37096;&amp;#20998;&amp;#65292;&amp;#23545;&amp;#39068;&amp;#33394;&amp;#19981;&amp;#26159;&amp;#24456;&amp;#20102;&amp;#35299;&amp;#65292;&amp;#25628;&amp;#20102;&amp;#19968;&amp;#19979;&amp;#21457;&amp;#29616;&amp;#22823;&amp;#26377;&amp;#38376;&amp;#36947;&amp;#65292;&amp;#19979;&amp;#38754;&amp;#26159;&amp;#19968;&amp;#20123;&amp;#20851;&amp;#20110;&amp;#39068;&amp;#33394;&amp;#28151;&amp;#21512;&amp;#27169;&amp;#24335;&amp;#30340;&amp;#23398;&amp;#20064;&amp;#36164;&amp;#26009;&amp;#65306;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://helpx.adobe.com/cn/photoshop/using/blending-modes.html&quot;&gt;Adobe &amp;#37324;&amp;#20851;&amp;#20110;&amp;#33394;&amp;#24425;&amp;#28151;&amp;#21512;&amp;#30340;&amp;#24110;&amp;#21161;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5919663/how-does-photoshop-blend-two-images-together&quot;&gt;&amp;#20195;&amp;#30721;&amp;#23454;&amp;#29616;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.zhihu.com/question/20293077&quot;&gt;&amp;#30693;&amp;#20046;&amp;#19978;&amp;#30340;&amp;#22238;&amp;#31572;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;gif &amp;#36136;&amp;#37327;&amp;#22909;&amp;#20302;&amp;#21834;&amp;#8230;&lt;/p&gt;
 &lt;p&gt;Blender Add-on: BLAM - the static camera calibration toolkit&lt;/p&gt;
