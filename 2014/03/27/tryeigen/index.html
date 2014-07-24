@@ -195,10 +195,10 @@
 
   <div class="span8">
     <div id="content">
-      <p>&#26368;&#36817;&#35201;&#20570;&#19968;&#20123;&#21644;&#30697;&#38453;&#26377;&#20851;&#30340;&#36816;&#31639;&#65292; &#22240;&#20026; matlab &#23454;&#22312;&#29992;&#19981;&#20064;&#24815;&#65292;&#25214;&#20102;&#20010;&#27604;&#36739;&#36731;&#37327;&#30340; Eigen&#65292;&#36731;&#37327;&#21040;&#37117;&#19981;&#38656;&#35201;&#38142;&#25509;&#65292;&#36190;&#21543;~</p>
-<p>&#29305;&#24449;&#20540;&#65292;SVD&#20998;&#35299;&#37117;&#26377;&#65292;&#35299;&#32447;&#24615;&#26041;&#31243;&#65292;&#26368;&#23567;&#20108;&#20056;&#37117;&#27809;&#38382;&#39064;&#12290;</p>
-<p>&#20284;&#20046;&#36824;&#26377;&#20123;&#38024;&#23545;&#31232;&#30095;&#30697;&#38453;&#30340;&#20248;&#21270;&#65292;&#19981;&#36807;&#29992;&#19981;&#30528;&#12290;</p>
-<p>&#19968;&#27573;&#31616;&#21333;&#30340; code :</p>
+      <p>最近要做一些和矩阵有关的运算， 因为 matlab 实在用不习惯，找了个比较轻量的 Eigen，轻量到都不需要链接，赞吧~</p>
+<p>特征值，SVD分解都有，解线性方程，最小二乘都没问题。</p>
+<p>似乎还有些针对稀疏矩阵的优化，不过用不着。</p>
+<p>一段简单的 code :</p>
 <pre><code>#include &lt;iostream&gt;
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -238,44 +238,44 @@ int main() {
 
     cout&lt;&lt; m1*m2 &lt;&lt;endl;
 
-    cout&lt;&lt;&quot;&#36716;&#32622;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;转置&quot;&lt;&lt;endl;
     cout &lt;&lt; m2.transpose() * m1.transpose() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#23545;&#27599;&#20010;&#20803;&#32032;&#25191;&#34892; cos&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;对每个元素执行 cos&quot;&lt;&lt;endl;
     cout &lt;&lt; m2.array().cos() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#34892;&#21015;&#24335;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;行列式&quot;&lt;&lt;endl;
     cout &lt;&lt; m2.determinant() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#29305;&#24449;&#21521;&#37327;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;特征向量&quot;&lt;&lt;endl;
     EigenSolver&lt;decltype(m2)&gt; es(m2);
     cout &lt;&lt; es.eigenvectors() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#29305;&#24449;&#20540;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;特征值&quot;&lt;&lt;endl;
     cout &lt;&lt; es.eigenvalues() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#29305;&#24449;&#20540;&#20998;&#35299; V*D*V^(-1)&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;特征值分解 V*D*V^(-1)&quot;&lt;&lt;endl;
     cout &lt;&lt; es.eigenvectors() * es.eigenvalues().asDiagonal() * es.eigenvectors().inverse() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;SVD &#20998;&#35299;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;SVD 分解&quot;&lt;&lt;endl;
     JacobiSVD&lt;decltype(m2)&gt; svd(m2, ComputeThinU | ComputeThinV);
     cout &lt;&lt; svd.matrixU().determinant() &lt;&lt; endl &lt;&lt; svd.singularValues() &lt;&lt; endl &lt;&lt; svd.matrixV().determinant() &lt;&lt; endl;
     cout &lt;&lt; svd.matrixU() * svd.singularValues().asDiagonal() * svd.matrixV().transpose() &lt;&lt; endl;
-    cout&lt;&lt;&quot;SVD &#35299;&#26368;&#23567;&#20108;&#20056;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;SVD 解最小二乘&quot;&lt;&lt;endl;
     cout &lt;&lt; svd.solve(VectorXf::Ones(5));
 
-    cout&lt;&lt;&quot;&#26497;&#20998;&#35299;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;极分解&quot;&lt;&lt;endl;
     auto rot = svd.matrixU() * svd.matrixV().transpose();
     auto scl = svd.matrixV() * svd.singularValues().asDiagonal() * svd.matrixV().transpose();
     cout&lt;&lt;rot&lt;&lt;endl&lt;&lt;scl&lt;&lt;endl;
     cout&lt;&lt;rot.determinant()&lt;&lt;endl&lt;&lt;rot*scl&lt;&lt;endl;
 
-    cout&lt;&lt;&quot;&#40784;&#27425;&#22352;&#26631;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;齐次坐标&quot;&lt;&lt;endl;
     Transform&lt;float, 5, Affine&gt; trans;
     //trans.computeRotationScaling();
     cout &lt;&lt; trans.matrix() &lt;&lt; endl;
 
-    cout&lt;&lt;&quot;&#35299;&#32447;&#24615;&#26041;&#31243;&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;解线性方程&quot;&lt;&lt;endl;
     VectorXf v(5);
     v &lt;&lt; 1,2,4,3,5;
     cout&lt;&lt;MatrixXf(v.asDiagonal()).colPivHouseholderQr().solve(VectorXf::Ones(5))&lt;&lt;endl;

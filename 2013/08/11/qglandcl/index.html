@@ -199,53 +199,53 @@
 
   <div class="span8">
     <div id="content">
-      <p>openCL&#30340;&#20351;&#29992;&#24120;&#24120;&#38656;&#35201;&#21644;openGL&#25645;&#37197;&#36215;&#26469;&#65292;glut&#19981;&#38169;&#30340;&#36873;&#25321;&#65292;&#19981;&#36807;&#30001;&#20110;&#26412;&#20154;&#27604;&#36739;&#21916;&#27426;Qt&#65292;&#20110;&#26159;&#30452;&#25509;&#20351;&#29992;&#20102;QGLWidget&#36827;&#34892;&#32472;&#22270;&#12290;</p>
-<p>&#26412;&#25991;&#37325;&#28857;&#26159;&#20171;&#32461;&#22914;&#20309;&#20849;&#20139;openCL&#21644;openGL&#30340;&#32531;&#23384;(VBO)&#65292;&#21644;VBO&#30340;&#31616;&#21333;&#24212;&#29992;&#12290;</p>
+      <p>openCL的使用常常需要和openGL搭配起来，glut不错的选择，不过由于本人比较喜欢Qt，于是直接使用了QGLWidget进行绘图。</p>
+<p>本文重点是介绍如何共享openCL和openGL的缓存(VBO)，和VBO的简单应用。</p>
 <blockquote>
-<p><img src="../../../../img/qgl_clbuffer.png" /> &gt;&#22312;QGLWidget&#19979;&#23454;&#29616;&#30340;openGL&#24212;&#29992;&#65292;&#20854;&#20013;&#27491;&#24358;&#20989;&#25968;&#37096;&#20998;&#30001;openCL&#35745;&#31639;&#65292;<a href="https://github.com/cjld/QGL-BufferCLshare">Fork me on Github</a></p>
+<p><img src="../../../../img/qgl_clbuffer.png" /> &gt;在QGLWidget下实现的openGL应用，其中正弦函数部分由openCL计算，<a href="https://github.com/cjld/QGL-BufferCLshare">Fork me on Github</a></p>
 </blockquote>
-<p>&#31616;&#21333;&#30340;QGLWidget&#26694;&#26550;&#21487;&#20197;&#21442;&#32771;&#36825;&#31687;&#8594;<a href="http://qiliang.net/old/nehe_qt/">Qt OpenGL&#25945;&#31243;</a></p>
-<h2 id="&#20174;opengl&#20013;&#21019;&#24314;&#20351;&#29992;vbo"><strong>&#20174;openGL&#20013;&#21019;&#24314;&#20351;&#29992;VBO</strong></h2>
-<p>&#20174;openGL&#30340;&#35282;&#24230;&#26469;&#30475;&#65292;&#20351;&#29992;VBO&#65288;&#39030;&#28857;&#32531;&#23384;&#22120;&#65289;&#30340;&#20960;&#20010;&#27493;&#39588;&#65306;</p>
+<p>简单的QGLWidget框架可以参考这篇→<a href="http://qiliang.net/old/nehe_qt/">Qt OpenGL教程</a></p>
+<h2 id="从opengl中创建使用vbo"><strong>从openGL中创建使用VBO</strong></h2>
+<p>从openGL的角度来看，使用VBO（顶点缓存器）的几个步骤：</p>
 <ul>
-<li>&#21019;&#24314;&#39030;&#28857;&#32531;&#23384;&#22120;</li>
-<li>&#32465;&#23450;&#65288;bind&#65289;&#39030;&#28857;&#32531;&#23384;&#22120;</li>
-<li>&#20351;&#29992;&#39030;&#28857;&#32531;&#23384;&#22120;&#32472;&#21046;</li>
+<li>创建顶点缓存器</li>
+<li>绑定（bind）顶点缓存器</li>
+<li>使用顶点缓存器绘制</li>
 </ul>
-<p>&#22240;&#20026;&#22312;qt&#37324;&#22909;&#20687;&#27809;&#26377;&#25214;&#21040;glBindBuffer&#36825;&#20040;&#20123;&#20989;&#25968;&#65292;&#20110;&#26159;&#20046;&#21482;&#22909;&#29992;Qt&#33258;&#24049;&#23553;&#35013;&#22909;&#30340;QGLBuffer&#65292;&#20351;&#29992;&#36215;&#26469;&#36824;&#27604;&#36739;&#26041;&#20415;</p>
+<p>因为在qt里好像没有找到glBindBuffer这么些函数，于是乎只好用Qt自己封装好的QGLBuffer，使用起来还比较方便</p>
 <pre><code>buffer=new QGLBuffer(QGLBuffer::VertexBuffer);
 buffer-&gt;create();
-//&#30456;&#24403;&#20110;glGenBuffer
+//相当于glGenBuffer
 
 buffer-&gt;bind();
-//&#30456;&#24403;&#20110;glBindBuffer
+//相当于glBindBuffer
 
 buffer-&gt;allocate(sizeof(GLfloat)*2048*2);
-//&#30456;&#24403;&#20110;glBufferData
+//相当于glBufferData
 
 buffer-&gt;bind();
-//&#32465;&#23450;&#65292;&#32472;&#21046;&#20934;&#22791;
+//绑定，绘制准备
 
 glEnableClientState(GL_VERTEX_ARRAY);
 glVertexPointer(2,GL_FLOAT,0,0);
 glColor3f(1,1,0);
 glDrawArrays(GL_LINE_STRIP,0,2048);
-//&#32472;&#21046;</code></pre>
-<p>&#26377;&#19968;&#20010;&#22353;&#29241;&#30340;&#22320;&#26041;&#65292;&#19968;&#23450;&#35201;&#20808;create&#20877;bind&#20877;alloccate&#65292;&#20081;&#20102;&#23601;&#20160;&#20040;&#20063;&#30011;&#19981;&#20986;&#26469;&#12290;</p>
-<h2 id="openclopengl&#20849;&#29992;vbo"><strong>openCL&amp;openGL&#20849;&#29992;VBO</strong></h2>
-<p>openCL&#22914;&#26524;&#38656;&#35201;&#21644;openGL&#20849;&#20139;buffer&#65292;&#22823;&#33268;&#27493;&#39588;&#22914;&#19979;&#65306;</p>
+//绘制</code></pre>
+<p>有一个坑爹的地方，一定要先create再bind再alloccate，乱了就什么也画不出来。</p>
+<h2 id="openclopengl共用vbo"><strong>openCL&amp;openGL共用VBO</strong></h2>
+<p>openCL如果需要和openGL共享buffer，大致步骤如下：</p>
 <ul>
-<li>&#21019;&#24314;&#19968;&#20010;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;</li>
-<li>&#20174;openGL&#24050;&#32463;&#21019;&#24314;&#22909;&#30340;VBO&#21019;&#24314;&#19968;&#20010;openCL buffer</li>
-<li>&#36830;&#25509;buffer&#65292;&#37322;&#25918;buffer</li>
+<li>创建一个支持openGL的上下文</li>
+<li>从openGL已经创建好的VBO创建一个openCL buffer</li>
+<li>连接buffer，释放buffer</li>
 </ul>
-<p>&#25105;&#23558;&#36825;&#20123;&#19996;&#35199;&#23553;&#35013;&#21040;&#20102; <code>ldCLtempl.h</code>&#65292;&#20351;&#29992;&#26041;&#27861;&#22914;&#19979;&#65306;</p>
+<p>我将这些东西封装到了 <code>ldCLtempl.h</code>，使用方法如下：</p>
 <pre><code>ldcl.init(wglGetCurrentContext(),wglGetCurrentDC());
-//&#21019;&#24314;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;
+//创建支持openGL的上下文
 
 ldcl.setArg(buffer-&gt;bufferId(),CL_MEM_READ_WRITE);
-//&#20849;&#20139;buffer</code></pre>
-<p><code>ldCLtempl.h</code>&#30340;&#23454;&#29616;&#26041;&#27861;&#22914;&#19979;&#65306;</p>
+//共享buffer</code></pre>
+<p><code>ldCLtempl.h</code>的实现方法如下：</p>
 <pre><code>void init(HGLRC glContext, HDC glDisplay) {
   cl::Platform::get(&amp;platformList);
   printPlatformInfo();
@@ -259,7 +259,7 @@ ldcl.setArg(buffer-&gt;bufferId(),CL_MEM_READ_WRITE);
     CL_CONTEXT_PLATFORM, (cl_context_properties)platformList[pid](), 0
   };
   context=new cl::Context(deviceList, props);
-  //&#21019;&#24314;&#25903;&#25345;openGL&#30340;&#19978;&#19979;&#25991;
+  //创建支持openGL的上下文
 
   cmdQueue=new cl::CommandQueue(*context,deviceList[did]);
 }
@@ -268,17 +268,17 @@ struct myBufferGL : public myBuffer {
   vector&lt;cl::Memory&gt; mv;
   myBufferGL(LDCL *fa, cl_mem_flags flags, GLuint bufobj) : myBuffer(fa,flags,0,0,0) {
     buffer=new cl::BufferGL(*(fa-&gt;context),flags,bufobj);
-    //&#36890;&#36807;&#20174;openGL&#24050;&#32463;&#21019;&#24314;&#30340;buffer&#21019;&#24314;
+    //通过从openGL已经创建的buffer创建
     mv.push_back(*buffer);
   }
   virtual void beforeRun() {father-&gt;cmdQueue-&gt;enqueueAcquireGLObjects(&amp;mv);}
-  //&#20174;openGL&#33719;&#21462;buffer&#30340;&#25511;&#21046;&#26435;
+  //从openGL获取buffer的控制权
   virtual void afterRun() {father-&gt;cmdQueue-&gt;enqueueReleaseGLObjects(&amp;mv);}
-  //&#37322;&#25918;&#25511;&#21046;&#26435;
+  //释放控制权
   ~myBufferGL() {}
 };</code></pre>
-<p>&#32441;&#29702;&#32531;&#23384;&#30340;&#20351;&#29992;&#26041;&#27861;&#31867;&#20284;&#12290;</p>
-<p>&#21478;&#22806;&#20070;&#19978;&#20889;&#30340;&#22312;&#25191;&#34892;openCL&#20043;&#21069;&#24471;&#20808;&#25191;&#34892;<code>glFinish()</code>&#65292;&#19981;&#36807;&#25105;&#27809;&#26377;&#25191;&#34892;&#20063;&#21487;&#20197;&#29992;&#65292;&#32780;&#19988;&#21457;&#29616;openCL&#26159;&#21516;&#27493;&#25191;&#34892;&#32780;&#19981;&#26159;&#24322;&#27493;&#25191;&#34892;&#30340;&#65292;&#20284;&#20046;&#26174;&#21345;&#26159;&#21542;&#25903;&#25345;&#21516;&#27493;&#26377;&#20851;&#12290;</p>
+<p>纹理缓存的使用方法类似。</p>
+<p>另外书上写的在执行openCL之前得先执行<code>glFinish()</code>，不过我没有执行也可以用，而且发现openCL是同步执行而不是异步执行的，似乎显卡是否支持同步有关。</p>
 
     </div>
     <hr>
