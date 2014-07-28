@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        Blender Script - 
+        编译 Blender - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    Blender Script 
+    编译 Blender 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">15 July 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">28 July 2014</span></div>
     </section>
          
     
@@ -177,8 +177,6 @@
   
      
     	<li><a href="/tags.html#Blender-ref">Blender <span>6</span></a></li>
-     
-    	<li><a href="/tags.html#Python-ref">Python <span>2</span></a></li>
     
   
 
@@ -197,17 +195,26 @@
 
   <div class="span8">
     <div id="content">
-      <p>挖个坑….</p>
+      <p>今天编译Blender也算是小折腾了一把，作为一个虽然用着 windows 但是一直使用 linux 工具链的非主流，碰到问题还搜不着…</p>
+<p>主要碰到三个问题：</p>
+<ul>
+<li><p>svn 无法 checkout，似乎是天朝网络的原因，挂上代理就好了</p></li>
+<li><p>运行 <code>msgfmt.exe</code> 提示 <code>libgcc_s_sjlj-1.dll</code> 缺失</p>
+<p>再三确定 <code>libgcc_s_sjlj-1.dll</code> 已经加入环境变量，但似乎不管用，看官方 <a href="http://wiki.blender.org/index.php/Dev:Doc/Building_Blender/Windows/MinGW/CMake">wiki</a>，发现和问题 <code>MinGW &amp; Redistribution</code> 颇为类似，将若干 dll 拷贝到 <code>cmake_build\bin</code> 以后问题解决</p></li>
+<li><p>最后链接 <code>Blender.exe</code> 时出现链接错误 <code>i386 architecture of input file 'winblender.rc.obj' is incompatible with i386:x86-64 output.</code></p>
+<p>这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了我另外一个 mingw 里的 <code>windres.exe</code>，把环境变量清空以后重新执行 cmake 后问题解决…</p></li>
+</ul>
+<p>配置 qtcreator 到没出什么bug，照着 <a href="http://wiki.blender.org/index.php/Dev:Doc/IDE_Configuration/Linux_CMake_QtCreator">wiki</a> 来就可以了</p>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/07/03/blendanime" title="Blender Animation">&larr; Previous</a>
+        <a class="btn prev" href="/2014/07/24/swigtest" title="Python, C/C++, SWIG">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/07/24/swigtest" title="Python, C/C++, SWIG">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>

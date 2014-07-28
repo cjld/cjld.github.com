@@ -4,13 +4,31 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-07-25T01:37:11+08:00</updated>
+ <updated>2014-07-28T22:48:20+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>randonlang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>编译 Blender</title>
+   <link href="http://cjld.github.io/2014/07/28/buildblender"/>
+   <updated>2014-07-28T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/07/28/buildblender</id>
+   <content type="html">&lt;p&gt;今天编译Blender也算是小折腾了一把，作为一个虽然用着 windows 但是一直使用 linux 工具链的非主流，碰到问题还搜不着…&lt;/p&gt;
+&lt;p&gt;主要碰到三个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;svn 无法 checkout，似乎是天朝网络的原因，挂上代理就好了&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行 &lt;code&gt;msgfmt.exe&lt;/code&gt; 提示 &lt;code&gt;libgcc_s_sjlj-1.dll&lt;/code&gt; 缺失&lt;/p&gt;
+&lt;p&gt;再三确定 &lt;code&gt;libgcc_s_sjlj-1.dll&lt;/code&gt; 已经加入环境变量，但似乎不管用，看官方 &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:Doc/Building_Blender/Windows/MinGW/CMake&quot;&gt;wiki&lt;/a&gt;，发现和问题 &lt;code&gt;MinGW &amp;amp; Redistribution&lt;/code&gt; 颇为类似，将若干 dll 拷贝到 &lt;code&gt;cmake_build\bin&lt;/code&gt; 以后问题解决&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最后链接 &lt;code&gt;Blender.exe&lt;/code&gt; 时出现链接错误 &lt;code&gt;i386 architecture of input file &#39;winblender.rc.obj&#39; is incompatible with i386:x86-64 output.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了我另外一个 mingw 里的 &lt;code&gt;windres.exe&lt;/code&gt;，把环境变量清空以后重新执行 cmake 后问题解决…&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置 qtcreator 到没出什么bug，照着 &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:Doc/IDE_Configuration/Linux_CMake_QtCreator&quot;&gt;wiki&lt;/a&gt; 来就可以了&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Python, C/C++, SWIG</title>

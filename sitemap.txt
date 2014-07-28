@@ -10,6 +10,7 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/07/28/buildblender
 http://cjld.github.io/2014/07/24/swigtest
 http://cjld.github.io/2014/07/15/blendscript
 http://cjld.github.io/2014/07/03/blendanime
