@@ -4,13 +4,58 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-07-28T22:48:20+08:00</updated>
+ <updated>2014-08-03T01:06:14+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>randonlang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Blender Addon</title>
+   <link href="http://cjld.github.io/2014/08/02/buildaraddon"/>
+   <updated>2014-08-02T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/08/02/buildaraddon</id>
+   <content type="html">&lt;p&gt;via &lt;a href=&quot;http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html&quot;&gt;http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;bl_info，包含字段仅用于在user preference显示用&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;register&lt;/code&gt; 与 &lt;code&gt;unregister&lt;/code&gt; 将会被调用，当在user preference里对addon激活和关闭时&lt;/p&gt;
+&lt;h2 id=&quot;bpy.types.operator-继承&quot;&gt;bpy.types.Operator 继承&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bl_idname&lt;/code&gt;: 必须，切唯一，用于api调用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_label&lt;/code&gt;: 必须，表示操作名称&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__doc__&lt;/code&gt;: 用于显示为tooltip&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_options&lt;/code&gt;: 枚举类集合
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;REGISTER&lt;/code&gt; 默认选项&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UNDO&lt;/code&gt; 支持撤销&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BLOCKING&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MACRO&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GRAB_POINTER&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PRESET&lt;/code&gt; 在操作设置显示一个 preset 按钮&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;INTERNAL&lt;/code&gt; 无法从外部搜索到&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute(context)&lt;/code&gt;: 运行 op，同时返回状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;operator-property&quot;&gt;Operator Property&lt;/h2&gt;
+&lt;p&gt;通过在类内部声明 property，可以让operator拥有参数输入，并且在最后一次操作面板里会出现一个简单地面板，显示所有 property&lt;/p&gt;
+&lt;h2 id=&quot;添加菜单&quot;&gt;添加菜单&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;bpy.types.VIEW3D_MT_object.append(menu_func)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类似于重载 menu 类中的 draw 函数，&lt;code&gt;append&lt;/code&gt; 为在draw之前运行，&lt;code&gt;prepend&lt;/code&gt; 在之后运行，以及 &lt;code&gt;remove&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def menu_func(self, context):
+    self.layout.operator(ObjectCursorArray.bl_idname)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过 layout.operator 绘制一个操纵 operator 的菜单项&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Blender Architecture</title>
+   <link href="http://cjld.github.io/2014/07/29/buildarchitecture"/>
+   <updated>2014-07-29T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/07/29/buildarchitecture</id>
+   <content type="html">&lt;p&gt;继续挖坑….&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>编译 Blender</title>
@@ -24,7 +69,7 @@
 &lt;li&gt;&lt;p&gt;运行 &lt;code&gt;msgfmt.exe&lt;/code&gt; 提示 &lt;code&gt;libgcc_s_sjlj-1.dll&lt;/code&gt; 缺失&lt;/p&gt;
 &lt;p&gt;再三确定 &lt;code&gt;libgcc_s_sjlj-1.dll&lt;/code&gt; 已经加入环境变量，但似乎不管用，看官方 &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:Doc/Building_Blender/Windows/MinGW/CMake&quot;&gt;wiki&lt;/a&gt;，发现和问题 &lt;code&gt;MinGW &amp;amp; Redistribution&lt;/code&gt; 颇为类似，将若干 dll 拷贝到 &lt;code&gt;cmake_build\bin&lt;/code&gt; 以后问题解决&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;最后链接 &lt;code&gt;Blender.exe&lt;/code&gt; 时出现链接错误 &lt;code&gt;i386 architecture of input file &#39;winblender.rc.obj&#39; is incompatible with i386:x86-64 output.&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了我另外一个 mingw 里的 &lt;code&gt;windres.exe&lt;/code&gt;，把环境变量清空以后重新执行 cmake 后问题解决…&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了另外一个 mingw 里的 &lt;code&gt;windres.exe&lt;/code&gt;，把环境变量清空以后重新执行 cmake 后问题解决…&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;配置 qtcreator 到没出什么bug，照着 &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:Doc/IDE_Configuration/Linux_CMake_QtCreator&quot;&gt;wiki&lt;/a&gt; 来就可以了&lt;/p&gt;
 </content>
@@ -49,11 +94,35 @@
  </entry>
  
  <entry>
-   <title>Blender Script</title>
+   <title>Blender Python API Overview</title>
    <link href="http://cjld.github.io/2014/07/15/blendscript"/>
    <updated>2014-07-15T00:00:00+08:00</updated>
    <id>http://cjld.github.io/2014/07/15/blendscript</id>
-   <content type="html">&lt;p&gt;挖个坑….&lt;/p&gt;
+   <content type="html">&lt;p&gt;via &lt;a href=&quot;http://www.blender.org/documentation/blender_python_api_2_70a_release/info_overview.html&quot;&gt;http://www.blender.org/documentation/blender_python_api_2_70a_release/info_overview.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;可以用-python-api-集成的类型&quot;&gt;可以用 python api 集成的类型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;bpy.types.Panel&lt;/li&gt;
+&lt;li&gt;bpy.types.Menu&lt;/li&gt;
+&lt;li&gt;bpy.types.Operator&lt;/li&gt;
+&lt;li&gt;bpy.types.PropertyGroup&lt;/li&gt;
+&lt;li&gt;bpy.types.KeyingSet&lt;/li&gt;
+&lt;li&gt;bpy.types.RenderEngine&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可见，使用 Blender Python API 可以做的事情是在 UI 界面可以做的所有事情，以及集成以上6种类型， 所以python api并不能做所有事情，比如 &lt;a href=&quot;http://wiki.blender.org/index.php/User:Enjalot/Creating_a_custom_modifier&quot;&gt;创建一个modifier&lt;/a&gt;、 &lt;a href=&quot;http://wiki.blender.org/index.php/User:Nazg-gul/WritingNewNode&quot;&gt;创建一个compositing node&lt;/a&gt;， 如有这种需求的时候就需要用到 C/C++ 对源码进行改写了&lt;/p&gt;
+&lt;p&gt;感觉blender对python api的理解是简化操作而不是增加特性而实现的。&lt;/p&gt;
+&lt;p&gt;在使用以上类型的时候尽量不涉及任何固有变量，固有变量应该被储存在 blender data 里，这样就能被保存和加载了（话说撤销机制是不是也是这么实现的？）， 这么看来其实blender的设计模式并不完全是OOP形式，更像是DOP，面向数据，以及MVC&lt;/p&gt;
+&lt;p&gt;从blender源码上来分析也是这种感觉，blender靠一个奇怪的 DNA/RNA 机制实现了动态类型&lt;/p&gt;
+&lt;h2 id=&quot;registration&quot;&gt;Registration&lt;/h2&gt;
+&lt;h3 id=&quot;module-registration&quot;&gt;Module Registration&lt;/h3&gt;
+&lt;p&gt;当一个 python 代码被放在 &lt;code&gt;scripts/addons/&lt;/code&gt; 下时，便会自动的被blender import 并调用 &lt;code&gt;register()&lt;/code&gt; 和 &lt;code&gt;unregister()&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;class-registration&quot;&gt;Class Registration&lt;/h3&gt;
+&lt;p&gt;前面提到的6种类型，在继承以后可以通过 &lt;code&gt;bpy.utils.register_class(cls)&lt;/code&gt; 来注册，或者通过 &lt;code&gt;bpy.utils.register_module(mod)&lt;/code&gt; 来自动注册所有在mod内部的类，按照定义顺序&lt;/p&gt;
+&lt;h3 id=&quot;inter-classes-dependencies&quot;&gt;Inter Classes Dependencies&lt;/h3&gt;
+&lt;p&gt;注册的时候需要考虑调用顺序&lt;/p&gt;
+&lt;h2 id=&quot;manipulating-classes&quot;&gt;Manipulating Classes&lt;/h2&gt;
+&lt;p&gt;properties 可以在运行时被动态的添加&lt;/p&gt;
+&lt;h2 id=&quot;dynamic-defined-classes&quot;&gt;Dynamic Defined-Classes&lt;/h2&gt;
+&lt;p&gt;动态定义类， 这用法太风骚了…还是少用为好&lt;/p&gt;
 </content>
  </entry>
  

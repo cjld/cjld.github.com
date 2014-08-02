@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        Python, C/C++, SWIG - 
+        Blender Addon - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    Python, C/C++, SWIG 
+    Blender Addon 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">24 July 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">02 August 2014</span></div>
     </section>
          
     
@@ -176,9 +176,9 @@
 
   
      
-    	<li><a href="/tags.html#Python-ref">Python <span>3</span></a></li>
+    	<li><a href="/tags.html#Blender-ref">Blender <span>8</span></a></li>
      
-    	<li><a href="/tags.html#SWIG-ref">SWIG <span>1</span></a></li>
+    	<li><a href="/tags.html#Python-ref">Python <span>3</span></a></li>
     
   
 
@@ -197,26 +197,44 @@
 
   <div class="span8">
     <div id="content">
-      <p>让 Python 和 C++ 相互调用，方法主要有以下几种：</p>
-<h2 id="通过-extern-生成动态链接库">通过 extern 生成动态链接库</h2>
-<p>via <a href="http://www.oschina.net/question/234345_48628">http://www.oschina.net/question/234345_48628</a></p>
-<p>最经典的方法，通过在头文件里加入 <code>extern &quot;C&quot;</code> 来定义动态链接符号，通过 <code>ctypes.CDLL</code> 来连接，优点是即插即用，缺点是只能以纯C的方式调用，而且只能传输基础类型。</p>
-<h2 id="使用-python-api">使用 Python API</h2>
-<p>via <a href="https://docs.python.org/2/extending/extending.html">https://docs.python.org/2/extending/extending.html</a></p>
-<p>最科学的方法，通过 python 提供的 API 来编写，编译出的文件可以直接 import，非常干净，而且不光可以 python 调用 c++，同样可以用 c++ 调用 python</p>
-<h2 id="swig">SWIG</h2>
-<p>发现 SWIG 以后真是相见恨晚，SWIG 几乎可以把 C++ 包装给所有语言用，而且不需要在原来基础上增加或者修改代码。</p>
-<p>基本上按着<a href="http://www.swig.org/Doc1.3/Python.html">官方教程</a>来一遍就知道怎么回事了，有一点一直被坑了很久，那就是编译出来的 <code>.dll</code>得把后缀改成 <code>.pyd</code> 才行，python3 import 的时候是不会找 <code>.dll</code> 后缀的…</p>
+      <p>via <a href="http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html">http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html</a></p>
+<p>bl_info，包含字段仅用于在user preference显示用</p>
+<p><code>register</code> 与 <code>unregister</code> 将会被调用，当在user preference里对addon激活和关闭时</p>
+<h2 id="bpy.types.operator-继承">bpy.types.Operator 继承</h2>
+<ul>
+<li><code>bl_idname</code>: 必须，切唯一，用于api调用</li>
+<li><code>bl_label</code>: 必须，表示操作名称</li>
+<li><code>__doc__</code>: 用于显示为tooltip</li>
+<li><code>bl_options</code>: 枚举类集合
+<ul>
+<li><code>REGISTER</code> 默认选项</li>
+<li><code>UNDO</code> 支持撤销</li>
+<li><code>BLOCKING</code></li>
+<li><code>MACRO</code></li>
+<li><code>GRAB_POINTER</code></li>
+<li><code>PRESET</code> 在操作设置显示一个 preset 按钮</li>
+<li><code>INTERNAL</code> 无法从外部搜索到</li>
+</ul></li>
+<li><code>execute(context)</code>: 运行 op，同时返回状态</li>
+</ul>
+<h2 id="operator-property">Operator Property</h2>
+<p>通过在类内部声明 property，可以让operator拥有参数输入，并且在最后一次操作面板里会出现一个简单地面板，显示所有 property</p>
+<h2 id="添加菜单">添加菜单</h2>
+<pre><code>bpy.types.VIEW3D_MT_object.append(menu_func)</code></pre>
+<p>类似于重载 menu 类中的 draw 函数，<code>append</code> 为在draw之前运行，<code>prepend</code> 在之后运行，以及 <code>remove</code></p>
+<pre><code>def menu_func(self, context):
+    self.layout.operator(ObjectCursorArray.bl_idname)</code></pre>
+<p>通过 layout.operator 绘制一个操纵 operator 的菜单项</p>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/07/15/blendscript" title="Blender Python API Overview">&larr; Previous</a>
+        <a class="btn prev" href="/2014/07/29/buildarchitecture" title="Blender Architecture">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/07/28/buildblender" title="编译 Blender">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>

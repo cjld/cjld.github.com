@@ -176,7 +176,7 @@
 
   
      
-    	<li><a href="/tags.html#Blender-ref">Blender <span>6</span></a></li>
+    	<li><a href="/tags.html#Blender-ref">Blender <span>8</span></a></li>
     
   
 
@@ -202,7 +202,7 @@
 <li><p>运行 <code>msgfmt.exe</code> 提示 <code>libgcc_s_sjlj-1.dll</code> 缺失</p>
 <p>再三确定 <code>libgcc_s_sjlj-1.dll</code> 已经加入环境变量，但似乎不管用，看官方 <a href="http://wiki.blender.org/index.php/Dev:Doc/Building_Blender/Windows/MinGW/CMake">wiki</a>，发现和问题 <code>MinGW &amp; Redistribution</code> 颇为类似，将若干 dll 拷贝到 <code>cmake_build\bin</code> 以后问题解决</p></li>
 <li><p>最后链接 <code>Blender.exe</code> 时出现链接错误 <code>i386 architecture of input file 'winblender.rc.obj' is incompatible with i386:x86-64 output.</code></p>
-<p>这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了我另外一个 mingw 里的 <code>windres.exe</code>，把环境变量清空以后重新执行 cmake 后问题解决…</p></li>
+<p>这个问题折腾了半天，本本里确实有几个版本的 mingw，但在 make 前为了防止环境变量污染还特地把 path 清空了，百思不得其解，去翻阅 makefile 时发现不知何时调用了另外一个 mingw 里的 <code>windres.exe</code>，把环境变量清空以后重新执行 cmake 后问题解决…</p></li>
 </ul>
 <p>配置 qtcreator 到没出什么bug，照着 <a href="http://wiki.blender.org/index.php/Dev:Doc/IDE_Configuration/Linux_CMake_QtCreator">wiki</a> 来就可以了</p>
 
@@ -214,7 +214,7 @@
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next disabled">Next &rarr;</a>
+        <a class="btn next" href="/2014/07/29/buildarchitecture" title="Blender Architecture">Next &rarr;</a>
       
     </div>
     <hr>

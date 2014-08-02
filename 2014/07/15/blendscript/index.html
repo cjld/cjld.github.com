@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        Blender Script - 
+        Blender Python API Overview - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    Blender Script 
+    Blender Python API Overview 
     
   </h1>
 </div>
@@ -176,9 +176,9 @@
 
   
      
-    	<li><a href="/tags.html#Blender-ref">Blender <span>6</span></a></li>
+    	<li><a href="/tags.html#Blender-ref">Blender <span>8</span></a></li>
      
-    	<li><a href="/tags.html#Python-ref">Python <span>2</span></a></li>
+    	<li><a href="/tags.html#Python-ref">Python <span>3</span></a></li>
     
   
 
@@ -197,7 +197,31 @@
 
   <div class="span8">
     <div id="content">
-      <p>挖个坑….</p>
+      <p>via <a href="http://www.blender.org/documentation/blender_python_api_2_70a_release/info_overview.html">http://www.blender.org/documentation/blender_python_api_2_70a_release/info_overview.html</a></p>
+<h2 id="可以用-python-api-集成的类型">可以用 python api 集成的类型</h2>
+<ul>
+<li>bpy.types.Panel</li>
+<li>bpy.types.Menu</li>
+<li>bpy.types.Operator</li>
+<li>bpy.types.PropertyGroup</li>
+<li>bpy.types.KeyingSet</li>
+<li>bpy.types.RenderEngine</li>
+</ul>
+<p>可见，使用 Blender Python API 可以做的事情是在 UI 界面可以做的所有事情，以及集成以上6种类型， 所以python api并不能做所有事情，比如 <a href="http://wiki.blender.org/index.php/User:Enjalot/Creating_a_custom_modifier">创建一个modifier</a>、 <a href="http://wiki.blender.org/index.php/User:Nazg-gul/WritingNewNode">创建一个compositing node</a>， 如有这种需求的时候就需要用到 C/C++ 对源码进行改写了</p>
+<p>感觉blender对python api的理解是简化操作而不是增加特性而实现的。</p>
+<p>在使用以上类型的时候尽量不涉及任何固有变量，固有变量应该被储存在 blender data 里，这样就能被保存和加载了（话说撤销机制是不是也是这么实现的？）， 这么看来其实blender的设计模式并不完全是OOP形式，更像是DOP，面向数据，以及MVC</p>
+<p>从blender源码上来分析也是这种感觉，blender靠一个奇怪的 DNA/RNA 机制实现了动态类型</p>
+<h2 id="registration">Registration</h2>
+<h3 id="module-registration">Module Registration</h3>
+<p>当一个 python 代码被放在 <code>scripts/addons/</code> 下时，便会自动的被blender import 并调用 <code>register()</code> 和 <code>unregister()</code></p>
+<h3 id="class-registration">Class Registration</h3>
+<p>前面提到的6种类型，在继承以后可以通过 <code>bpy.utils.register_class(cls)</code> 来注册，或者通过 <code>bpy.utils.register_module(mod)</code> 来自动注册所有在mod内部的类，按照定义顺序</p>
+<h3 id="inter-classes-dependencies">Inter Classes Dependencies</h3>
+<p>注册的时候需要考虑调用顺序</p>
+<h2 id="manipulating-classes">Manipulating Classes</h2>
+<p>properties 可以在运行时被动态的添加</p>
+<h2 id="dynamic-defined-classes">Dynamic Defined-Classes</h2>
+<p>动态定义类， 这用法太风骚了…还是少用为好</p>
 
     </div>
     <hr>
