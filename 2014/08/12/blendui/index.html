@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        Blender Inside Out - 
+        Blender Interface - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    Blender Inside Out 
+    Blender Interface 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">20 June 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">12 August 2014</span></div>
     </section>
          
     
@@ -177,6 +177,8 @@
   
      
     	<li><a href="/tags.html#Blender-ref">Blender <span>9</span></a></li>
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>4</span></a></li>
     
   
 
@@ -195,107 +197,74 @@
 
   <div class="span8">
     <div id="content">
-      <p><a href="https://www.youtube.com/watch?v=YibZKnVc0Zk&amp;list=PLtuvwW4VAp5sn3kYEM8f2WQwPVXIbHXMq">Blender Inside Out</a> 对 blender 做了非常系统的介绍，信息量比较大，做些笔记：</p>
-<h2 id="interface">Interface</h2>
+      <p>via <a href="http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Cookbook/Code_snippets/Interface#A_modal_operator">http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Cookbook/Code_snippets/Interface#A_modal_operator</a></p>
+<p>blender 主要有两种 UI:</p>
 <ul>
-<li><code>N</code> : Property panel</li>
-<li><code>T</code> : Tools panel</li>
+<li>继承自 <code>bpy.types.Panel</code>, 有 properties 和 draw function</li>
+<li><code>bpy.types.Operator</code>, 有 properties, execute function, 可选的 invoke function</li>
 </ul>
-<h2 id="selection-tools">Selection Tools</h2>
+<p>一个注册文件中所有类的方法是 <code>bpy.utils.register_module(__name__)</code></p>
+<h2 id="panels-and-buttons">Panels and buttons</h2>
+<p>可以通过以下代码添加一个按钮</p>
+<pre><code>self.layout.operator(&quot;hello.hello&quot;, text=&#39;Hej&#39;).country = &quot;Sweden&quot;</code></pre>
+<p><code>UILayout.operator</code> 具有额外参数: * <code>text</code>: 按钮上的字 * <code>text_ctxt</code>: 用于翻译 * <code>translate</code>: 是否翻译 * <code>icon</code>: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’ * <code>emboss</code>: bool, 是否显示按钮的凸起</p>
+<p>同时这个函数具有返回值, 可以对对应的 operator 设置调用时的 properties, 可以设置多个 properties, 如下:</p>
+<pre><code>op = row.operator(&quot;transform.translate&quot;)
+op.value = (1,-1,-1)
+op.proportional_size = 1</code></pre>
+<p>和 operator 一样, panel 同样有 <code>bl_*</code> 的前缀, 常用的有</p>
 <ul>
-<li><code>RMB</code> : select one</li>
-<li><code>A</code> : (De)select All / Invert</li>
-<li><code>B</code> : Border Select</li>
-<li><code>C</code> : Circle Select , <code>SW</code> to change the size</li>
-<li><code>Ctrl</code> + <code>LMB</code> : Polygon Select</li>
-<li><code>Shift</code> + <code>...</code> : Deselect</li>
-<li><code>MMB</code> : Deselect</li>
+<li><code>bl_idname</code>: id</li>
+<li><code>bl_label</code>: label, 提示性文字, 标题</li>
+<li><code>bl_space_type</code>: 属于哪个 space, 如 <code>VIEW_3D</code>, <code>PROPERTIES</code></li>
+<li><code>bl_region_type</code>: 属于哪个 region, 如 <code>TOOLS</code>, <code>TOOL_PROPS</code></li>
+<li><code>bl_context</code>: 取决于具体环境, 这三项从上到下决定了具体 panel 的具体位置</li>
 </ul>
-<h2 id="transform-tools">Transform Tools</h2>
+<p>可重载函数:</p>
 <ul>
-<li><code>G</code> : Translate</li>
-<li><code>R</code> : Rotate</li>
-<li><code>S</code> : Scale</li>
-<li>Pivot center for rotate and scale</li>
-<li>Transform orientation : Global , Local , Normal , Gimbal? , Custom</li>
-<li><code>X</code> <code>Y</code> <code>Z</code> <code>Shift</code> Constraint Axis</li>
-<li><code>Alt</code> + <code>Space</code> : Select Orientation</li>
-<li><code>Shift</code> + D : Duplicate</li>
+<li><code>classmethod poll(context)</code>: 返回bool, 是否绘制ui</li>
+<li><code>draw_header(context)</code>: 用来绘制标题</li>
+<li><code>draw(context)</code>: 用来绘制 panel</li>
 </ul>
-<h2 id="using-the-search-box-to-find-amost-anything">Using The Search Box To Find Amost Anything</h2>
-<h2 id="customizing-the-interface-layout">Customizing The Interface Layout</h2>
-<p>Right click in split line to split or merge</p>
-<h2 id="using-the-3d-cursor">Using The 3D Cursor</h2>
+<h2 id="panel-properties">Panel properties</h2>
+<p>除了 operator, 还可以使用 panel 控制 properties, 如下:</p>
+<pre><code>layout.prop(ob, &#39;myRnaInt&#39;)         # RNA properties
+layout.prop(ob, &#39;[&quot;myRnaInt&quot;]&#39;)     # ID properties</code></pre>
+<p>以及一些常用的 ui 元素:</p>
 <ul>
-<li><code>D</code> + <code>LMB</code> | <code>RMB</code> | <code>Ctrl</code>: draw | erase | line</li>
-<li><code>Shift</code> + <code>S</code> : snap menu</li>
+<li><code>layout.template_ID</code>: ID 链接</li>
+<li><code>prop_menu_enum</code>: 枚举类菜单</li>
 </ul>
-<h2 id="object-mode-versus-edit-mode">Object Mode Versus Edit Mode</h2>
+<h2 id="panel-layout">Panel layout</h2>
 <ul>
-<li><code>Tab</code> : switch between two mode</li>
-<li><code>Ctrl</code> + <code>Tab</code> : (in Edit Mode) switch select mode {v,e,f}</li>
+<li><code>layout.row()</code>: 在同一行, 有一个参数, align, 表示元素是否为紧凑排列</li>
+<li><code>layout.column()</code>: 同 row, 按列排列</li>
+<li><code>layout.alignment</code>: 设置对齐方式</li>
+<li><code>layout.box()</code>: 包围盒</li>
+<li><code>layout.separator()</code>: 分隔符</li>
+<li><code>layout.split()</code>: 有一个参数 percentage, 按行宽度百分比拆分</li>
 </ul>
-<h2 id="mesh-selection-tools">Mesh Selection Tools</h2>
-<ul>
-<li><code>L</code> : select link</li>
-<li><code>Shift</code> + <code>R</code> : Repeat last command</li>
-<li><code>Ctrl</code> + <code>N+</code> | <code>N-</code> : select more | less around cur select</li>
-<li><code>P</code> : separated to another obj</li>
-<li><code>Y</code> : split</li>
-<li><code>Alt</code> + <code>RMB</code> : select edge loop like — — —</li>
-<li><code>Ctrl</code> + <code>Alt</code> + <code>RMB</code> : select edge ring like | | |</li>
-<li><code>Ctrl</code> + <code>RMB</code> : select path</li>
-</ul>
-<h2 id="object-mesh-snapping">Object / Mesh Snapping</h2>
-<ul>
-<li>snap to : volume , face, edge, vertex</li>
-<li>snap element : center, active, median, closest</li>
-<li><code>Ctrl</code> + <code>LMB</code> : duplicate and extrude at 3d cursor</li>
-<li><code>Ctrl</code> when transform, enable snap</li>
-</ul>
-<h2 id="edit-model">Edit model</h2>
-<ul>
-<li><code>E</code> : Extrude and Extrude individual</li>
-<li><code>Ctrl</code> + <code>V</code>|<code>F</code>|<code>E</code> : vertex/face/edge menu</li>
-<li><code>I</code> : face inset</li>
-<li>face edge bevel</li>
-<li>bridge and spin</li>
-<li>loop cuts</li>
-<li>knife</li>
-<li>merge and collapse</li>
-<li>Mesh Creases for subsdiv</li>
-<li>mesh display in property to display normal, length, etc.</li>
-</ul>
-<h2 id="modifiers">Modifiers</h2>
-<ul>
-<li><code>Ctrl</code> + <code>H</code> : hook menu</li>
-<li><a href="https://www.youtube.com/watch?v=ljMePAmmxx4">all modifiers Tutorial</a></li>
-</ul>
-<h2 id="smoothing-groups">Smoothing Groups</h2>
-<ul>
-<li>Mark sharp used by Edge Split modifier</li>
-<li>Crease used by subsurf modifier</li>
-</ul>
-<h2 id="setting-seams-and-unwrapping">Setting Seams And Unwrapping</h2>
-<ul>
-<li>Mark Seams in Edge menu</li>
-<li><code>Ctrl</code> + <code>P</code> : Pack island</li>
-<li><code>W</code> : Weld / Align Menu</li>
-<li><code>P</code> : Pin, need to enable live unwarp</li>
-<li>Sculpting UV</li>
-<li><code>M</code> move to layer</li>
-</ul>
-<p>还有好多东西啊… 不想看了， 先玩 motion track 去 …</p>
+<h2 id="menu">menu</h2>
+<p>找到对应的菜单, 使用 <code>prepend</code>/<code>append</code> 函数添加绘制函数</p>
+<pre><code>bpy.types.INFO_MT_mesh_add.prepend(menu_func)
+bpy.types.INFO_MT_mesh_add.append(menu_func)
+
+bpy.types.INFO_MT_mesh_add.remove(menu_func)</code></pre>
+<h2 id="a-modal-operator">A modal operator</h2>
+<p>modal operator 和普通的 operator 的区别是, <code>Operator.modal</code> 被重载用来处理事件, 主要用于交互式的 operator</p>
+<p>modal 函数的返回值有 4 种: * <code>FINISHED</code>: 结束 * <code>CANCELLED</code>: 取消 * <code>RUNNING_MODAL</code>: 等待下一个事件触发继续运行 * <code>PASS_THROUGH</code>: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?</p>
+<p>可以通过重载 <code>__init__</code> 和 <code>__del__</code> 获得 modal operator 开始和结束的信息</p>
+<p>在调用时使用语句 <code>context.window_manager.modal_handler_add(self)</code></p>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/06/11/blendercool" title="Blender 大法好">&larr; Previous</a>
+        <a class="btn prev" href="/2014/08/02/buildaraddon" title="Blender Addon">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/06/28/blendmt" title="Blender Motion Track">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>

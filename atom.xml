@@ -4,13 +4,79 @@
  <title>CJLD</title>
  <link href="http://cjld.github.io/" rel="self"/>
  <link href="http://cjld.github.io"/>
- <updated>2014-08-03T01:06:14+08:00</updated>
+ <updated>2014-08-16T14:03:52+08:00</updated>
  <id>http://cjld.github.io</id>
  <author>
    <name>cjld</name>
    <email>randonlang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Blender Interface</title>
+   <link href="http://cjld.github.io/2014/08/12/blendui"/>
+   <updated>2014-08-12T00:00:00+08:00</updated>
+   <id>http://cjld.github.io/2014/08/12/blendui</id>
+   <content type="html">&lt;p&gt;via &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Cookbook/Code_snippets/Interface#A_modal_operator&quot;&gt;http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Cookbook/Code_snippets/Interface#A_modal_operator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;blender 主要有两种 UI:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;继承自 &lt;code&gt;bpy.types.Panel&lt;/code&gt;, 有 properties 和 draw function&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpy.types.Operator&lt;/code&gt;, 有 properties, execute function, 可选的 invoke function&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个注册文件中所有类的方法是 &lt;code&gt;bpy.utils.register_module(__name__)&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;panels-and-buttons&quot;&gt;Panels and buttons&lt;/h2&gt;
+&lt;p&gt;可以通过以下代码添加一个按钮&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;self.layout.operator(&amp;quot;hello.hello&amp;quot;, text=&amp;#39;Hej&amp;#39;).country = &amp;quot;Sweden&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;UILayout.operator&lt;/code&gt; 具有额外参数: * &lt;code&gt;text&lt;/code&gt;: 按钮上的字 * &lt;code&gt;text_ctxt&lt;/code&gt;: 用于翻译 * &lt;code&gt;translate&lt;/code&gt;: 是否翻译 * &lt;code&gt;icon&lt;/code&gt;: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’ * &lt;code&gt;emboss&lt;/code&gt;: bool, 是否显示按钮的凸起&lt;/p&gt;
+&lt;p&gt;同时这个函数具有返回值, 可以对对应的 operator 设置调用时的 properties, 可以设置多个 properties, 如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;op = row.operator(&amp;quot;transform.translate&amp;quot;)
+op.value = (1,-1,-1)
+op.proportional_size = 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;和 operator 一样, panel 同样有 &lt;code&gt;bl_*&lt;/code&gt; 的前缀, 常用的有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bl_idname&lt;/code&gt;: id&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_label&lt;/code&gt;: label, 提示性文字, 标题&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_space_type&lt;/code&gt;: 属于哪个 space, 如 &lt;code&gt;VIEW_3D&lt;/code&gt;, &lt;code&gt;PROPERTIES&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_region_type&lt;/code&gt;: 属于哪个 region, 如 &lt;code&gt;TOOLS&lt;/code&gt;, &lt;code&gt;TOOL_PROPS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bl_context&lt;/code&gt;: 取决于具体环境, 这三项从上到下决定了具体 panel 的具体位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可重载函数:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;classmethod poll(context)&lt;/code&gt;: 返回bool, 是否绘制ui&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;draw_header(context)&lt;/code&gt;: 用来绘制标题&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;draw(context)&lt;/code&gt;: 用来绘制 panel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;panel-properties&quot;&gt;Panel properties&lt;/h2&gt;
+&lt;p&gt;除了 operator, 还可以使用 panel 控制 properties, 如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;layout.prop(ob, &amp;#39;myRnaInt&amp;#39;)         # RNA properties
+layout.prop(ob, &amp;#39;[&amp;quot;myRnaInt&amp;quot;]&amp;#39;)     # ID properties&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以及一些常用的 ui 元素:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;layout.template_ID&lt;/code&gt;: ID 链接&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;prop_menu_enum&lt;/code&gt;: 枚举类菜单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;panel-layout&quot;&gt;Panel layout&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;layout.row()&lt;/code&gt;: 在同一行, 有一个参数, align, 表示元素是否为紧凑排列&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout.column()&lt;/code&gt;: 同 row, 按列排列&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout.alignment&lt;/code&gt;: 设置对齐方式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout.box()&lt;/code&gt;: 包围盒&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout.separator()&lt;/code&gt;: 分隔符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout.split()&lt;/code&gt;: 有一个参数 percentage, 按行宽度百分比拆分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;menu&quot;&gt;menu&lt;/h2&gt;
+&lt;p&gt;找到对应的菜单, 使用 &lt;code&gt;prepend&lt;/code&gt;/&lt;code&gt;append&lt;/code&gt; 函数添加绘制函数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bpy.types.INFO_MT_mesh_add.prepend(menu_func)
+bpy.types.INFO_MT_mesh_add.append(menu_func)
+
+bpy.types.INFO_MT_mesh_add.remove(menu_func)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;a-modal-operator&quot;&gt;A modal operator&lt;/h2&gt;
+&lt;p&gt;modal operator 和普通的 operator 的区别是, &lt;code&gt;Operator.modal&lt;/code&gt; 被重载用来处理事件, 主要用于交互式的 operator&lt;/p&gt;
+&lt;p&gt;modal 函数的返回值有 4 种: * &lt;code&gt;FINISHED&lt;/code&gt;: 结束 * &lt;code&gt;CANCELLED&lt;/code&gt;: 取消 * &lt;code&gt;RUNNING_MODAL&lt;/code&gt;: 等待下一个事件触发继续运行 * &lt;code&gt;PASS_THROUGH&lt;/code&gt;: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?&lt;/p&gt;
+&lt;p&gt;可以通过重载 &lt;code&gt;__init__&lt;/code&gt; 和 &lt;code&gt;__del__&lt;/code&gt; 获得 modal operator 开始和结束的信息&lt;/p&gt;
+&lt;p&gt;在调用时使用语句 &lt;code&gt;context.window_manager.modal_handler_add(self)&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Blender Addon</title>
@@ -123,6 +189,42 @@
 &lt;p&gt;properties 可以在运行时被动态的添加&lt;/p&gt;
 &lt;h2 id=&quot;dynamic-defined-classes&quot;&gt;Dynamic Defined-Classes&lt;/h2&gt;
 &lt;p&gt;动态定义类， 这用法太风骚了…还是少用为好&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;application-modules&quot;&gt;Application Modules&lt;/h2&gt;
+&lt;h3 id=&quot;context-access&quot;&gt;Context Access&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.context&lt;/code&gt;: blender 上下文信息，所有变量只读，不过可以通过data api修改&lt;/p&gt;
+&lt;h3 id=&quot;data-access&quot;&gt;Data Access&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.data&lt;/code&gt;: blender内部的所有数据（除开context）&lt;/p&gt;
+&lt;h3 id=&quot;opetators&quot;&gt;Opetators&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.ops&lt;/code&gt;: 所有用python，c和宏实现的 operator 都可以被找到&lt;/p&gt;
+&lt;p&gt;因为 operator 有一些特性，所以也有一些特殊的调用方法&lt;/p&gt;
+&lt;p&gt;所有 operator 支持三个特殊的 positional arguments，因为其他参数都是 keyword arguments，所以不会冲突：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;override_context&lt;/code&gt;: dict type&lt;br /&gt; 用于重载传给 operator 里的 context&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execution_context&lt;/code&gt;: string(enum)&lt;br /&gt; 没看懂有啥用…似乎相关invoke和execute的区别，这个之后的文章再深究&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;undo&lt;/code&gt;: bool 是否支持撤销，也就是要不要在做这个操作之前做一次备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比较神奇的是这三个参数顺序是无所谓的，可以查看代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;File &amp;quot;Blender Foundation\Blender\2.71\scripts\modules\bpy\ops.py&amp;quot;, line 185, in __call__
+    C_dict, C_exec, C_undo = BPyOpsSubModOp._parse_args(args)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为三个参数类型不同，所以顺序不同也是可以判断出来的&lt;/p&gt;
+&lt;h3 id=&quot;types&quot;&gt;Types&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.types&lt;/code&gt;: blender 中出现的所有类型&lt;/p&gt;
+&lt;p&gt;继承或者添加自定义属性时会用到&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bpy_struct&lt;/code&gt;: 所有类的基类，可以用来添加key，driver&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ID&lt;/code&gt;: 负责GC，连接和储存的基类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;utilities&quot;&gt;Utilities&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.utils&lt;/code&gt;: 各种零碎的实用的函数如 &lt;code&gt;register_class&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;property-definitions&quot;&gt;Property Definitions&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bpy.props&lt;/code&gt;: 提供若干属性的声明，有 bool, float, int, string… 以及 update, get/set 的设置&lt;/p&gt;
+&lt;p&gt;这种 property 定义方法被称之为 &lt;code&gt;RNA properties&lt;/code&gt;, 除此之外还有一种定义方法是 &lt;code&gt;ID properties&lt;/code&gt;, &lt;code&gt;RNA properties&lt;/code&gt; 的定义是针对一个类型， 而 &lt;code&gt;ID properties&lt;/code&gt; 是针对单个实例的&lt;/p&gt;
+&lt;h2 id=&quot;乱&quot;&gt;乱&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bpy.context.window_manager.popup_menu(draw, title=&amp;quot;Greeting&amp;quot;, icon=&#39;INFO&#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpy.ops.object.select_by_type(type=&#39;MESH&#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
@@ -1238,6 +1340,10 @@ profile = google_ipv6
 &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/hexw7/article/details/9864617&quot;&gt;703n的OpenWrt配置二:U盘扩容&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://scola.github.io/deploy-goagent-on-openwrt-tplink-703n/&quot;&gt;在openwrt-tplink703n路由器上成功部署GoAgent&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&quot;update&quot;&gt;Update&lt;/h3&gt;
+&lt;p&gt;某次玩脱了，重置了路由器，结果软件包怎么都装不了， 发现官方源地址换了，详见&lt;a href=&quot;http://www.right.com.cn/forum/forum.php?mod=viewthread&amp;amp;action=printable&amp;amp;tid=104602&quot;&gt;http://www.right.com.cn/forum/forum.php?mod=viewthread&amp;amp;action=printable&amp;amp;tid=104602&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;同时还得刷一下固件&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 中配置dns服务器&lt;/p&gt;
 </content>
  </entry>
  

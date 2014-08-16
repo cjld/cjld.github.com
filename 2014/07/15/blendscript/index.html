@@ -176,9 +176,9 @@
 
   
      
-    	<li><a href="/tags.html#Blender-ref">Blender <span>8</span></a></li>
+    	<li><a href="/tags.html#Blender-ref">Blender <span>9</span></a></li>
      
-    	<li><a href="/tags.html#Python-ref">Python <span>3</span></a></li>
+    	<li><a href="/tags.html#Python-ref">Python <span>4</span></a></li>
     
   
 
@@ -222,6 +222,42 @@
 <p>properties 可以在运行时被动态的添加</p>
 <h2 id="dynamic-defined-classes">Dynamic Defined-Classes</h2>
 <p>动态定义类， 这用法太风骚了…还是少用为好</p>
+<hr />
+<h2 id="application-modules">Application Modules</h2>
+<h3 id="context-access">Context Access</h3>
+<p><code>bpy.context</code>: blender 上下文信息，所有变量只读，不过可以通过data api修改</p>
+<h3 id="data-access">Data Access</h3>
+<p><code>bpy.data</code>: blender内部的所有数据（除开context）</p>
+<h3 id="opetators">Opetators</h3>
+<p><code>bpy.ops</code>: 所有用python，c和宏实现的 operator 都可以被找到</p>
+<p>因为 operator 有一些特性，所以也有一些特殊的调用方法</p>
+<p>所有 operator 支持三个特殊的 positional arguments，因为其他参数都是 keyword arguments，所以不会冲突：</p>
+<ul>
+<li><code>override_context</code>: dict type<br /> 用于重载传给 operator 里的 context</li>
+<li><code>execution_context</code>: string(enum)<br /> 没看懂有啥用…似乎相关invoke和execute的区别，这个之后的文章再深究</li>
+<li><code>undo</code>: bool 是否支持撤销，也就是要不要在做这个操作之前做一次备份</li>
+</ul>
+<p>比较神奇的是这三个参数顺序是无所谓的，可以查看代码：</p>
+<pre><code>File &quot;Blender Foundation\Blender\2.71\scripts\modules\bpy\ops.py&quot;, line 185, in __call__
+    C_dict, C_exec, C_undo = BPyOpsSubModOp._parse_args(args)</code></pre>
+<p>因为三个参数类型不同，所以顺序不同也是可以判断出来的</p>
+<h3 id="types">Types</h3>
+<p><code>bpy.types</code>: blender 中出现的所有类型</p>
+<p>继承或者添加自定义属性时会用到</p>
+<ul>
+<li><code>bpy_struct</code>: 所有类的基类，可以用来添加key，driver</li>
+<li><code>ID</code>: 负责GC，连接和储存的基类</li>
+</ul>
+<h3 id="utilities">Utilities</h3>
+<p><code>bpy.utils</code>: 各种零碎的实用的函数如 <code>register_class</code></p>
+<h3 id="property-definitions">Property Definitions</h3>
+<p><code>bpy.props</code>: 提供若干属性的声明，有 bool, float, int, string… 以及 update, get/set 的设置</p>
+<p>这种 property 定义方法被称之为 <code>RNA properties</code>, 除此之外还有一种定义方法是 <code>ID properties</code>, <code>RNA properties</code> 的定义是针对一个类型， 而 <code>ID properties</code> 是针对单个实例的</p>
+<h2 id="乱">乱</h2>
+<ul>
+<li><code>bpy.context.window_manager.popup_menu(draw, title=&quot;Greeting&quot;, icon='INFO')</code></li>
+<li><code>bpy.ops.object.select_by_type(type='MESH')</code></li>
+</ul>
 
     </div>
     <hr>
