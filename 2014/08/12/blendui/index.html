@@ -176,7 +176,7 @@
 
   
      
-    	<li><a href="/tags.html#Blender-ref">Blender <span>9</span></a></li>
+    	<li><a href="/tags.html#Blender-ref">Blender <span>10</span></a></li>
      
     	<li><a href="/tags.html#Python-ref">Python <span>4</span></a></li>
     
@@ -207,7 +207,14 @@
 <h2 id="panels-and-buttons">Panels and buttons</h2>
 <p>可以通过以下代码添加一个按钮</p>
 <pre><code>self.layout.operator(&quot;hello.hello&quot;, text=&#39;Hej&#39;).country = &quot;Sweden&quot;</code></pre>
-<p><code>UILayout.operator</code> 具有额外参数: * <code>text</code>: 按钮上的字 * <code>text_ctxt</code>: 用于翻译 * <code>translate</code>: 是否翻译 * <code>icon</code>: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’ * <code>emboss</code>: bool, 是否显示按钮的凸起</p>
+<p><code>UILayout.operator</code> 具有额外参数:</p>
+<ul>
+<li><code>text</code>: 按钮上的字</li>
+<li><code>text_ctxt</code>: 用于翻译</li>
+<li><code>translate</code>: 是否翻译</li>
+<li><code>icon</code>: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’</li>
+<li><code>emboss</code>: bool, 是否显示按钮的凸起</li>
+</ul>
 <p>同时这个函数具有返回值, 可以对对应的 operator 设置调用时的 properties, 可以设置多个 properties, 如下:</p>
 <pre><code>op = row.operator(&quot;transform.translate&quot;)
 op.value = (1,-1,-1)
@@ -252,7 +259,13 @@ bpy.types.INFO_MT_mesh_add.append(menu_func)
 bpy.types.INFO_MT_mesh_add.remove(menu_func)</code></pre>
 <h2 id="a-modal-operator">A modal operator</h2>
 <p>modal operator 和普通的 operator 的区别是, <code>Operator.modal</code> 被重载用来处理事件, 主要用于交互式的 operator</p>
-<p>modal 函数的返回值有 4 种: * <code>FINISHED</code>: 结束 * <code>CANCELLED</code>: 取消 * <code>RUNNING_MODAL</code>: 等待下一个事件触发继续运行 * <code>PASS_THROUGH</code>: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?</p>
+<p>modal 函数的返回值有 4 种:</p>
+<ul>
+<li><code>FINISHED</code>: 结束</li>
+<li><code>CANCELLED</code>: 取消</li>
+<li><code>RUNNING_MODAL</code>: 等待下一个事件触发继续运行</li>
+<li><code>PASS_THROUGH</code>: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?</li>
+</ul>
 <p>可以通过重载 <code>__init__</code> 和 <code>__del__</code> 获得 modal operator 开始和结束的信息</p>
 <p>在调用时使用语句 <code>context.window_manager.modal_handler_add(self)</code></p>
 
@@ -264,7 +277,7 @@ bpy.types.INFO_MT_mesh_add.remove(menu_func)</code></pre>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next disabled">Next &rarr;</a>
+        <a class="btn next" href="/2014/08/16/blendccode" title="Blender 源码学习 --- Operator">Next &rarr;</a>
       
     </div>
     <hr>

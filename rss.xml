@@ -5,10 +5,212 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-08-16T14:03:52+08:00</lastBuildDate>
-        <pubDate>2014-08-16T14:03:52+08:00</pubDate>
+        <lastBuildDate>2014-08-17T09:03:12+08:00</lastBuildDate>
+        <pubDate>2014-08-17T09:03:12+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Blender 源码学习 --- Operator</title>
+                <description>&lt;p&gt;via &lt;a href=&quot;http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Operators/Tutorial&quot;&gt;http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Operators/Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Blender 的 c 语言 api 与 python api 颇为相似&lt;/p&gt;
+&lt;h2 id=&quot;mesh-subdivide&quot;&gt;Mesh Subdivide&lt;/h2&gt;
+&lt;p&gt;下面是对 blender 中的 mesh subdivide operator 代码的分析&lt;/p&gt;
+&lt;h3 id=&quot;registration&quot;&gt;Registration&lt;/h3&gt;
+&lt;p&gt;首先我们需要在 window manager 中注册 operator, 编写的注册函数将会在启动时调用.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void MESH_OT_subdivide(wmOperatorType *ot)
+{
+    /* identifiers */
+    ot-&amp;gt;name= &amp;quot;Subdivide&amp;quot;;
+    ot-&amp;gt;description= &amp;quot;Split selected faces into smaller faces.&amp;quot;;
+    ot-&amp;gt;idname= &amp;quot;MESH_OT_subdivide&amp;quot;;
+ 
+    /* api callbacks */
+    ot-&amp;gt;exec= subdivide_exec;
+    ot-&amp;gt;poll= ED_operator_editmesh;
+ 
+    /* flags */
+    ot-&amp;gt;flag= OPTYPE_REGISTER|OPTYPE_UNDO;
+ 
+    /* properties */
+    RNA_def_int(ot-&amp;gt;srna, &amp;quot;number_cuts&amp;quot;, 1, 1, 10, &amp;quot;Number of Cuts&amp;quot;, &amp;quot;&amp;quot;, 1, INT_MAX);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;第一行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void MESH_OT_subdivide(wmOperatorType *ot)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中 &lt;code&gt;OT&lt;/code&gt; 是指 operator type.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    /* identifiers */
+    ot-&amp;gt;name= &amp;quot;Subdivide&amp;quot;;
+    ot-&amp;gt;description= &amp;quot;Split selected faces into smaller faces.&amp;quot;;
+    ot-&amp;gt;idname= &amp;quot;MESH_OT_subdivide&amp;quot;;&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ot-&amp;gt;name&lt;/code&gt; 相当于 &lt;code&gt;bl_label&lt;/code&gt;, 用于显示ui&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ot-&amp;gt;description&lt;/code&gt; 相当于 &lt;code&gt;bl_description&lt;/code&gt;, tooltip&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ot-&amp;gt;idname&lt;/code&gt; 相当于 &lt;code&gt;bl_idname&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;MESH_OT_subdivide&lt;/code&gt; 相当于 &lt;code&gt;mesh.subdivide&lt;/code&gt;, 必须唯一&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/* api callbacks */
+ot-&amp;gt;exec= subdivide_exec;
+ot-&amp;gt;poll= ED_operator_editmesh;
+ot-&amp;gt;flag= OPTYPE_REGISTER|OPTYPE_UNDO;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相当于python api 中的 exec 和 poll, &lt;code&gt;ot-&amp;gt;flag&lt;/code&gt; 相当于 &lt;code&gt;bl_options&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    prop = RNA_def_int(ot-&amp;gt;srna, &amp;quot;number_cuts&amp;quot;, 1, 1, INT_MAX, &amp;quot;Number of Cuts&amp;quot;, &amp;quot;&amp;quot;, 1, 10);
+
+    PropertyRNA *RNA_def_int(StructOrFunctionRNA *cont_, const char *identifier, int default_value,
+                     int hardmin, int hardmax, const char *ui_name, const char *ui_description,
+                     int softmin, int softmax)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里可以看一下 &lt;code&gt;RNA_def_int&lt;/code&gt; 的定义, &lt;code&gt;identifier&lt;/code&gt;, 相当于变量名, 用来访问该变量, 其他都挺直观的, 不过不太清楚 &lt;code&gt;hardmax&lt;/code&gt; 和 &lt;code&gt;softmax&lt;/code&gt; 有什么区别, 不过一般 hard 更大&lt;/p&gt;
+&lt;h3 id=&quot;wm&quot;&gt;WM&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;void ED_operatortypes_mesh(void)
+{
+    ...
+    WM_operatortype_append(MESH_OT_subdivide);
+    ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注册该 operator, 在这里可以看到所有注册的关于mesh的operator&lt;/p&gt;
+&lt;h3 id=&quot;poll&quot;&gt;Poll&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;int ED_operator_editmesh(bContext *C)
+{
+    Object *obedit= CTX_data_edit_object(C);
+    if(obedit &amp;amp;&amp;amp; obedit-&amp;gt;type==OB_MESH)
+        return NULL != ((Mesh *)obedit-&amp;gt;data)-&amp;gt;edit_mesh;
+    CTX_wm_operator_poll_msg_set(C, &amp;quot;selected object isn&amp;#39;t a mesh or not in editmode&amp;quot;);
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;该函数返回是否可以运行, 首先通过 &lt;code&gt;bContext&lt;/code&gt; 获得 object, 然后判断是否是 mesh, 是否有mesh, 以及通过 &lt;code&gt;CTX_wm_operator_poll_msg_set&lt;/code&gt; 告知信息&lt;/p&gt;
+&lt;h3 id=&quot;exec&quot;&gt;Exec&lt;/h3&gt;
+&lt;p&gt;运行函数, 用于没有用户交互时使用, 和 transform operator 正好相反&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;static int subdivide_exec(bContext *C, wmOperator *op)
+{
+    Scene *scene = CTX_data_scene(C);
+    Object *obedit= CTX_data_edit_object(C);
+    EditMesh *em= BKE_mesh_get_editmesh((Mesh *)obedit-&amp;gt;data);
+    int cuts= RNA_int_get(op-&amp;gt;ptr,&amp;quot;number_cuts&amp;quot;);
+ 
+    esubdivideflag(obedit, em, cuts);
+ 
+    DAG_object_flush_update(scene, obedit, OB_RECALC_DATA);
+    WM_event_add_notifier(C, NC_OBJECT|ND_GEOM_SELECT, obedit);
+ 
+    return OPERATOR_FINISHED;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先是函数声明&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;static int subdivide_exec(bContext *C, wmOperator *op)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;两个参数, 一个是 context, 和 python 中的 context 类似, 第二个是 &lt;code&gt;wmOperator&lt;/code&gt;, 注意这个和注册时的 &lt;code&gt;wmOperatorType&lt;/code&gt; 不一样, 返回值用于返回 Operator 是否运行成功&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int cuts = RNA_int_get(op-&amp;gt;ptr, &amp;quot;number_cuts&amp;quot;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;op-&amp;gt;ptr&lt;/code&gt; 用于获得 RNA, &lt;code&gt;RNA_int_get&lt;/code&gt; 用于获取 int properties, &lt;code&gt;number_cuts&lt;/code&gt; 为之前声明的变量id&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DAG_object_flush_update(scene, obedit, OB_RECALC_DATA);
+WM_event_add_notifier(C, NC_OBJECT|ND_GEOM_DATA, obedit);
+// EDBM_update_generic(em, true, true); in new blender code&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在完成操作以后, 我们需要通知对此数据有依赖的操作, &lt;code&gt;DAG_id_tag_update&lt;/code&gt; 用于通知 dependency graph, &lt;code&gt;WM_main_add_notifier&lt;/code&gt; 用于通知窗口系统&lt;/p&gt;
+&lt;h2 id=&quot;d-view-zoom&quot;&gt;3D View Zoom&lt;/h2&gt;
+&lt;h3 id=&quot;registration-1&quot;&gt;Registration&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;void VIEW3D_OT_zoom(wmOperatorType *ot)
+{
+    /* identifiers */
+    ot-&amp;gt;name = &amp;quot;Zoom View&amp;quot;;
+    ot-&amp;gt;description = &amp;quot;Zoom in/out in the view&amp;quot;;
+    ot-&amp;gt;idname = &amp;quot;VIEW3D_OT_zoom&amp;quot;;
+
+    /* api callbacks */
+    ot-&amp;gt;invoke = viewzoom_invoke;
+    ot-&amp;gt;exec = viewzoom_exec;
+    ot-&amp;gt;modal = viewzoom_modal;
+    ot-&amp;gt;poll = ED_operator_region_view3d_active;
+    ot-&amp;gt;cancel = viewzoom_cancel;
+
+    /* flags */
+    ot-&amp;gt;flag = OPTYPE_BLOCKING | OPTYPE_GRAB_POINTER;
+    // OPTYPE_BLOCKING 表示获得所有鼠标事件, 包括在窗口外部
+
+    RNA_def_int(ot-&amp;gt;srna, &amp;quot;delta&amp;quot;, 0, INT_MIN, INT_MAX, &amp;quot;Delta&amp;quot;, &amp;quot;&amp;quot;, INT_MIN, INT_MAX);
+    RNA_def_int(ot-&amp;gt;srna, &amp;quot;mx&amp;quot;, 0, 0, INT_MAX, &amp;quot;Zoom Position X&amp;quot;, &amp;quot;&amp;quot;, 0, INT_MAX);
+    RNA_def_int(ot-&amp;gt;srna, &amp;quot;my&amp;quot;, 0, 0, INT_MAX, &amp;quot;Zoom Position Y&amp;quot;, &amp;quot;&amp;quot;, 0, INT_MAX);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;poll-1&quot;&gt;Poll&lt;/h3&gt;
+&lt;p&gt;现在的代码和 2.5 有点出入, 以现在的为准&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// context.c
+RegionView3D *CTX_wm_region_view3d(const bContext *C)
+{
+    ScrArea *sa = CTX_wm_area(C);
+    // 相当于 context.area
+    ARegion *ar = CTX_wm_region(C);
+    // 相当于 context.region
+    // region 是 area 的 subcontext
+
+    if (sa &amp;amp;&amp;amp; sa-&amp;gt;spacetype == SPACE_VIEW3D)
+    // context.area.space.type == &amp;#39;VIEW_3D&amp;#39;
+        if (ar)
+            return ar-&amp;gt;regiondata;
+            // context.region_data
+    return NULL;
+}
+
+int ED_operator_region_view3d_active(bContext *C)
+{
+    if (CTX_wm_region_view3d(C))
+        return true;
+
+    CTX_wm_operator_poll_msg_set(C, &amp;quot;expected a view3d region&amp;quot;);
+    return false;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;invoke&quot;&gt;Invoke&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;static int viewzoom_invoke(bContext *C, wmOperator *op, wmEvent *event)
+// 和 exec 不同的是, 多了一个 event, 可以用来获得鼠标事件
+{
+    if(RNA_property_is_set(op-&amp;gt;ptr, &amp;quot;delta&amp;quot;)) {
+        return viewzoom_exec(C, op);
+    }
+    // 如果已经定义了 delta property, 直接运行
+    else {
+        /* makes op-&amp;gt;customdata */
+        viewops_data(C, op, event);
+        // 初始化信息, 存入 op-&amp;gt;customdata, 这是一个 void* 指针, 可以用于存临时信息
+ 
+        /* add temp handler */
+        WM_event_add_modal_handler(C, &amp;amp;CTX_wm_window(C)-&amp;gt;   handlers, op);
+        // WM_event_add_modal_handler(C, op); in blender 2.72
+        // 添加一个 modal hander, 和 python 中的 context.window_manager.modal_handler_add(self) 一样, 这个语句同时会拦截其他 event handler
+ 
+        return OPERATOR_RUNNING_MODAL;
+        // 表明现在开始运行modal
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;modal&quot;&gt;Modal&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;static int viewzoom_modal(bContext *C, wmOperator *op, wmEvent *event)
+{
+    ViewOpsData *vod= op-&amp;gt;customdata;
+ 
+    /* execute the events */
+    switch(event-&amp;gt;type) {
+        case MOUSEMOVE:
+            viewzoom_apply(vod, event-&amp;gt;x, event-&amp;gt;y);
+            break;
+        // 将鼠标移动应用给 viewzoom
+ 
+        default:
+            /* origkey may be zero when invoked from a button   */
+            if(ELEM3(event-&amp;gt;type, ESCKEY, LEFTMOUSE, RIGHTMOUSE) || (event-&amp;gt;type==vod-&amp;gt;origkey &amp;amp;&amp;amp; event-&amp;gt;val==0)) {
+                request_depth_update(CTX_wm_region_view3d(C));
+ 
+                MEM_freeN(vod);
+                op-&amp;gt;customdata= NULL;
+ 
+                return OPERATOR_FINISHED;
+            }
+    }
+ 
+    return OPERATOR_RUNNING_MODAL;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;乱&quot;&gt;乱&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BKE_context.h&lt;/code&gt;, 很多操作 context 的函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RNA_access.h&lt;/code&gt;, RNA 数据操作函数&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>http://cjld.github.io/2014/08/16/blendccode</link>
+                <guid>http://cjld.github.io/2014/08/16/blendccode</guid>
+                <pubDate>2014-08-16T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Blender Interface</title>
@@ -22,7 +224,14 @@
 &lt;h2 id=&quot;panels-and-buttons&quot;&gt;Panels and buttons&lt;/h2&gt;
 &lt;p&gt;可以通过以下代码添加一个按钮&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;self.layout.operator(&amp;quot;hello.hello&amp;quot;, text=&amp;#39;Hej&amp;#39;).country = &amp;quot;Sweden&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;UILayout.operator&lt;/code&gt; 具有额外参数: * &lt;code&gt;text&lt;/code&gt;: 按钮上的字 * &lt;code&gt;text_ctxt&lt;/code&gt;: 用于翻译 * &lt;code&gt;translate&lt;/code&gt;: 是否翻译 * &lt;code&gt;icon&lt;/code&gt;: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’ * &lt;code&gt;emboss&lt;/code&gt;: bool, 是否显示按钮的凸起&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UILayout.operator&lt;/code&gt; 具有额外参数:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;text&lt;/code&gt;: 按钮上的字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;text_ctxt&lt;/code&gt;: 用于翻译&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;translate&lt;/code&gt;: 是否翻译&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;icon&lt;/code&gt;: 图标, 比如 ‘QUESTION’, ‘ERROR’, ‘CANCEL’&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;emboss&lt;/code&gt;: bool, 是否显示按钮的凸起&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;同时这个函数具有返回值, 可以对对应的 operator 设置调用时的 properties, 可以设置多个 properties, 如下:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;op = row.operator(&amp;quot;transform.translate&amp;quot;)
 op.value = (1,-1,-1)
@@ -67,7 +276,13 @@ bpy.types.INFO_MT_mesh_add.append(menu_func)
 bpy.types.INFO_MT_mesh_add.remove(menu_func)&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;a-modal-operator&quot;&gt;A modal operator&lt;/h2&gt;
 &lt;p&gt;modal operator 和普通的 operator 的区别是, &lt;code&gt;Operator.modal&lt;/code&gt; 被重载用来处理事件, 主要用于交互式的 operator&lt;/p&gt;
-&lt;p&gt;modal 函数的返回值有 4 种: * &lt;code&gt;FINISHED&lt;/code&gt;: 结束 * &lt;code&gt;CANCELLED&lt;/code&gt;: 取消 * &lt;code&gt;RUNNING_MODAL&lt;/code&gt;: 等待下一个事件触发继续运行 * &lt;code&gt;PASS_THROUGH&lt;/code&gt;: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?&lt;/p&gt;
+&lt;p&gt;modal 函数的返回值有 4 种:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;FINISHED&lt;/code&gt;: 结束&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CANCELLED&lt;/code&gt;: 取消&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RUNNING_MODAL&lt;/code&gt;: 等待下一个事件触发继续运行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PASS_THROUGH&lt;/code&gt;: 不知道…把 blender 整个代码搜了一遍也只有很少很集中的地方用到了, 应该不用也没问题, 感觉像是多个 modal operator 调用时处理的事情?&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;可以通过重载 &lt;code&gt;__init__&lt;/code&gt; 和 &lt;code&gt;__del__&lt;/code&gt; 获得 modal operator 开始和结束的信息&lt;/p&gt;
 &lt;p&gt;在调用时使用语句 &lt;code&gt;context.window_manager.modal_handler_add(self)&lt;/code&gt;&lt;/p&gt;
 </description>
