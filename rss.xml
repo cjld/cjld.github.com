@@ -5,8 +5,8 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-08-17T09:03:12+08:00</lastBuildDate>
-        <pubDate>2014-08-17T09:03:12+08:00</pubDate>
+        <lastBuildDate>2014-08-21T12:43:31+08:00</lastBuildDate>
+        <pubDate>2014-08-21T12:43:31+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -201,10 +201,111 @@ int ED_operator_region_view3d_active(bContext *C)
  
     return OPERATOR_RUNNING_MODAL;
 }&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;简易实现-translate&quot;&gt;简易实现 translate&lt;/h2&gt;
+&lt;p&gt;这里仿照&lt;a href=&quot;http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Cookbook/Code_snippets/Interface#A_modal_operator&quot;&gt;这个 Python 脚本&lt;/a&gt;实现一个C版本, 作为练习, 因为新的 api 和 wiki 有些出入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/* my transform begin */
+#include &amp;quot;BKE_object.h&amp;quot;
+#include &amp;quot;BKE_depsgraph.h&amp;quot;
+
+static int mytransform_exec(bContext *C, wmOperator *op)
+{
+    float value[2];
+    PropertyRNA *prop = RNA_struct_find_property(op-&amp;gt;ptr, &amp;quot;value&amp;quot;);
+    RNA_property_float_get_array(op-&amp;gt;ptr, prop, value);
+    // 从 property 获得变量
+
+    Object *obj = CTX_data_active_object(C);
+    obj-&amp;gt;loc[0] = value[0];
+    obj-&amp;gt;loc[1] = value[1];
+    // 设置 object location
+
+    DAG_id_tag_update(&amp;amp;obj-&amp;gt;id, OB_RECALC_OB);
+    WM_event_add_notifier(C, NC_OBJECT | ND_TRANSFORM, obj);
+    // 更新 dependency, 添加 notifier
+
+    return OPERATOR_FINISHED;
+}
+
+static int mytransform_modal(bContext *C, wmOperator *op, const wmEvent *event)
+{
+    if (event-&amp;gt;type == LEFTMOUSE)
+        return OPERATOR_FINISHED;
+
+    if (event-&amp;gt;type == RIGHTMOUSE)
+        return OPERATOR_CANCELLED;
+
+    if (event-&amp;gt;type != MOUSEMOVE)
+        printf(&amp;quot;Uncatched event type %d\n&amp;quot;, (int)(event-&amp;gt;type));
+
+    PropertyRNA *prop = RNA_struct_find_property(op-&amp;gt;ptr, &amp;quot;value&amp;quot;);
+    float value[2] = { event-&amp;gt;x / 100.0f, event-&amp;gt;y / 100.0f };
+
+    RNA_property_float_set_array(op-&amp;gt;ptr, prop, value);
+    // 获得鼠标事件, 设置 property
+
+    mytransform_exec(C, op);
+
+    return OPERATOR_RUNNING_MODAL;
+}
+
+static int mytransform_poll(bContext *C)
+{
+    Object *obj = CTX_data_active_object(C);
+    if (obj == NULL) {
+        CTX_wm_operator_poll_msg_set(C, &amp;quot;No Active Object in context.&amp;quot;);
+        return false;
+    }
+    // 判断 active object 是否存在
+    else return true;
+}
+
+static int mytransform_invoke(bContext *C, wmOperator *op, const wmEvent *event)
+{
+    PropertyRNA *prop = RNA_struct_find_property(op-&amp;gt;ptr, &amp;quot;value&amp;quot;);
+
+    if (RNA_property_is_set(op-&amp;gt;ptr, prop))
+        return mytransform_exec(C, op);
+
+    WM_event_add_modal_handler(C, op);
+    // 添加 modal handler
+
+    return OPERATOR_RUNNING_MODAL;
+}
+
+static void TRANSFORM_OT_mytransform(struct wmOperatorType *ot) 
+{
+    /* identifiers */
+    ot-&amp;gt;name = &amp;quot;MyTransform&amp;quot;;
+    ot-&amp;gt;description = &amp;quot;Move object in XY plane by mouse move&amp;quot;;
+    ot-&amp;gt;idname = &amp;quot;TRANSFORM_OT_my_transform&amp;quot;;
+    ot-&amp;gt;flag = OPTYPE_REGISTER | OPTYPE_UNDO | OPTYPE_BLOCKING;
+
+    /* api callbacks */
+    ot-&amp;gt;invoke = mytransform_invoke;
+    ot-&amp;gt;exec = mytransform_exec;
+    ot-&amp;gt;poll = mytransform_poll;
+    ot-&amp;gt;modal = mytransform_modal;
+
+    RNA_def_float_vector(
+        ot-&amp;gt;srna, &amp;quot;value&amp;quot;, 2, NULL, -FLT_MAX, FLT_MAX,
+        &amp;quot;Value&amp;quot;, &amp;quot;Vector that add to object&amp;quot;, -FLT_MAX, FLT_MAX);
+}
+
+/* my transform end */
+
+void transform_operatortypes(void)
+{
+    .......
+    WM_operatortype_append(TRANSFORM_OT_mytransform);
+    // 注册 operator
+}&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;乱&quot;&gt;乱&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;BKE_context.h&lt;/code&gt;, 很多操作 context 的函数&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;RNA_access.h&lt;/code&gt;, RNA 数据操作函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RNA_struct_find_property&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;event-&amp;gt;type == EVT_MODAL_MAP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BKE_object.h&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
                 <link>http://cjld.github.io/2014/08/16/blendccode</link>
