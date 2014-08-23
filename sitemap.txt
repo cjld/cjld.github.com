@@ -10,6 +10,8 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2014/08/16/blendccodenotifier
+http://cjld.github.io/2014/08/16/blendccodemodifier
 http://cjld.github.io/2014/08/16/blendccode
 http://cjld.github.io/2014/08/12/blendui
 http://cjld.github.io/2014/08/02/buildaraddon

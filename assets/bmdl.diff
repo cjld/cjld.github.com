@@ -1,0 +1,312 @@
+ .../startup/bl_ui/properties_data_modifier.py      |   3 +
+ source/blender/makesdna/DNA_modifier_types.h       |   8 ++
+ source/blender/makesrna/RNA_access.h               |   2 +
+ source/blender/makesrna/intern/rna_modifier.c      |  33 ++++-
+ source/blender/modifiers/CMakeLists.txt            |   1 +
+ source/blender/modifiers/MOD_modifiertypes.h       |   1 +
+ source/blender/modifiers/intern/MOD_scaling.c      | 142 +++++++++++++++++++++
+ source/blender/modifiers/intern/MOD_util.c         |   1 +
+ 8 files changed, 189 insertions(+), 2 deletions(-)
+
+diff --git a/release/scripts/startup/bl_ui/properties_data_modifier.py b/release/scripts/startup/bl_ui/properties_data_modifier.py
+index 5769db5..7722922 100644
+--- a/release/scripts/startup/bl_ui/properties_data_modifier.py
++++ b/release/scripts/startup/bl_ui/properties_data_modifier.py
+@@ -1222,6 +1222,9 @@ class DATA_PT_modifiers(ModifierButtonsPanel, Panel):
+ 
+         col.prop(md, "material_offset", text="Material Offset")
+ 
++    def SCALING(self, layout, ob, md):
++        layout.column().prop(md, "scaleui")
++
+ 
+ if __name__ == "__main__":  # only for live edit.
+     bpy.utils.register_module(__name__)
+diff --git a/source/blender/makesdna/DNA_modifier_types.h b/source/blender/makesdna/DNA_modifier_types.h
+index 2bd33ae..3a589b8 100644
+--- a/source/blender/makesdna/DNA_modifier_types.h
++++ b/source/blender/makesdna/DNA_modifier_types.h
+@@ -82,6 +82,7 @@ typedef enum ModifierType {
+ 	eModifierType_MeshCache         = 46,
+ 	eModifierType_LaplacianDeform   = 47,
+ 	eModifierType_Wireframe         = 48,
++	eModifierType_Scaling			= 49,
+ 	NUM_MODIFIER_TYPES
+ } ModifierType;
+ 
+@@ -135,6 +136,13 @@ typedef struct SubsurfModifierData {
+ 	void *emCache, *mCache;
+ } SubsurfModifierData;
+ 
++typedef struct ScalingModifierData {
++	ModifierData modifier;
++
++	float scale;
++	int pad;
++} ScalingModifierData;
++
+ typedef struct LatticeModifierData {
+ 	ModifierData modifier;
+ 
+diff --git a/source/blender/makesrna/RNA_access.h b/source/blender/makesrna/RNA_access.h
+index 8cbc198..cde8447 100644
+--- a/source/blender/makesrna/RNA_access.h
++++ b/source/blender/makesrna/RNA_access.h
+@@ -675,6 +675,8 @@ extern StructRNA RNA_WorldTextureSlot;
+ extern StructRNA RNA_XnorController;
+ extern StructRNA RNA_XorController;
+ 
++extern StructRNA RNA_ScalingModifier;
++
+ /* Pointer
+  *
+  * These functions will fill in RNA pointers, this can be done in three ways:
+diff --git a/source/blender/makesrna/intern/rna_modifier.c b/source/blender/makesrna/intern/rna_modifier.c
+index fb76010..cd94a21 100644
+--- a/source/blender/makesrna/intern/rna_modifier.c
++++ b/source/blender/makesrna/intern/rna_modifier.c
+@@ -94,8 +94,9 @@ EnumPropertyItem modifier_type_items[] = {
+ 	{eModifierType_Shrinkwrap, "SHRINKWRAP", ICON_MOD_SHRINKWRAP, "Shrinkwrap", ""},
+ 	{eModifierType_SimpleDeform, "SIMPLE_DEFORM", ICON_MOD_SIMPLEDEFORM, "Simple Deform", ""},
+ 	{eModifierType_Smooth, "SMOOTH", ICON_MOD_SMOOTH, "Smooth", ""},
+-	{eModifierType_Warp, "WARP", ICON_MOD_WARP, "Warp", ""},
+-	{eModifierType_Wave, "WAVE", ICON_MOD_WAVE, "Wave", ""},
++	{ eModifierType_Warp, "WARP", ICON_MOD_WARP, "Warp", "" },
++	{ eModifierType_Wave, "WAVE", ICON_MOD_WAVE, "Wave", "" },
++	{ eModifierType_Scaling, "SCALING", ICON_MAN_SCALE, "Scaling the mesh", "" },
+ 	{0, "", 0, N_("Simulate"), ""},
+ 	{eModifierType_Cloth, "CLOTH", ICON_MOD_CLOTH, "Cloth", ""},
+ 	{eModifierType_Collision, "COLLISION", ICON_MOD_PHYSICS, "Collision", ""},
+@@ -244,6 +245,8 @@ static StructRNA *rna_Modifier_refine(struct PointerRNA *ptr)
+ 			return &RNA_LaplacianDeformModifier;
+ 		case eModifierType_Wireframe:
+ 			return &RNA_WireframeModifier;
++		case eModifierType_Scaling:
++			return &RNA_ScalingModifier;
+ 		/* Default */
+ 		case eModifierType_None:
+ 		case eModifierType_ShapeKey:
+@@ -660,6 +663,30 @@ static void rna_def_modifier_subsurf(BlenderRNA *brna)
+ 	RNA_def_property_update(prop, 0, "rna_Modifier_update");
+ }
+ 
++static void rna_def_modifier_scaling(struct PointerRNA *brna)
++{
++	StructRNA *srna;
++	PropertyRNA *prop;
++
++	srna = RNA_def_struct(brna, "ScalingModifier", "Modifier");
++	// 相当于 ScalingModifier 从 Modifier 继承
++
++	RNA_def_struct_ui_text(srna, "Scaling Modifier", "Scaling effect modifier");
++	RNA_def_struct_sdna(srna, "ScalingModifierData");
++	// struct 实体
++	RNA_def_struct_ui_icon(srna, ICON_MAN_SCALE);
++
++	prop = RNA_def_property(srna, "scaleui", PROP_FLOAT, PROP_NONE);
++	/* scaleui: name for "properties_data_modifier.py"*/
++
++	RNA_def_property_float_sdna(prop, NULL, "scale");
++
++	RNA_def_property_range(prop, -FLT_MAX, FLT_MAX);
++	RNA_def_property_ui_range(prop, -100, 100, 1, 3);
++	RNA_def_property_ui_text(prop, "Scale", "Scale factor");
++	RNA_def_property_update(prop, 0, "rna_Modifier_update");
++}
++
+ static void rna_def_modifier_generic_map_info(StructRNA *srna)
+ {
+ 	static EnumPropertyItem prop_texture_coordinates_items[] = {
+@@ -3771,6 +3798,8 @@ void RNA_def_modifier(BlenderRNA *brna)
+ 	rna_def_modifier_meshcache(brna);
+ 	rna_def_modifier_laplaciandeform(brna);
+ 	rna_def_modifier_wireframe(brna);
++
++	rna_def_modifier_scaling(brna);
+ }
+ 
+ #endif
+diff --git a/source/blender/modifiers/CMakeLists.txt b/source/blender/modifiers/CMakeLists.txt
+index b841356..f20e49a 100644
+--- a/source/blender/modifiers/CMakeLists.txt
++++ b/source/blender/modifiers/CMakeLists.txt
+@@ -99,6 +99,7 @@ set(SRC
+ 	intern/MOD_weightvgmix.c
+ 	intern/MOD_weightvgproximity.c
+ 	intern/MOD_wireframe.c
++	intern/MOD_scaling.c
+ 
+ 	MOD_modifiertypes.h
+ 	intern/MOD_boolean_util.h
+diff --git a/source/blender/modifiers/MOD_modifiertypes.h b/source/blender/modifiers/MOD_modifiertypes.h
+index 9c7c21c..8219eaa 100644
+--- a/source/blender/modifiers/MOD_modifiertypes.h
++++ b/source/blender/modifiers/MOD_modifiertypes.h
+@@ -82,6 +82,7 @@ extern ModifierTypeInfo modifierType_MeshCache;
+ extern ModifierTypeInfo modifierType_LaplacianDeform;
+ extern ModifierTypeInfo modifierType_Wireframe;
+ 
++extern ModifierTypeInfo modifierType_Scaling;
+ /* MOD_util.c */
+ void modifier_type_init(ModifierTypeInfo *types[]);
+ 
+diff --git a/source/blender/modifiers/intern/MOD_scaling.c b/source/blender/modifiers/intern/MOD_scaling.c
+new file mode 100644
+index 0000000..20a2d98
+--- /dev/null
++++ b/source/blender/modifiers/intern/MOD_scaling.c
+@@ -0,0 +1,142 @@
++/*
++ * ***** BEGIN GPL LICENSE BLOCK *****
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software  Foundation,
++ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
++ *
++ * The Original Code is Copyright (C) 2005 by the Blender Foundation.
++ * All rights reserved.
++ *
++ * Contributor(s): Your name
++ *
++ * ***** END GPL LICENSE BLOCK *****
++ *
++ */
++ 
++/** \file blender/modifiers/intern/MOD_scaling.c
++ *  \ingroup modifiers
++ */
++ 
++ 
++#include "DNA_meshdata_types.h"
++ 
++#include "BLI_math.h"
++#include "BLI_utildefines.h"
++#include "BLI_string.h"
++ 
++#include "MEM_guardedalloc.h"
++ 
++#include "BKE_cdderivedmesh.h"
++#include "BKE_particle.h"
++#include "BKE_deform.h"
++ 
++#include "MOD_modifiertypes.h"
++#include "MOD_util.h"
++ 
++ 
++static void initData(ModifierData *md)
++{
++	ScalingModifierData *smd = (ScalingModifierData *)md;
++	smd->scale = 1.0f;
++}
++ 
++static void copyData(ModifierData *md, ModifierData *target)
++{
++	ScalingModifierData *smd = (ScalingModifierData *) md;
++	ScalingModifierData *tsmd = (ScalingModifierData *) target;
++	tsmd->scale = smd->scale;
++}
++ 
++static bool isDisabled(ModifierData *md, int UNUSED(useRenderParams))
++{
++	ScalingModifierData *smd = (ScalingModifierData *) md;
++	/* disable if modifier is 1.0 for scale*/
++	if (smd->scale == 1.0f) return 1;
++	return 0;
++}
++ 
++static CustomDataMask requiredDataMask(Object *UNUSED(ob), ModifierData *md)
++{
++	ScalingModifierData *smd = (ScalingModifierData *)md;
++	CustomDataMask dataMask = 0;
++	return dataMask;
++}
++ 
++static void ScalingModifier_do(
++        ScalingModifierData *smd, Object *ob, DerivedMesh *dm,
++        float (*vertexCos)[3], int numVerts)
++{
++	int i;
++	float scale;
++	scale = smd->scale;
++ 
++	for (i = 0; i < numVerts; i++) {
++		vertexCos[i][0] = vertexCos[i][0] * scale;
++		vertexCos[i][1] = vertexCos[i][1] * scale;
++		vertexCos[i][2] = vertexCos[i][2] * scale;
++	}
++}
++ 
++static void deformVerts(ModifierData *md, Object *ob, DerivedMesh *derivedData,
++                        float (*vertexCos)[3], int numVerts, ModifierApplyFlag UNUSED(flag))
++{
++	DerivedMesh *dm = get_dm(ob, NULL, derivedData, NULL, 0, 0);
++ 
++	ScalingModifier_do((ScalingModifierData *)md, ob, dm,
++	                  vertexCos, numVerts);
++ 
++	if (dm != derivedData)
++		dm->release(dm);
++}
++ 
++static void deformVertsEM(
++        ModifierData *md, Object *ob, struct BMEditMesh *editData,
++        DerivedMesh *derivedData, float (*vertexCos)[3], int numVerts)
++{
++	DerivedMesh *dm = get_dm(ob, editData, derivedData, NULL, 0, 0);
++ 
++	ScalingModifier_do((ScalingModifierData *)md, ob, dm,
++	                  vertexCos, numVerts);
++ 
++	if (dm != derivedData)
++		dm->release(dm);
++}
++ 
++ 
++ModifierTypeInfo modifierType_Scaling = {
++	/* name */              "Scaling",
++	/* structName */        "ScalingModifierData",
++	/* structSize */        sizeof(ScalingModifierData),
++	/* type */              eModifierTypeType_OnlyDeform,
++	/* flags */             eModifierTypeFlag_AcceptsMesh |
++	                        eModifierTypeFlag_SupportsEditmode,
++ 
++	/* copyData */          copyData,
++	/* deformVerts */       deformVerts,
++	/* deformMatrices */    NULL,
++	/* deformVertsEM */     deformVertsEM,
++	/* deformMatricesEM */  NULL,
++	/* applyModifier */     NULL,
++	/* applyModifierEM */   NULL,
++	/* initData */          initData,
++	/* requiredDataMask */  requiredDataMask,
++	/* freeData */          NULL,
++	/* isDisabled */        isDisabled,
++	/* updateDepgraph */    NULL,
++	/* dependsOnTime */     NULL,
++	/* dependsOnNormals */	NULL,
++	/* foreachObjectLink */ NULL,
++	/* foreachIDLink */     NULL,
++	/* foreachTexLink */    NULL,
++};
+\ No newline at end of file
+diff --git a/source/blender/modifiers/intern/MOD_util.c b/source/blender/modifiers/intern/MOD_util.c
+index 829c2b8..d8f800a 100644
+--- a/source/blender/modifiers/intern/MOD_util.c
++++ b/source/blender/modifiers/intern/MOD_util.c
+@@ -309,5 +309,6 @@ void modifier_type_init(ModifierTypeInfo *types[])
+ 	INIT_TYPE(MeshCache);
+ 	INIT_TYPE(LaplacianDeform);
+ 	INIT_TYPE(Wireframe);
++	INIT_TYPE(Scaling);
+ #undef INIT_TYPE
+ }

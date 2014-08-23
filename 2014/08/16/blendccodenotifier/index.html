@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        Blender Addon - 
+        Blender 源码学习 --- Notifiers - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    Blender Addon 
+    Blender 源码学习 --- Notifiers 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">02 August 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">16 August 2014</span></div>
     </section>
          
     
@@ -177,8 +177,6 @@
   
      
     	<li><a href="/tags.html#Blender-ref">Blender <span>12</span></a></li>
-     
-    	<li><a href="/tags.html#Python-ref">Python <span>4</span></a></li>
     
   
 
@@ -197,44 +195,34 @@
 
   <div class="span8">
     <div id="content">
-      <p>via <a href="http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html">http://www.blender.org/documentation/blender_python_api_2_70a_release/info_tutorial_addon.html</a></p>
-<p>bl_info，包含字段仅用于在user preference显示用</p>
-<p><code>register</code> 与 <code>unregister</code> 将会被调用，当在user preference里对addon激活和关闭时</p>
-<h2 id="bpy.types.operator-继承">bpy.types.Operator 继承</h2>
+      <p>via <a href="http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Notifiers/Updates">http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Notifiers/Updates</a> and <a href="http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Notifiers/Data">http://wiki.blender.org/index.php/Dev:2.5/Source/Architecture/Notifiers/Data</a></p>
+<p>blender 里有三种更新的方式:</p>
 <ul>
-<li><code>bl_idname</code>: 必须，切唯一，用于api调用</li>
-<li><code>bl_label</code>: 必须，表示操作名称</li>
-<li><code>__doc__</code>: 用于显示为tooltip</li>
-<li><code>bl_options</code>: 枚举类集合
-<ul>
-<li><code>REGISTER</code> 默认选项</li>
-<li><code>UNDO</code> 支持撤销</li>
-<li><code>BLOCKING</code></li>
-<li><code>MACRO</code></li>
-<li><code>GRAB_POINTER</code></li>
-<li><code>PRESET</code> 在操作设置显示一个 preset 按钮</li>
-<li><code>INTERNAL</code> 无法从外部搜索到</li>
-</ul></li>
-<li><code>execute(context)</code>: 运行 op，同时返回状态</li>
+<li>Notifier: Notifier 主要用来通知窗口系统</li>
+<li>Dependency Graph: 主要针对依赖数据的改变</li>
+<li>Redraw Tag: 重绘事件, 经常被 Notifier 调用</li>
 </ul>
-<h2 id="operator-property">Operator Property</h2>
-<p>通过在类内部声明 property，可以让operator拥有参数输入，并且在最后一次操作面板里会出现一个简单地面板，显示所有 property</p>
-<h2 id="添加菜单">添加菜单</h2>
-<pre><code>bpy.types.VIEW3D_MT_object.append(menu_func)</code></pre>
-<p>类似于重载 menu 类中的 draw 函数，<code>append</code> 为在draw之前运行，<code>prepend</code> 在之后运行，以及 <code>remove</code></p>
-<pre><code>def menu_func(self, context):
-    self.layout.operator(ObjectCursorArray.bl_idname)</code></pre>
-<p>通过 layout.operator 绘制一个操纵 operator 的菜单项</p>
+<p>个人感觉这几个的层级关系是 Dependency Graph -&gt; Notifier -&gt; Redraw Tag</p>
+<h2 id="notifier">Notifier</h2>
+<pre><code>void WM_event_add_notifier(const struct bContext *C, unsigned int type, void *data);</code></pre>
+<p>向窗口系统发出 notifier, type 有四个层次: * category: 前缀为 <code>NC_</code>, 如 window, screen, object * Data: 前缀为 <code>ND_</code>, 根据 category 不同, data 不同, 如 object 下有 <code>ND_TRANSFORM</code>, <code>ND_POSE</code> * Data sub types, Action, 多数情况下不常用, 可以参考 <code>WM_types.h</code></p>
+<h2 id="约定">约定</h2>
+<p>这里有几条简单的方针:</p>
+<ul>
+<li>Datablocks: 当修改对应的 datablock 时, 应当修改对应的 category, 然后再找到正确的 <code>ND_*</code></li>
+<li>Space/ Region Data: 可以使用 <code>NC_SPACE</code>, 然后找到对应的 <code>ND_*</code></li>
+<li>User Perferences: 发送 <code>NC_WINDOW</code> Notifier 来刷新整个屏幕</li>
+</ul>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/07/29/buildarchitecture" title="Blender Architecture">&larr; Previous</a>
+        <a class="btn prev" href="/2014/08/16/blendccodemodifier" title="Blender 源码学习 --- Modifier">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/08/12/blendui" title="Blender Interface">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
