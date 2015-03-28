@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        路漫漫 - 
+        CMake 学习 - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    路漫漫 
+    CMake 学习 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">05 June 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">05 November 2014</span></div>
     </section>
          
     
@@ -176,7 +176,7 @@
 
   
      
-    	<li><a href="/tags.html#Diary-ref">Diary <span>1</span></a></li>
+    	<li><a href="/tags.html#CMake-ref">CMake <span>1</span></a></li>
     
   
 
@@ -195,20 +195,44 @@
 
   <div class="span8">
     <div id="content">
-      <p>最近总算忙完 siga 了，深深的感觉到自己的不足之处，一个是英语，二是一些技能…</p>
-<p>有很多想做的，有很多想学的，无奈太懒计划总是落空，一大波期末考试要来了，再懒就要死了…</p>
-<p>还想积累一套做游戏的技能呢，从做音乐，美术，动画到各种nb引擎的使用， 什么时候才能实现呢？</p>
-<p>最近墙的好死啊，Google都抽了，什么时候才能无障碍的上油管呢，上面确实有很多精华呀。</p>
+      <p>捡起许久以前编写的代码, 是一个Qt project, 并且还有一大堆乱七八糟的依赖, 编译起来简直抓狂, 所以想趁机会学习一下CMake</p>
+<p>之前在学 CMake 和 Scons 之间挣扎了一下, 最终还是觉得 CMake 靠谱一点, CMake 的优势 是可以直接将 CMakeList.txt 编译成其他 IDE 可以识别的工程, 比如 VS 的 sln, makefile, Eclipse, 甚至连 sublime 都有.</p>
+<p>这里主要的参考资料是 <a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf">http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf</a> 和 <a href="http://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80">http://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80</a></p>
+<h2 id="设置-generator">设置 generator</h2>
+<p>在 windows 下默认使用的是生成 vs 的 solution, 如果要改为 makefile 文件有两种办法:</p>
+<p>修改 cmake 运行参数</p>
+<pre><code>cmake -G &quot;MinGW Makefiles&quot; .</code></pre>
+<p>或者在<code>Cmakelist.txt</code>里面这么写</p>
+<pre><code>set(cmake_generator &quot;MinGW Makefiles&quot;)</code></pre>
+<p>生成的 makefile 可以使用 <code>make help</code> 查看可用的 make 指令, 以及使用 <code>make VERBOSE=1</code> 查看详细的生成命令, 另外可以用 <code>cmake --help-command xxx</code> 来查看对应命令的帮助,</p>
+<p>使用 set 可以设置变量, 变量有 5 种类型 FILEPATH PATH STRING BOOL INTERNAL, 并且可以设置 cache 属性, 多用来提供用户接口</p>
+<h2 id="使用外部编译">使用外部编译</h2>
+<p>所谓使用外部编译, 就是把编译程序和源代码分离开来, 放置在不同的文件夹下, 好处很多, 比如利于版本控制, 利于打包程序, 利于清理程序</p>
+<p>方法很简单, 切换到想要的目录下执行 cmake 即可</p>
+<h2 id="设置编译存放目录">设置编译存放目录</h2>
+<p>这两句话分别设置了二进制文件的存放位置</p>
+<pre><code>SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)</code></pre>
+<p>分别对应了<code>ADD_EXECUTABLE</code> 和 <code>ADD_LIBRARY</code></p>
+<p>一些有用的 cmake 变量 <a href="http://www.cmake.org/Wiki/CMake_Useful_Variables">http://www.cmake.org/Wiki/CMake_Useful_Variables</a></p>
+<h2 id="设置安装目录">设置安装目录</h2>
+<p>默认的 make 里面是没有 install 选项的, 需要在 cmakelist.txt 里通过添加 install 指令实现. 在这之前需要设置 <code>CMAKE_INSTALL_PREFIX</code>, install 指令的简单 使用</p>
+<pre><code>install(TARGETS hello RUNTIME DESTINATION bin)</code></pre>
+<p>以及 install 可以不是 <code>TARGETS</code>, 还可以是 <code>files</code>, <code>PROGRAMS</code>, <code>DIRECTORY</code>, 甚至支持正则表达式</p>
+<h2 id="使用库">使用库</h2>
+<p>主要是<code>include_directories</code>, <code>link_directories</code>, <code>target_link_libraries</code>, 要记住这几个指令最好放在 <code>add_executable</code> 之后, 因为实验过程中发现先后是会产生 不同的现象的, <code>add_definitions</code> 添加宏指令, 以及 <code>target_link_libraries</code> 可以 为 release 和 debug 分别指定库</p>
+<p>以及 vs 如果需要设置为 64 位的话得用</p>
+<pre><code>cmake .. -G &quot;Visual Studio 12 2013 Win64&quot;</code></pre>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/05/02/vectormagic" title="std::vector's magic">&larr; Previous</a>
+        <a class="btn prev" href="/2014/08/16/blendccodenotifier" title="Blender 源码学习 --- Notifiers">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/06/11/blendercool" title="Blender 大法好">Next &rarr;</a>
+        <a class="btn next" href="/2014/12/14/theano" title="Anaconda & Theano 学习">Next &rarr;</a>
       
     </div>
     <hr>

@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        路漫漫 - 
+        Anaconda & Theano 学习 - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    路漫漫 
+    Anaconda & Theano 学习 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">05 June 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">14 December 2014</span></div>
     </section>
          
     
@@ -176,7 +176,11 @@
 
   
      
-    	<li><a href="/tags.html#Diary-ref">Diary <span>1</span></a></li>
+    	<li><a href="/tags.html#Anaconda-ref">Anaconda <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#Theano-ref">Theano <span>1</span></a></li>
     
   
 
@@ -195,20 +199,26 @@
 
   <div class="span8">
     <div id="content">
-      <p>最近总算忙完 siga 了，深深的感觉到自己的不足之处，一个是英语，二是一些技能…</p>
-<p>有很多想做的，有很多想学的，无奈太懒计划总是落空，一大波期末考试要来了，再懒就要死了…</p>
-<p>还想积累一套做游戏的技能呢，从做音乐，美术，动画到各种nb引擎的使用， 什么时候才能实现呢？</p>
-<p>最近墙的好死啊，Google都抽了，什么时候才能无障碍的上油管呢，上面确实有很多精华呀。</p>
+      <p>Anaconda 是一个用于科学计算的 Python 发行版, 带有很多用于科学计算的包, Anaconda 的 python 3.4 的版本和 theano 似乎有 bug, theano 使用了 python 2.7 的 API 导致出错, 所以需要使用 Anaconda 的 python 2.7 版本</p>
+<p>常常写完一个修改一个模块以后会需要重新import改模块, 这里可以使用 <code>reload(module)</code> 来重新导入该模块</p>
+<p>ipython notebook 在 command 模式带 <code>ctrl</code> 的快捷键往往不需要加 <code>ctrl</code></p>
+<p>Theano 可以使用 CPU 多线程加速, 也可以使用 GPU, CPU 多线程加速如下:</p>
+<p>设置 <code>THEANO_FLAGS</code> 中的 <code>openmp=True</code> 设置 <code>OMP_NUM_THREADS</code> 为线程数量, 如 <code>2</code></p>
+<p>Theano 还可以使用 GPU, 甚至多 GPU, 这里在 windows 上更详细的安装方法详见 <a href="http://deeplearning.net/software/theano/install.html#gpu-windows">这里</a></p>
+<p>这里, 我们的 Theano 库需要用 <code>cl.exe</code> 和 <code>nvcc.exe</code> 进行编译, 我们需要将这两个路径加入 环境变量<code>PATH</code></p>
+<p>这里执行 <code>import theano.sandbox.cuda</code> 时出现了一个错误</p>
+<pre><code>nvcc fatal   : Microsoft Visual Studio configuration file &#39;vcvars64.bat&#39; could not be found for installation at &#39;C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/../..&#39;</code></pre>
+<p>看上去似乎 CUDA 的 Compiler 好像在寻找 VC 用于配置环境的 bat 文件, 我是用的版本似乎没有, 所以我们创建一个</p>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/05/02/vectormagic" title="std::vector's magic">&larr; Previous</a>
+        <a class="btn prev" href="/2014/11/05/cmakelearn" title="CMake 学习">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/06/11/blendercool" title="Blender 大法好">Next &rarr;</a>
+        <a class="btn next" href="/2015/03/28/gitpt" title="Git push 到本地或者远程 repo">Next &rarr;</a>
       
     </div>
     <hr>

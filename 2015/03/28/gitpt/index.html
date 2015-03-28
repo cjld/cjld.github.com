@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
       
-        路漫漫 - 
+        Git push 到本地或者远程 repo - 
       
       
         CJLD
@@ -153,7 +153,7 @@
         
 <div class="page-header">
   <h1 id="mainTitle">
-    路漫漫 
+    Git push 到本地或者远程 repo 
     
   </h1>
 </div>
@@ -163,7 +163,7 @@
   <div class="span4">
     <section>
     <h3><i class="icon-calendar"></i>Published</h3>
-      <div class="date"><span style="margin-left: 20px">05 June 2014</span></div>
+      <div class="date"><span style="margin-left: 20px">28 March 2015</span></div>
     </section>
          
     
@@ -176,7 +176,7 @@
 
   
      
-    	<li><a href="/tags.html#Diary-ref">Diary <span>1</span></a></li>
+    	<li><a href="/tags.html#Git-ref">Git <span>1</span></a></li>
     
   
 
@@ -195,20 +195,47 @@
 
   <div class="span8">
     <div id="content">
-      <p>最近总算忙完 siga 了，深深的感觉到自己的不足之处，一个是英语，二是一些技能…</p>
-<p>有很多想做的，有很多想学的，无奈太懒计划总是落空，一大波期末考试要来了，再懒就要死了…</p>
-<p>还想积累一套做游戏的技能呢，从做音乐，美术，动画到各种nb引擎的使用， 什么时候才能实现呢？</p>
-<p>最近墙的好死啊，Google都抽了，什么时候才能无障碍的上油管呢，上面确实有很多精华呀。</p>
+      <p>最近有一些需求, 大概就是本地有几个仓库, 需要相互之间 push, pull, 并且希望能够立即同步 到 work directory 下, 于是开始尝试了一发</p>
+<p>创建了一个 git 仓库在 <code>~/p1</code> 下, 然后</p>
+<pre><code>    git clone ~/p1 ~/p2</code></pre>
+<p>成功了! git 可以 clone 本地仓库, 并且在 <code>~/p2</code> 目录下也有对应的 origin.</p>
+<p>第二个实验就是看看能不能 push 到远程仓库上, ssh 什么都设置好了以后, 在 vps 上通过 <code>git init</code> 创建了一个空的 git 仓库, 尝试能不能吧本地的repo push 上去, remote 的设置命令为 <code>git remote add origin ssh://root@vps.randonl.me/root/test_git</code>,</p>
+<p>push 一发尝试了一下, 发现出了问题</p>
+<pre><code>    remote: error: refusing to update checked out branch: refs/heads/master[K
+    remote: error: By default, updating the current branch in a non-bare repository[K
+    remote: error: is denied, because it will make the index and work tree inconsistent[K
+    remote: error: with what you pushed, and will require &#39;git reset --hard&#39; to match[K
+    remote: error: the work tree to HEAD.[K
+    remote: error: [K
+    remote: error: You can set &#39;receive.denyCurrentBranch&#39; configuration variable to[K
+    remote: error: &#39;ignore&#39; or &#39;warn&#39; in the remote repository to allow pushing into[K
+    remote: error: its current branch; however, this is not recommended unless you[K
+    remote: error: arranged to update its work tree to match what you pushed in some[K
+    remote: error: other way.[K
+    remote: error: [K
+    remote: error: To squelch this message and still keep the default behaviour, set[K
+    remote: error: &#39;receive.denyCurrentBranch&#39; configuration variable to &#39;refuse&#39;.[K
+    To remote reop</code></pre>
+<p>查了一下, 似乎是 git 并不允许 push 到远程正在工作的目录, 这个问题有两种解决方法, 一个就是建立仓库的时候使用 <code>--bare</code>, 这样会导致我们的仓库 没有工作目录, 这不是我们想要的, 于是使用另外一个方案 , 需要修改配置 <code>receive.denyCurrentBranch</code></p>
+<p>这个设置有如下参数:</p>
+<pre><code>    receive.denyCurrentBranch
+    If set to true or &quot;refuse&quot;, git-receive-pack will deny a ref update to the currently checked out branch of a non-bare repository. Such a push is potentially dangerous because it brings the HEAD out of sync with the index and working tree. If set to &quot;warn&quot;, print a warning of such a push to stderr, but allow the push to proceed. If set to false or &quot;ignore&quot;, allow such pushes with no message. Defaults to &quot;refuse&quot;.</code></pre>
+<p>我们将它设置为 <code>ignore</code></p>
+<p>push 成功了, 但是发现文件并没有更新, 这是因为我们的 work directory 并没有更改, 我们可以通过 reset HEAD 来同步, 但是这样还不够快, 于是乎我们可以使用这个设置的 另一个选项, 也就是 <code>updateInstead</code>, 通过这个变量就可以直接更新了, 不过很可惜似乎 低版本的 git 不支持这个选项</p>
+<p>为了升级到最新的 git 我们需要用 ppa 源</p>
+<pre><code>    sudo add-apt-repository ppa:git-core/ppa
+    sudo apt-get update
+    sudo apt-get upgrade git</code></pre>
 
     </div>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2014/05/02/vectormagic" title="std::vector's magic">&larr; Previous</a>
+        <a class="btn prev" href="/2014/12/14/theano" title="Anaconda & Theano 学习">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2014/06/11/blendercool" title="Blender 大法好">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>

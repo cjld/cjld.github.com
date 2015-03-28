@@ -5,10 +5,103 @@
         <description>CJLD - cjld</description>
         <link>http://cjld.github.io</link>
         <link>http://cjld.github.io</link>
-        <lastBuildDate>2014-08-23T20:31:34+08:00</lastBuildDate>
-        <pubDate>2014-08-23T20:31:34+08:00</pubDate>
+        <lastBuildDate>2015-03-28T17:59:02+08:00</lastBuildDate>
+        <pubDate>2015-03-28T17:59:02+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Git push 到本地或者远程 repo</title>
+                <description>&lt;p&gt;最近有一些需求, 大概就是本地有几个仓库, 需要相互之间 push, pull, 并且希望能够立即同步 到 work directory 下, 于是开始尝试了一发&lt;/p&gt;
+&lt;p&gt;创建了一个 git 仓库在 &lt;code&gt;~/p1&lt;/code&gt; 下, 然后&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    git clone ~/p1 ~/p2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;成功了! git 可以 clone 本地仓库, 并且在 &lt;code&gt;~/p2&lt;/code&gt; 目录下也有对应的 origin.&lt;/p&gt;
+&lt;p&gt;第二个实验就是看看能不能 push 到远程仓库上, ssh 什么都设置好了以后, 在 vps 上通过 &lt;code&gt;git init&lt;/code&gt; 创建了一个空的 git 仓库, 尝试能不能吧本地的repo push 上去, remote 的设置命令为 &lt;code&gt;git remote add origin ssh://root@vps.randonl.me/root/test_git&lt;/code&gt;,&lt;/p&gt;
+&lt;p&gt;push 一发尝试了一下, 发现出了问题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    remote: error: refusing to update checked out branch: refs/heads/master[K
+    remote: error: By default, updating the current branch in a non-bare repository[K
+    remote: error: is denied, because it will make the index and work tree inconsistent[K
+    remote: error: with what you pushed, and will require &amp;#39;git reset --hard&amp;#39; to match[K
+    remote: error: the work tree to HEAD.[K
+    remote: error: [K
+    remote: error: You can set &amp;#39;receive.denyCurrentBranch&amp;#39; configuration variable to[K
+    remote: error: &amp;#39;ignore&amp;#39; or &amp;#39;warn&amp;#39; in the remote repository to allow pushing into[K
+    remote: error: its current branch; however, this is not recommended unless you[K
+    remote: error: arranged to update its work tree to match what you pushed in some[K
+    remote: error: other way.[K
+    remote: error: [K
+    remote: error: To squelch this message and still keep the default behaviour, set[K
+    remote: error: &amp;#39;receive.denyCurrentBranch&amp;#39; configuration variable to &amp;#39;refuse&amp;#39;.[K
+    To remote reop&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查了一下, 似乎是 git 并不允许 push 到远程正在工作的目录, 这个问题有两种解决方法, 一个就是建立仓库的时候使用 &lt;code&gt;--bare&lt;/code&gt;, 这样会导致我们的仓库 没有工作目录, 这不是我们想要的, 于是使用另外一个方案 , 需要修改配置 &lt;code&gt;receive.denyCurrentBranch&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个设置有如下参数:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    receive.denyCurrentBranch
+    If set to true or &amp;quot;refuse&amp;quot;, git-receive-pack will deny a ref update to the currently checked out branch of a non-bare repository. Such a push is potentially dangerous because it brings the HEAD out of sync with the index and working tree. If set to &amp;quot;warn&amp;quot;, print a warning of such a push to stderr, but allow the push to proceed. If set to false or &amp;quot;ignore&amp;quot;, allow such pushes with no message. Defaults to &amp;quot;refuse&amp;quot;.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们将它设置为 &lt;code&gt;ignore&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;push 成功了, 但是发现文件并没有更新, 这是因为我们的 work directory 并没有更改, 我们可以通过 reset HEAD 来同步, 但是这样还不够快, 于是乎我们可以使用这个设置的 另一个选项, 也就是 &lt;code&gt;updateInstead&lt;/code&gt;, 通过这个变量就可以直接更新了, 不过很可惜似乎 低版本的 git 不支持这个选项&lt;/p&gt;
+&lt;p&gt;为了升级到最新的 git 我们需要用 ppa 源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    sudo add-apt-repository ppa:git-core/ppa
+    sudo apt-get update
+    sudo apt-get upgrade git&lt;/code&gt;&lt;/pre&gt;
+</description>
+                <link>http://cjld.github.io/2015/03/28/gitpt</link>
+                <guid>http://cjld.github.io/2015/03/28/gitpt</guid>
+                <pubDate>2015-03-28T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>Anaconda & Theano 学习</title>
+                <description>&lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版, 带有很多用于科学计算的包, Anaconda 的 python 3.4 的版本和 theano 似乎有 bug, theano 使用了 python 2.7 的 API 导致出错, 所以需要使用 Anaconda 的 python 2.7 版本&lt;/p&gt;
+&lt;p&gt;常常写完一个修改一个模块以后会需要重新import改模块, 这里可以使用 &lt;code&gt;reload(module)&lt;/code&gt; 来重新导入该模块&lt;/p&gt;
+&lt;p&gt;ipython notebook 在 command 模式带 &lt;code&gt;ctrl&lt;/code&gt; 的快捷键往往不需要加 &lt;code&gt;ctrl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Theano 可以使用 CPU 多线程加速, 也可以使用 GPU, CPU 多线程加速如下:&lt;/p&gt;
+&lt;p&gt;设置 &lt;code&gt;THEANO_FLAGS&lt;/code&gt; 中的 &lt;code&gt;openmp=True&lt;/code&gt; 设置 &lt;code&gt;OMP_NUM_THREADS&lt;/code&gt; 为线程数量, 如 &lt;code&gt;2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Theano 还可以使用 GPU, 甚至多 GPU, 这里在 windows 上更详细的安装方法详见 &lt;a href=&quot;http://deeplearning.net/software/theano/install.html#gpu-windows&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里, 我们的 Theano 库需要用 &lt;code&gt;cl.exe&lt;/code&gt; 和 &lt;code&gt;nvcc.exe&lt;/code&gt; 进行编译, 我们需要将这两个路径加入 环境变量&lt;code&gt;PATH&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这里执行 &lt;code&gt;import theano.sandbox.cuda&lt;/code&gt; 时出现了一个错误&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nvcc fatal   : Microsoft Visual Studio configuration file &amp;#39;vcvars64.bat&amp;#39; could not be found for installation at &amp;#39;C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/../..&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看上去似乎 CUDA 的 Compiler 好像在寻找 VC 用于配置环境的 bat 文件, 我是用的版本似乎没有, 所以我们创建一个&lt;/p&gt;
+</description>
+                <link>http://cjld.github.io/2014/12/14/theano</link>
+                <guid>http://cjld.github.io/2014/12/14/theano</guid>
+                <pubDate>2014-12-14T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>CMake 学习</title>
+                <description>&lt;p&gt;捡起许久以前编写的代码, 是一个Qt project, 并且还有一大堆乱七八糟的依赖, 编译起来简直抓狂, 所以想趁机会学习一下CMake&lt;/p&gt;
+&lt;p&gt;之前在学 CMake 和 Scons 之间挣扎了一下, 最终还是觉得 CMake 靠谱一点, CMake 的优势 是可以直接将 CMakeList.txt 编译成其他 IDE 可以识别的工程, 比如 VS 的 sln, makefile, Eclipse, 甚至连 sublime 都有.&lt;/p&gt;
+&lt;p&gt;这里主要的参考资料是 &lt;a href=&quot;http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf&quot;&gt;http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf&lt;/a&gt; 和 &lt;a href=&quot;http://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80&quot;&gt;http://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;设置-generator&quot;&gt;设置 generator&lt;/h2&gt;
+&lt;p&gt;在 windows 下默认使用的是生成 vs 的 solution, 如果要改为 makefile 文件有两种办法:&lt;/p&gt;
+&lt;p&gt;修改 cmake 运行参数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cmake -G &amp;quot;MinGW Makefiles&amp;quot; .&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者在&lt;code&gt;Cmakelist.txt&lt;/code&gt;里面这么写&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;set(cmake_generator &amp;quot;MinGW Makefiles&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成的 makefile 可以使用 &lt;code&gt;make help&lt;/code&gt; 查看可用的 make 指令, 以及使用 &lt;code&gt;make VERBOSE=1&lt;/code&gt; 查看详细的生成命令, 另外可以用 &lt;code&gt;cmake --help-command xxx&lt;/code&gt; 来查看对应命令的帮助,&lt;/p&gt;
+&lt;p&gt;使用 set 可以设置变量, 变量有 5 种类型 FILEPATH PATH STRING BOOL INTERNAL, 并且可以设置 cache 属性, 多用来提供用户接口&lt;/p&gt;
+&lt;h2 id=&quot;使用外部编译&quot;&gt;使用外部编译&lt;/h2&gt;
+&lt;p&gt;所谓使用外部编译, 就是把编译程序和源代码分离开来, 放置在不同的文件夹下, 好处很多, 比如利于版本控制, 利于打包程序, 利于清理程序&lt;/p&gt;
+&lt;p&gt;方法很简单, 切换到想要的目录下执行 cmake 即可&lt;/p&gt;
+&lt;h2 id=&quot;设置编译存放目录&quot;&gt;设置编译存放目录&lt;/h2&gt;
+&lt;p&gt;这两句话分别设置了二进制文件的存放位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;分别对应了&lt;code&gt;ADD_EXECUTABLE&lt;/code&gt; 和 &lt;code&gt;ADD_LIBRARY&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一些有用的 cmake 变量 &lt;a href=&quot;http://www.cmake.org/Wiki/CMake_Useful_Variables&quot;&gt;http://www.cmake.org/Wiki/CMake_Useful_Variables&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;设置安装目录&quot;&gt;设置安装目录&lt;/h2&gt;
+&lt;p&gt;默认的 make 里面是没有 install 选项的, 需要在 cmakelist.txt 里通过添加 install 指令实现. 在这之前需要设置 &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt;, install 指令的简单 使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install(TARGETS hello RUNTIME DESTINATION bin)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以及 install 可以不是 &lt;code&gt;TARGETS&lt;/code&gt;, 还可以是 &lt;code&gt;files&lt;/code&gt;, &lt;code&gt;PROGRAMS&lt;/code&gt;, &lt;code&gt;DIRECTORY&lt;/code&gt;, 甚至支持正则表达式&lt;/p&gt;
+&lt;h2 id=&quot;使用库&quot;&gt;使用库&lt;/h2&gt;
+&lt;p&gt;主要是&lt;code&gt;include_directories&lt;/code&gt;, &lt;code&gt;link_directories&lt;/code&gt;, &lt;code&gt;target_link_libraries&lt;/code&gt;, 要记住这几个指令最好放在 &lt;code&gt;add_executable&lt;/code&gt; 之后, 因为实验过程中发现先后是会产生 不同的现象的, &lt;code&gt;add_definitions&lt;/code&gt; 添加宏指令, 以及 &lt;code&gt;target_link_libraries&lt;/code&gt; 可以 为 release 和 debug 分别指定库&lt;/p&gt;
+&lt;p&gt;以及 vs 如果需要设置为 64 位的话得用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cmake .. -G &amp;quot;Visual Studio 12 2013 Win64&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+</description>
+                <link>http://cjld.github.io/2014/11/05/cmakelearn</link>
+                <guid>http://cjld.github.io/2014/11/05/cmakelearn</guid>
+                <pubDate>2014-11-05T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Blender 源码学习 --- Notifiers</title>

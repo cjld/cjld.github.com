@@ -10,6 +10,9 @@ http://cjld.github.io/sitemap.txt
 http://cjld.github.io/tags.html
 http://cjld.github.io/todolist.html
 
+http://cjld.github.io/2015/03/28/gitpt
+http://cjld.github.io/2014/12/14/theano
+http://cjld.github.io/2014/11/05/cmakelearn
 http://cjld.github.io/2014/08/16/blendccodenotifier
 http://cjld.github.io/2014/08/16/blendccodemodifier
 http://cjld.github.io/2014/08/16/blendccode
