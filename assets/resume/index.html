@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>梁盾 - 简历</title>
+
+<meta name="viewport" content="width=device-width"/>
+<meta name="description" content="The Curriculum Vitae of Joe Bloggs."/>
+<meta charset="UTF-8">
+
+<link type="text/css" rel="stylesheet" href="typo.css">
+<link type="text/css" rel="stylesheet" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
+<script charset="utf-8">
+
+	$(document).ready(function() {
+
+		var lang_index = 1;
+
+		$.urlParam = function(name){
+		    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+		    return results[1] || 0;
+		}
+		if ($.urlParam('lang')=='cn')
+			lang_index = 0;
+		function translate(dom) {
+			var c = dom.children();
+			if (c.length == 0) {
+				var str = dom.text();
+				var arr = str.split('__');
+				if (arr.length > lang_index)
+					dom.text(arr[lang_index]);
+				else
+					dom.text(arr[0]);
+			} else
+			for (var i=0; i<c.length; i++)
+				translate($(c[i]));
+		}
+		translate($('body'));
+	});
+</script>
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body id="top">
+<div id="cv" class="instaFade">
+	<div class="mainDetails">
+		<div id="headshot" class="quickFade">
+			<img src="head2.png" alt="Dun Liang" />
+		</div>
+
+		<div id="name">
+			<h1 class="quickFade delayTwo">梁盾__Dun Liang</h1>
+			<a href="./?lang=cn">中文</a>
+			&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="./?lang=en">English</a>
+			<!--<h2 class="quickFade delayThree">Randon Liang</h2>-->
+		</div>
+
+		<div id="contactDetails" class="quickFade delayFour">
+			<ul>
+				<li><div class='left'>地址:__Addr:</div> <div class='right'>
+					清华大学紫荆公寓 2# 102A__Room 102A 2# ZiJing Dorm, Tsinghua Univ, BeiJing </div> </li>
+				<li><div class='left'>生日:__Date of Birth:</div> <div class='right'> 01/26/1994 </div> </li>
+				<li><div class='left'>性别:__Gender:</div> <div class='right'> 男__Male </div> </li>
+				<li><div class='left'>电话:__Mobile Phone</div> <div class='right'> +86 18500979645 </div> </li>
+				<li><div class='left'>Email:</div> <div class='right'> <a href="mailto:randonlang@gmail.com">randonlang@gmail.com</a> </div> </li>
+				<li><div class='left'>Website:</div> <div class='right'> <a href="http://randonl.me">randonl.me</a>  </div> </li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<div id="mainArea" class="quickFade delayFive">
+		<section>
+			<article>
+				<div class="sectionTitle">
+					<h1>个人简介__Profile</h1>
+				</div>
+
+				<div class="sectionContent">
+					<p>
+						热爱程序, 热爱算法, 热爱技术, 同时不断地钻研着最新的软硬件技术.
+						对图形学和GPU相关技术有一定研究, 业余爱好设计和武术.
+						__
+						Enthusiasm with programming, algorithm and computer technology.
+						Have some research about Computer Graphics and GPU programming, hobbies are
+						design and kongfu.
+					</p>
+				</div>
+			</article>
+			<div class="clear"></div>
+		</section>
+
+		<section>
+			<div class="sectionTitle">
+				<h1>教育__Education</h1>
+			</div>
+
+			<div class="sectionContent">
+				<article>
+					<div class="three-in-one">
+						<h2>清华大学__Tsinghua University</h2>
+						<h2>计算机系本科__Bachelor of CS&T</h2>
+						<p class="subDetails">2012/08 - 2016/08</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>
+							核心课程: 操作系统, 数据结构, 网络原理, 编译原理, 计算机组成原理 等等.__
+							Core Courses: Operating System, Data Structure, Computer Network, Computer
+						Architecture, Fundamentals of Compiling, etc.</li>
+					</ul>
+					<p></p>
+				</article>
+
+				<article>
+					<div class="three-in-one">
+						<h2>清华大学__Tsinghua University</h2>
+						<h2>数字娱乐设计双学位__Digital Amusement Design</h2>
+						<p class="subDetails">2013/08 - 2016/08</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>
+							核心课程: 数字娱乐设计, 游戏程序设计, 游戏动画制作 等等.__
+							Core Courses: Digital entertainment design,
+							Game Programming, Game animations etc.</li>
+					</ul>
+					<p></p>
+				</article>
+			</div>
+			<div class="clear"></div>
+		</section>
+
+		<section>
+			<div class="sectionTitle">
+				<h1>专业经历__Professional Experience</h1>
+			</div>
+
+			<div class="sectionContent">
+				<article>
+					<div class="three-in-one">
+						<h2 style="width:60%">图形学实验室__Graphics & Geometric Computing Group</h2>
+						<p class="subDetails">2014/04 - 2014/06</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>实现完成 Paper "Linear Shape Representation for Data-Driven
+						Mesh Manipulation", 并以二作, 学生一作身份投稿 SIGGRAPH ASIA 2014.
+						__
+						Submit paper "Linear Shape Representation for Data-Driven
+						Mesh Manipulation" to SIGGRAPH ASIA 2014, the second author.</li>
+					</ul>
+					<p></p>
+				</article>
+
+				<article>
+					<div class="three-in-one">
+						<h2 style="width:55%">Blender 开源社区__Blender Opensource community</h2>
+						<h2 >补丁开发__Patch developer</h2>
+						<p class="subDetails">2014/07 - present</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>
+							实现可供中日韩输入法输入的补丁.
+						__
+						Implement Patch for CJK input method support. </li>
+						<li>
+							受BlenderCN众筹项目支持.
+						__Funded by BlenderCN Crowdfunding.
+						</li>
+						<li><a href="https://developer.blender.org/D765">https://developer.blender.org/D765</a></li>
+					</ul>
+						<p></p>
+				</article>
+
+				<article>
+					<div class="three-in-one">
+						<h2 style="width:55%">旷视科技__Megvii, Inc</h2>
+						<h2 >实习__Intern</h2>
+						<p class="subDetails">2015/03 - present</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>
+							合成真实感数据用于深度学习训练.
+						__Synthetic realistic data generation used for deep neural network training.
+						</li>
+						<li>
+							参与搭建分布式集群用于深度学习.
+						__Participated in High Performance Computing used for deep learning.
+						</li>
+					</ul>
+						<p></p>
+				</article>
+
+			</div>
+			<div class="clear"></div>
+		</section>
+
+
+		<section>
+			<div class="sectionTitle">
+				<h1>社工经历__Social Work</h1>
+			</div>
+
+			<div class="sectionContent">
+
+				<article>
+					<div class="three-in-one">
+						<h2 style="width:55%">计算机系科协__Student Association of Science</h2>
+						<h2 style="">部长__Minister</h2>
+						<p class="subDetails">2013/10 - 2014/10</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>负责第18届智能体比赛的播放器开发工作
+						__
+						In charge of Game player development in
+							18th Artificial Intelligence Program Contest.</li>
+					</ul>
+						<p></p>
+				</article>
+
+
+				<article>
+					<div class="three-in-one">
+						<h2 style="width:55%">信息学国家集训队清华集训__the Informatics national team training</h2>
+						<h2 >学生专家__Specialist student</h2>
+						<p class="subDetails">2014/12</p>
+						<div class="clear"></div>
+					</div>
+					<ul>
+						<li>
+							命题和验题.
+						__
+						Problem design and testing. </li>
+					</ul>
+						<p></p>
+				</article>
+
+			</div>
+			<div class="clear"></div>
+		</section>
+
+		<section>
+			<div class="sectionTitle">
+				<h1>奖项__Awards</h1>
+			</div>
+
+			<div class="sectionContent">
+
+				<article>
+					<div class="three-in-one">
+					<h2 style="width:60%">ACM国际大学生程序设计竞赛 中国赛区金牌__The ACM-ICPC China region Gold medal </h2>
+					<p class="subDetails">2012/11</p>
+					<div class="clear"></div>
+					</div>
+					<p>杭州赛区第六名__</p>
+				</article>
+
+				<article>
+					<div class="three-in-one">
+					<h2 style="width:70%">清华大学计算机系科技创新奖__2013 Tsinghua Technology Innovation Awards</h2>
+					<p class="subDetails">2013/08</p>
+					<div class="clear"></div>
+					</div>
+					<p></p>
+				</article>
+
+			</div>
+			<div class="clear"></div>
+		</section>
+
+
+		<section>
+			<div class="sectionTitle">
+				<h1>技能__Skills</h1>
+			</div>
+
+			<div class="sectionContent">
+				<ul class="keySkills">
+					<li>C/C++</li>
+					<li>Python</li>
+					<li>Java</li>
+					<li>HTML/CSS/JS</li>
+					<li>PS/AE</li>
+					<li>Node.js</li>
+					<li>Linux</li>
+					<li>Blender</li>
+					<li>CUDA/OpenCL</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</section>
+
+	</div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3753241-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
