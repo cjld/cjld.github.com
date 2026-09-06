@@ -1,14 +1,14 @@
 梁盾
-Senior Engineer, AI DevTech - NVIDIA
+Senior AI DevTech Engineer - NVIDIA
 
 ![head](head.jpg)
 
-Liang Dun, from Changsha, Hunan, was admitted to Tsinghua University's Computer Science Department through the Informatics Olympiad. As an undergraduate, he earned an ACM-ICPC gold medal and won international supercomputing competitions such as ISC. He pursued a Ph.D. at Tsinghua under Academician Hu Shimin, where he led the development of the Jittor deep learning framework. Launched in 2018, Jittor was the first framework to support dynamic compilation, with its related projects accumulating over 10,000 stars on GitHub. Following his doctorate, he transitioned into the industry as CEO of Beijing Fitten Technology, leading the release of multiple AI infrastructure and AI coding products. He currently serves as a Senior Software Engineer in NVIDIA’s DevTech team, specializing in large-scale model performance optimization.
+Liang Dun, from Changsha, Hunan, was admitted to Tsinghua University's Computer Science Department through the Informatics Olympiad. As an undergraduate, he earned an ACM-ICPC gold medal and won international supercomputing competitions such as ISC. He pursued a Ph.D. at Tsinghua under Academician Hu Shimin, where he led the development of the Jittor deep learning framework. Launched in 2018, Jittor was the first framework to support dynamic compilation, with its related projects accumulating over 10,000 stars on GitHub. Following his doctorate, he transitioned into the industry as CEO of Beijing Fitten Technology, leading the release of multiple AI infrastructure and AI coding products. He currently serves as a Senior AI DevTech Engineer at NVIDIA, specializing in large-scale model performance optimization.
 
 工作经历
 
 ====
-Senior Engineer, AI DevTech
+Senior AI DevTech Engineer
 
 Nvidia · 正式
 
@@ -170,14 +170,6 @@ Graphical Models 130, 101202
 《博士论文答辩 - 计图深度学习框架》
 ![](./assets/img/phd.jpg)
 2021年6月，博士学位论文答辩，指导老师为胡事民院士，在胡老师的指导下，开发了计图深度学习框架，为国产人工智能生态添砖加瓦。
-
-《清华与北大》
-![](./assets/img/phd2.jpg)
-2021年6月，和北大生物Phd太太在清华园合影，北大的博士学位也服很好看。
-
-《创业之路》
-![](./assets/img/fitten.jpg)
-2025年，和非十的创业的兄弟们合影，创业艰辛，希望他们能乘风破浪，勇往直前。
 
 《计25》
 ![](./assets/img/cst25.jpg)
